@@ -2,19 +2,15 @@ General Package TODO:
 
 add better error handling to all functions
 
+want to add testing that works with devtools::test
+
 NEED BETTER EXAMPLES
 
 fix typos TODO:
 
-right now fix typos takes in a vector of strings
-  should we add a way to take in df column of unique strings and column of occurence?
-  maybe have a method that uses rep for the user?
-  e.g. rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-
 idea from dk:
   string distance calculation that weights letters that are close in qwerty-space
   would work really well for same length strings
-
 
 setting the arguments thr and occ_ratio is tough
   should probably make a method for determining the best way
@@ -28,6 +24,7 @@ OSA / DL
 
 viable applications
   add handling for multiple typo matches
+    c(amy, andy, amdy)
   add to vignette
 
 most dl changes are 1, default value should be 1 / nchar(string)

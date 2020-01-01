@@ -1,16 +1,30 @@
 # # fix_typos ----
-# rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-#
-# append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
-#
-# typo_df <- as.data.frame(typo_caterpillars)
-#
-# typo_v = typo_caterpillars
-# occ_ratio = 10
-# thr = 0.3
-#
-# fix_typos(typo_v = typo_v, thr = 0.3, occ_ratio = 10) %>% unique
-#
+rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
+
+append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
+
+typo_df <- as.data.frame(typo_caterpillars) %>% group_by(typo_caterpillars) %>% count
+
+occ_ratio = 4
+thr = 0.7
+
+t = rep(unlist(typo_df[,1]),unlist(typo_df[,2]))
+names(t) <- NULL
+
+fix_typos(typo_v = typo_caterpillars, thr = 0.3, occ_ratio = 10) -> test_v
+fix_typos(typo_v = typo_df, thr = 0.3, occ_ratio = 10) -> test_df
+fix_typos(typo_v = clean_caterpillars, thr = 0.3, occ_ratio = 10)
+fix_typos(typo_v = typo_caterpillars, thr = 3, occ_ratio = 10)
+fix_typos(typo_v = typo_caterpillars, thr = 0.3, occ_ratio = "10")
+fix_typos(typo_v = typo_caterpillars, thr = "0.3", occ_ratio = 10)
+
+as.data.frame(test_v) %>% group_by(test_v) %>% count
+
+test_v = c("Amy","Andy","Amdy", "Andy", "Amy")
+test_v2 = c("Andy", "Amdy", "Andy")
+
+fix_typos(test_v, thr = 0.5, occ_ratio = 0.5)
+
 # counties <- c(
 #   "Litchfield",
 #   "Hartford",

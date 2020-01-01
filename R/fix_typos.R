@@ -2,7 +2,7 @@
 #' @description This function is meant to allow users to fix typos in strings
 #'  that are not normally found in dictionaries.
 #' @param typo_v vector of strings that will have its typos cleaned
-#' @param thr the string distance maximum used to determine typos. This argument
+#' @param threshold the string distance maximum used to determine typos. This argument
 #' is specified as the percentage of a typo that should at most be expected to be
 #' insertions, additons, deletions, and transpositions.
 #' @param occ_ratio the minimum ratio of correctly spelled words to their typo.
@@ -29,10 +29,26 @@
 #' @export
 
 
-fix_typos <- function(typo_v, thr, occ_ratio) {
-  # string <- stringr::str_split(paste0(typo_v, collapse = " "), " ")[[1]]
-  # tbl <- table(string)
-  # df <- data.frame(word = names(tbl), times = as.integer(tbl))
+fix_typos <- function(typo_v, threshold, occ_ratio) {
+  if (!is.numeric(threshold)) {
+    stop("Argument threshold must be numeric")
+  } else if (is.numeric(threshold) & threshold > 1) {
+    stop("Argument threshold must be less than 1")
+  } else if (!is.numeric(occ_ratio)) {
+    stop("Argument occ_ratio must be numeric")
+  } else if(!is.character(typo_v) & !is.data.frame(typo_v)){
+    stop("Argument typo_v must be a character vector or a dataframe of strings and their counts")
+  } else if(!is.character(typo_v) & is.data.frame(typo_v) & length(typo_v) > 2) {
+    stop("Argument typo_v can be a dataframe, but must have 2 columns: \n  one containing strings and the second containing their counts")
+  }
+
+  if(is.data.frame(typo_v)){
+    orig_df <- TRUE
+    typo_v = rep(unlist(typo_v[,1]),unlist(typo_v[,2]))
+    names(typo_v) <- NULL
+  } else {
+    orig_df <- FALSE
+  }
   prom_ratio <- NULL
 
   tbl <- table(typo_v)
@@ -44,7 +60,7 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
 
   scaled_dist_mat[lower.tri(scaled_dist_mat, diag=T)] <- 1
 
-  as.data.frame(which(scaled_dist_mat<thr, arr.ind = T)) -> under_thresh_mat
+  as.data.frame(which(scaled_dist_mat<threshold, arr.ind = T)) -> under_thresh_mat
   under_thresh_mat$row2 <- NA
   under_thresh_mat$col2 <- NA
   # to optimize later
@@ -66,7 +82,13 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
       typo_v[typo_v==df$word[under_thresh_mat$row[[i]]]] = df$word[under_thresh_mat$col[[i]]]
     }
   }
-  typo_v
+
+  if(orig_df){
+    typo_df = as.data.frame(typo_v) %>% group_by(typo_v) %>% count
+    typo_df
+  } else typo_v
 }
+
+
 
 
