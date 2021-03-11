@@ -8,10 +8,13 @@ The goal of messy.cats is to ...
 
 ## Installation
 
-You can install the released version of messy.cats from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of messy.cats from [GITHUB](https://github.com) with:
 
 ``` r
-install.packages("messy.cats")
+if(!require(devtools)){
+ install.packages("devtools")
+}
+devtools::install_github("hkarp1/messy.cats", 
 ```
 
 ## Example

@@ -5,8 +5,6 @@ library(tidyverse)
 library(varhandle)
 library(rapportools)
 
-usethis::use_vignette("intro")
-
 
 #' @title cat_match
 #' @description FUNCTION_DESCRIPTION
