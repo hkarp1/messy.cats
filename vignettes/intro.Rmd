@@ -16,4 +16,27 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(messy.cats)
+library(sf)
+library(rgeos)
+library(maptools)
+library(raster)
+library(dplyr)
+library(qacr)
+library(rgdal)
+
+data(deerpop)
+data(dmu)
+
+deerpop %>% 
+  dplyr::filter(Year==2017) %>% 
+  dplyr::select(DMU, PosthuntPopEst) -> pop17
+
+dmu %>% 
+  dplyr::select(geometry,DEER_MGM_1) -> dmu
+
+fx_vrthng(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T,
+          return_lists = 3, threshold = .3) -> df
+
+
+inner_join(df,dmu, by=c("bad"="DEER_MGM_1")) -> dmu
 ```
