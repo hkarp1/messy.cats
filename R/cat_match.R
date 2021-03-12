@@ -74,15 +74,12 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
   u_g_v = unique(g_v)
   u_b_v = unique(b_v)
 
-  x <- as.data.frame(stringdistmatrix(u_g_v, u_b_v, method = method,
-                                      p = p, useNames = TRUE, useBytes = useBytes))
+  x <- as.data.frame(stringdistmatrix(tolower(u_g_v), tolower(u_b_v),
+                                      method = method, p = p,
+                                      useBytes = useBytes))
+  rownames(x) = u_g_v
+  colnames(x) = u_b_v
   new_var <- c()
-
-
-
-
-
-
 
   if (!is.na(threshold)) {
     if (!is.na(return_lists)) {
@@ -155,7 +152,6 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
     changing = df[lapply(df$match, length) > 1, ]
     df = df[!lapply(df$match, length) > 1, ]
 
-
     for (i in 1:nrow(changing)) {
       bad = changing[i, "bad"]
       matches = unlist(changing[i, "match"])
@@ -175,13 +171,10 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
       }
     }
 
-
     df = rbind(df, changing)
     df$match = unlist(df$match)
     df$dists = unlist(df$dists)
   }
-
-
 
   return(df)
 
