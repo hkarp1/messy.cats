@@ -2,6 +2,10 @@
 # 3/11/21
 # cat_match Examples
 
+##############################
+## show shapefiles in vignette
+##############################
+
 library(dplyr)
 library(stringdist)
 library(readxl)
@@ -36,8 +40,8 @@ dmu %>%
   dplyr::select(geometry,DEER_MGM_1) -> dmu
 
 plot(dmu)
-# data is deer management unit shapefiles and deer population numbers for those units
-# the problem is the names for the management units don't match exactly:
+# data is deer management unit shapefiles and deer population numbers for those
+# DMUs, the problem is the names for the management units don't match exactly:
 unique(dmu$DEER_MGM_1) %>% head(10)
 unique(pop17$DMU) %>% head(10)
 

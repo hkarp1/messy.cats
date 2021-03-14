@@ -7,18 +7,23 @@ library(rapportools)
 
 
 #' @title cat_match
-#' @description FUNCTION_DESCRIPTION
-#' @param b_v PARAM_DESCRIPTION
-#' @param g_v PARAM_DESCRIPTION
-#' @param return_dists PARAM_DESCRIPTION, Default: FALSE
-#' @param return_lists PARAM_DESCRIPTION, Default: NA
+#' @description cat_match() uses fuzzy matching to clean messy categories
+#' @description or strings of a bad vector by comparing them to a good vector.
+#' @description Returns a dataframe with each unique value in the bad vector
+#' @description and it's closest match in the good vector.
+#' @param b_v bad_vector: the vector of messy categories or strings
+#' @param g_v good_vector: the vector of clean categories or strings to compare with b_V
+#' @param return_dists Returns the distance between the matched values. 0 is an exact
+#' @param return_dists and 1 means they share no characters, Default: FALSE
+#' @param return_lists Returns a list of the top matches, Default: NA
 #' @param pick_lists PARAM_DESCRIPTION, Default: F
 #' @param threshold PARAM_DESCRIPTION, Default: NA
-#' @param method PARAM_DESCRIPTION, Default: 'jw'
+#' @param method method to calculate string distances. See help for stringdist::stringdist, Default: 'jw'
 #' @param q PARAM_DESCRIPTION, Default: 1
 #' @param p PARAM_DESCRIPTION, Default: 0
 #' @param bt PARAM_DESCRIPTION, Default: 0
 #' @param useBytes PARAM_DESCRIPTION, Default: FALSE
+#' @param weight For method='osa', Default: c(d=1, i=1, t=1)
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples
@@ -32,7 +37,7 @@ library(rapportools)
 
 cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
                       threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
-                      useBytes = FALSE) {
+                      useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
   if (is.factor(b_v)) {
     b_v = unfactor(b_v)
@@ -68,6 +73,8 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
     stop("Argument return_lists must be either NA or numeric")
   } else if (!is.na(threshold) & !is.numeric(threshold)) {
     stop("Argument threshold must be either NA or numeric")
+  } else if (!is.vector(weight) | length(weight) != 3) {
+    stop("Argument weight must be a vector of length 3")
   }
 
 
@@ -76,7 +83,8 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
 
   x <- as.data.frame(stringdistmatrix(tolower(u_g_v), tolower(u_b_v),
                                       method = method, p = p,
-                                      useBytes = useBytes))
+                                      useBytes = useBytes,
+                                      weight = weight))
   rownames(x) = u_g_v
   colnames(x) = u_b_v
   new_var <- c()
