@@ -5,7 +5,6 @@ library(tidyverse)
 library(varhandle)
 library(rapportools)
 
-## can get rid of all the return stuff
 
 
 cat_replace <- function(b_v, g_v, threshold = NA,
@@ -72,12 +71,4 @@ cat_replace <- function(b_v, g_v, threshold = NA,
 
 }
 
-data(dmu)
-
-threshold = .3
-
-g_v = deerpop$DMU
-b_v = dmu$DEER_MGM_1
-
-dmu$new_var = cat_replace(b_v, g_v, threshold)
 
