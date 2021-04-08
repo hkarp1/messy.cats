@@ -1,11 +1,25 @@
-library(dplyr)
-library(stringdist)
-library(readxl)
-library(tidyverse)
-library(varhandle)
-library(rapportools)
 
-
+#' @title cat_replace
+#' @description FUNCTION_DESCRIPTION
+#' @param b_v PARAM_DESCRIPTION
+#' @param g_v PARAM_DESCRIPTION
+#' @param threshold PARAM_DESCRIPTION, Default: NA
+#' @param method PARAM_DESCRIPTION, Default: 'jw'
+#' @param q PARAM_DESCRIPTION, Default: 1
+#' @param p PARAM_DESCRIPTION, Default: 0
+#' @param bt PARAM_DESCRIPTION, Default: 0
+#' @param useBytes PARAM_DESCRIPTION, Default: FALSE
+#' @param weight PARAM_DESCRIPTION, Default: c(d = 1, i = 1, t = 1)
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname cat_replace
+#' @export
 
 cat_replace <- function(b_v, g_v, threshold = NA,
                       method = "jw", q = 1, p = 0, bt = 0,
