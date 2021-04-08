@@ -5,10 +5,12 @@ library(tidyverse)
 library(varhandle)
 library(rapportools)
 
+## can get rid of all the return stuff
 
-cat_fix <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
-                      threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
-                      useBytes = FALSE) {
+
+cat_replace <- function(b_v, g_v, threshold = NA,
+                      method = "jw", q = 1, p = 0, bt = 0,
+                      useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
   if (is.factor(b_v)) {
     b_v = unfactor(b_v)
@@ -30,136 +32,52 @@ cat_fix <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_list
     stop("Argument q must be a number")
   } else if (!is.numeric(bt)) {
     stop("Argument bt must be a number")
-  } else if (!is.boolean(return_dists)) {
-    stop("Argument unique must be a boolean")
-  } else if (!is.boolean(pick_lists)) {
-    stop("Argument unique must be a boolean")
   } else if (!is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
                              "cosine", "jaccard", "jw","soundex"))) {
     stop("Please use only a method available to the stringdist function in the
          stringdist package")
-  } else if (!is.na(return_lists) & !is.numeric(return_lists)) {
-    stop("Argument return_lists must be either NA or numeric")
   } else if (!is.na(threshold) & !is.numeric(threshold)) {
-    stop("Argument threshold must be either NA or numeric")
+    stop("Argument threshold must be numeric")
   }
 
 
-  u_g_v = unique(g_v)
-  u_b_v = unique(b_v)
+  x <- as.data.frame(stringdistmatrix(tolower(g_v), tolower(b_v),method = "jw"))
 
-  x <- as.data.frame(stringdistmatrix(tolower(u_g_v), tolower(u_b_v),
-                                      method = method, p = p,
-                                      useBytes = useBytes))
-  rownames(x) = u_g_v
-  colnames(x) = u_b_v
-  new_var <- c()
+  #rownames(x) = g_v
+  #colnames(x) = b_v
+
+  new_var = c()
 
   if (!is.na(threshold)) {
-    if (!is.na(return_lists)) {
-      acc_dists = c()
-      new_var = c()
 
-      for (i in 1:ncol(x)) {
-        x[i] %>% arrange(x[i]) %>% slice(1:return_lists) -> t
-        t$matches = row.names(t)
-        colnames(t)[1] = "dists"
-        if (min(unlist(t$dists)) <= threshold) {
-          t %>% slice(1) -> t
-          new_var[[i]] = unlist(t$matches)
-        } else {
-          new_var[[i]] = unlist(t$matches)
-        }
-
-        if (return_dists == TRUE) {
-          acc_dists[[i]] = round(unlist(t$dists), 4)
-        }
-      }
-
-    } else {
-      for (i in 1:ncol(x)) {
-        min <- min(x[[i]])
-        min.plc <- which.min(x[[i]])
-        if (min <= threshold) {
-          new_var <- new_var %>% append(u_g_v[min.plc])
-        } else {
-          new_var <- new_var %>% append(NA)
-        }
+    for (i in 1:length(b_v)) {
+      if (min(x[[i]]) <= threshold) {
+        new_var = append(new_var, g_v[which.min(x[[i]])])
+      } else {
+        new_var = append(new_var, NA)
       }
     }
 
   } else {
-    if (!is.na(return_lists)) {
-      acc_dists = c()
-      new_var = c()
 
-      for (i in 1:ncol(x)) {
-        x[i] %>% arrange(x[i]) %>% slice(1:return_lists) -> t
-        t$matches = row.names(t)
-        colnames(t)[1] = "dists"
-        new_var[[i]] = unlist(t$matches)
-        if (return_dists == TRUE) {
-          acc_dists[[i]] = round(unlist(t$dists), 4)
-        }
-      }
-
-    } else {
-      for (i in 1:ncol(x)) {
-        min <- which.min(x[[i]])
-        new_var <- new_var %>% append(u_g_v[min])
-      }
-    }
-  }
-
-  df = data.frame(y = u_b_v)
-  df$x = new_var
-
-  if (return_dists == TRUE & is.na(return_lists)) {
-    df$dists = round(sapply(x, extract_min), 4)
-  } else if (return_dists == TRUE & !is.na(return_lists)) {
-    df$dists = acc_dists
-  }
-
-  colnames(df)[1:2] = c("bad", "match")
-
-  if (!is.na(return_lists) & pick_lists == TRUE) {
-    changing = df[lapply(df$match, length) > 1, ]
-    df = df[!lapply(df$match, length) > 1, ]
-
-    for (i in 1:nrow(changing)) {
-      bad = changing[i, "bad"]
-      matches = unlist(changing[i, "match"])
-      dists = unlist(changing[i, "dists"])
-      for (p in 1:return_lists) {
-        print(paste0(matches[[p]], " has a distance of ", dists[[p]], " from ", bad))
-        print(paste0("Enter ", p, " to keep this match"))
-      }
-      print("Enter 0 to force a non-match (make the string match to NA)")
-      which = as.numeric(readline(prompt = "Which one would you like to keep?"))
-      if (which == 0) {
-        changing[i, "match"] = NA
-        changing[i, "dists"] = NA
-      } else {
-        changing[i, "match"] = changing[i, "match"][[1]][which]
-        changing[i, "dists"] = changing[i, "dists"][[1]][which]
-      }
+    for (i in 1:length(b_v)) {
+      new_var = append(new_var, g_v[which.min(x[[i]])])
     }
 
-    df = rbind(df, changing)
-    df$match = unlist(df$match)
-    df$dists = unlist(df$dists)
   }
 
-  return(df)
+  return(new_var)
 
 }
 
+data(dmu)
 
+threshold = .3
 
+g_v = deerpop$DMU
+b_v = dmu$DEER_MGM_1
 
-
-
-
+dmu$new_var = cat_replace(b_v, g_v, threshold)
 
