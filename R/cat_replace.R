@@ -1,5 +1,5 @@
 
-#' @title cat_replace
+#' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param b_v PARAM_DESCRIPTION
 #' @param g_v PARAM_DESCRIPTION
