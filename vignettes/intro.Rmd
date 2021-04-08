@@ -12,9 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-```{r setup}
 library(messy.cats)
 library(sf)
 library(rgeos)
@@ -23,6 +21,14 @@ library(raster)
 library(dplyr)
 library(qacr)
 library(rgdal)
+library(ggplot2)
+library(stringdist)
+library(varhandle)
+library(rapportools)
+
+```
+
+```{r data sets}
 
 data(deerpop)
 data(dmu)
@@ -31,12 +37,87 @@ deerpop %>%
   dplyr::filter(Year==2017) %>% 
   dplyr::select(DMU, PosthuntPopEst) -> pop17
 
-dmu %>% 
-  dplyr::select(DEER_MGM_1) -> dmu
+dmu %>%
+  dplyr::select(DEER_MGM_1)
 
-fx_vrthng(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T,
-          return_lists = 3, threshold = .3) -> df
+```
+## Data Sets
+* The `deerpop` data frame has deer population (PosthuntPopEst) for deer management units (DMU) in Wisconsin for 2015-2018 and `pop17` is a subset of 2017.
+* the `dmu` dataset contains polygons for each deer management unit, but the names are much longer and do not match the population data.
 
+```{r view tables and map}
+head(pop17)
+head(dmu)
+# ggplot()+
+#   geom_sf(data=dmu, aes(fill=DEER_MGM_1))+
+#   scale_fill_distiller(palette="RdPu",direction=1)+
+#   theme(panel.background = element_rect(fill="white"),
+#         legend.position=element_blank())
+```
+The biggest issue that this function solves is mismatching category formats or misspellings in names between two data sets. In this example the names of the deer management units are not consistent between the shapefiles or the population data.
+```{r head of names}
+unique(dmu$DEER_MGM_1) %>% head(10)
+unique(pop17$DMU) %>% head(10)
+```
+The function can match these two columns despite their different formats, and a series of examples will lead you through how this function can be utilized to match categories.
 
+## Example: Basic Category Match 
+```{r first cat_match example}
+cat_match(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T) -> df
+head(df)
+```
+As you can see most of bad DMU names have a good match, but if we examine a little closer:
+```{r}
+df %>% 
+  arrange(desc(dists)) %>% head(15)
+```
+There is no deer population for the reservations, metro areas, or Chippewa Forest, and since we supplied only the basic arguments they were matched to a deer population value. We are using the Jaro-Winkler method (default) which produces string distances ranging from 0 to 1, with 0 being an exact match and 1 meaning the strings share no characters. The poorly matched DMUs string distances are all above 0.2, so we can solve this mismatching using the threshold argument. 
+
+## Threshold Matching Example
+```{r threshold cat_match example}
+cat_match(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T, threshold = 0.2) -> df
+
+df %>% 
+  arrange(desc(dists)) %>% head(15)
+```
+With our threshold set to 0.2, these polygons without population data don't have a match below the threshold so instead of receiving their top match their matches are NA. 
+
+What if for our hypothetical purposes we need every polygon to have a population value, and instead of assigning NA we wanted to see the top matches? The return_lists argument lets you do just that.
+```{r return_lists cat_match example}
+cat_match(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T, threshold = 0.2,return_lists = 3) -> df
+
+df %>% 
+  arrange(desc(dists)) %>% head(16)
+```
+Now we can see the top three matches for each of these observations with a closest match above the threshold, and a decision can be made for each messy name. Utilizing user input and the pick_lists argument these decisions can be made on the fly. This can't be demonstrated here, but you will be able to choose the match from the  top 3 for each messy name that has a minimum string distance of above the threshold.
+
+## Pick Lists Matching Example
+```{r pick_lists cat_match example, eval=F,echo=T}
+cat_match(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T, threshold = 0.2,return_lists = 3,pick_lists=T) -> df
+```
+NOTE: Using return_lists or pick_lists without a threshold will return a list of matches for every bad observation and make you pick for each observation respectively, this will be vey time consuming.
+
+## How to Use cat_match Outputs:
+```{r using outputs cat_match example}
+cat_match(dmu$DEER_MGM_1,pop17$DMU, p = 0.1, return_dists = T, threshold = 0.2) -> df
+head(df)
+```
+Now that our messy DMU names are properly matched to their clean counterparts, we can join deer population to our polygons. The output of this function can be used in a series of joins connect the two datasets that our good and bad vectors come from. 
+```{r using outputs inner_join}
 inner_join(df,dmu, by=c("bad"="DEER_MGM_1")) -> dmu
+head(dmu)
+```
+First we inner_join the results from `cat_match()` to the polygons by matching the "bad" column (the inputted bad_vector) in the output to the "DEER_MGM_1" column in `dmu`.
+Now `dmu` has the dmu names from `pop17` matched to it's "DEER_MGM_1" column, and deer population can be added on by left_join
+``` {r using outputs left_join}
+left_join(dmu,pop17[c(1,2)], by=c("match"="DMU")) -> dmu
+head(dmu)
+```
+Now that we have population data for each dmu associated with the polygons, we can plot deer population.
+``` {r using outputs plot}
+# dmu %>% st_as_sf() -> dmu
+# ggplot()+
+#   geom_sf(data=dmu, aes(fill=PosthuntPopEst))+
+#   scale_fill_distiller(palette="RdPu",direction=1)+
+#   theme(panel.background = element_rect(fill="white"))
 ```

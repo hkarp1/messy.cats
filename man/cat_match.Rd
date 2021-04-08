@@ -15,23 +15,24 @@ cat_match(
   q = 1,
   p = 0,
   bt = 0,
-  useBytes = FALSE
+  useBytes = FALSE,
+  weight = c(d = 1, i = 1, t = 1)
 )
 }
 \arguments{
-\item{b_v}{PARAM_DESCRIPTION}
+\item{b_v}{bad_vector: the vector of messy categories or strings}
 
-\item{g_v}{PARAM_DESCRIPTION}
+\item{g_v}{good_vector: the vector of clean categories or strings to compare with b_V}
 
-\item{return_dists}{PARAM_DESCRIPTION, Default: FALSE}
+\item{return_dists}{and 1 means they share no characters, Default: FALSE}
 
-\item{return_lists}{PARAM_DESCRIPTION, Default: NA}
+\item{return_lists}{specify, Default: NA}
 
 \item{pick_lists}{PARAM_DESCRIPTION, Default: F}
 
 \item{threshold}{PARAM_DESCRIPTION, Default: NA}
 
-\item{method}{PARAM_DESCRIPTION, Default: 'jw'}
+\item{method}{method to calculate string distances. See help for stringdist::stringdist, Default: 'jw'}
 
 \item{q}{PARAM_DESCRIPTION, Default: 1}
 
@@ -40,12 +41,14 @@ cat_match(
 \item{bt}{PARAM_DESCRIPTION, Default: 0}
 
 \item{useBytes}{PARAM_DESCRIPTION, Default: FALSE}
+
+\item{weight}{For method='osa', Default: c(d=1, i=1, t=1)}
 }
 \value{
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+cat_match() uses fuzzy matching to clean messy categories or strings of a bad vector by comparing them to a good vector. Returns a dataframe with each unique value in the bad vector and it's closest match in the good vector.
 }
 \details{
 DETAILS

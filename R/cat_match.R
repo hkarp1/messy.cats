@@ -7,24 +7,20 @@ library(rapportools)
 
 
 #' @title cat_match
-#' @description cat_match() uses fuzzy matching to clean messy categories
-#' @description or strings of a bad vector by comparing them to a good vector.
-#' @description Returns a dataframe with each unique value in the bad vector
-#' @description and it's closest match in the good vector.
+#' @description cat_match() uses fuzzy matching to clean messy categories or strings of a bad vector by comparing them to a good vector.
 #' @param b_v bad_vector: the vector of messy categories or strings
 #' @param g_v good_vector: the vector of clean categories or strings to compare with b_V
-#' @param return_dists Returns the distance between the matched values. 0 is an exact
-#' @param return_dists and 1 means they share no characters, Default: FALSE
-#' @param return_lists Returns a list of the top matches, Default: NA
-#' @param pick_lists PARAM_DESCRIPTION, Default: F
-#' @param threshold PARAM_DESCRIPTION, Default: NA
+#' @param return_dists Returns the distance between the matched values. Range of values depends on method used: see help for stringdist::stringdist, Default: FALSE
+#' @param return_lists Instead of the closest match, return a list of the top number of matches that you specify with this argument, Default: NA
+#' @param pick_lists If TRUE cat_match() asks for user input and allows you to choose between the list of matches created by return_lists, Default: F
+#' @param threshold Sets a threshold for an acceptable match. If return_lists != NA then lists are only returned for matches above the threshold, Default: NA
 #' @param method method to calculate string distances. See help for stringdist::stringdist, Default: 'jw'
-#' @param q PARAM_DESCRIPTION, Default: 1
-#' @param p PARAM_DESCRIPTION, Default: 0
-#' @param bt PARAM_DESCRIPTION, Default: 0
-#' @param useBytes PARAM_DESCRIPTION, Default: FALSE
-#' @param weight For method='osa', Default: c(d=1, i=1, t=1)
-#' @return OUTPUT_DESCRIPTION
+#' @param q Size of the q-gram; must be nonnegative. Only applies to method='qgram', 'jaccard' or 'cosine'., Default: 1
+#' @param p Penalty factor for Jaro-Winkler distance. The valid range for p is 0 <= p <= 0.25. If p=0 (default), the Jaro-distance is returned. Applies only to method='jw', Default: 0
+#' @param btWinkler's boost threshold. Winkler's penalty factor is only applied when the Jaro distance is larger than bt. Applies only to method='jw' and p>0., Default: 0, Default: 0
+#' @param useBytes If TRUE, the matching is done byte-by-byte rather than character-by-character, Default: FALSE
+#' @param weight For method='osa' or 'dl', the penalty for deletion, insertion, substitution and transposition, in that order. When method='lv', the penalty for transposition is ignored. When method='jw', the weights associated with characters of a, characters from b and the transposition weight, in that order. Weights must be positive and not exceed 1. weight is ignored completely when method='hamming', 'qgram', 'cosine', 'Jaccard', 'lcs', or soundex., Default: c(d = 1, i = 1, s = 1, t = 1)
+#' @return Returns a dataframe with each unique value in the bad vector and it's closest match in the good vector. If return_dists is TRUE the distances between the matches are added as a column.
 #' @details DETAILS
 #' @examples
 #' \dontrun{

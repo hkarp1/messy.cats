@@ -21,12 +21,10 @@ library(rgdal)
 library(messy.cats)
 
 
-setwd("C:/Users/abhen/OneDrive - wesleyan.edu/FX_VRTHNG")
+
 
 ## deer pop ----
 
-# reading in and subsetting data
-deerpop <- import("Demog.Deer.Harvest_Pop.DMU.2015-2018.Stenglein.csv")
 
 deerpop %>%
   filter(Year==2017) %>%
@@ -65,7 +63,6 @@ left_join(dmu,pop17[c(1,2)], by=c("match"="DMU")) -> dmu
 head(dmu)
 
 dmu %>% st_as_sf() -> dmu
-
 ggplot()+
   geom_sf(data=dmu, aes(fill=PosthuntPopEst))+
   scale_fill_distiller(palette="RdPu",direction=1)+
