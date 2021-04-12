@@ -2,7 +2,7 @@
 % Please edit documentation in R/cat_replace.R
 \name{cat_replace}
 \alias{cat_replace}
-\title{FUNCTION_TITLE}
+\title{cat_replace}
 \usage{
 cat_replace(
   b_v,
@@ -17,29 +17,40 @@ cat_replace(
 )
 }
 \arguments{
-\item{b_v}{PARAM_DESCRIPTION}
+\item{b_v}{The bad string vector that will be restructured. This can come in the form
+of a column of a dataframe or a lone vector.}
 
-\item{g_v}{PARAM_DESCRIPTION}
+\item{g_v}{The clean string vector that will be referenced to perform the restructing.
+Again, this argument can be a dataframe column or vector.}
 
-\item{threshold}{PARAM_DESCRIPTION, Default: NA}
+\item{threshold}{The maximum distance that will form a match. If this argument
+is specified, any element in the messy vector that has no match closer than
+the threshold distance will be replaced with NA. Default: NA}
 
-\item{method}{PARAM_DESCRIPTION, Default: 'jw'}
+\item{method}{The type of string distance calculation to use. Possible methods
+are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
+See package stringdist for more information. Default: 'jw'}
 
-\item{q}{PARAM_DESCRIPTION, Default: 1}
+\item{q}{Size of the q-gram used in string distance calculation. Default: 1}
 
-\item{p}{PARAM_DESCRIPTION, Default: 0}
+\item{p}{Only used with method "jw", the Jaro-Winkler penatly size. Default: 0}
 
-\item{bt}{PARAM_DESCRIPTION, Default: 0}
+\item{bt}{Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0}
 
-\item{useBytes}{PARAM_DESCRIPTION, Default: FALSE}
+\item{useBytes}{Whether or not to perform byte-wise comparison. Default: FALSE}
 
-\item{weight}{PARAM_DESCRIPTION, Default: c(d = 1, i = 1, t = 1)}
+\item{weight}{Only used with methods "osa" or "dl", a vector representing the
+penalty for deletion, insertion, substitution, and transposition,
+in that order. Default: c(d = 1, i = 1, t = 1)}
 }
 \value{
-OUTPUT_DESCRIPTION
+This function returns a cleaned version of the bad vector, with each
+each element replaced by the most similar element of the good vector.
 }
 \description{
-FUNCTION_DESCRIPTION
+This function replaces the contents of a messy vector with
+the closest match in a clean vector. The closest match can be found in a
+variety using a variety of different string distance measurement options.
 }
 \details{
 DETAILS
