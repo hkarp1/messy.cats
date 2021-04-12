@@ -80,7 +80,10 @@ cat_replace <- function(b_v, g_v, threshold = NA,
   }
 
 
-  x <- as.data.frame(stringdistmatrix(tolower(g_v), tolower(b_v),method = "jw"))
+  x <- as.data.frame(stringdistmatrix(tolower(g_v), tolower(b_v),
+                                      method = method, p = p,
+                                      useBytes = useBytes,
+                                      weight = weight))
 
   #rownames(x) = g_v
   #colnames(x) = b_v
@@ -109,4 +112,8 @@ cat_replace <- function(b_v, g_v, threshold = NA,
 
 }
 
+x = cat_match(dmu$DEER_MGM_1, deerpop$DMU, threshold = .19, p = .1, method = "jw",
+              return_dists = T)
+
+x$new = cat_replace(dmu$DEER_MGM_1, deerpop$DMU, threshold = .19, p = .1, method = "jw")
 
