@@ -92,3 +92,10 @@ cat_match(trees$Species,tree.l, p=0.1, return_dists = T, pick_lists=F,
 arrange(df_lcs,desc(dists)) %>% head(5)
 
 
+# Messy mtcars ----
+cat_match(rownames(messy_mtcars),rownames(mtcars))
+
+cat_match(rownames(messy_mtcars),rownames(mtcars),return_dists=T)
+
+
+

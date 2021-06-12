@@ -3,9 +3,9 @@
 #' @description This function replaces the contents of a messy vector with
 #' the closest match in a clean vector. The closest match can be found in a
 #' variety using a variety of different string distance measurement options.
-#' @param b_v The bad string vector that will be restructured. This can come in the form
+#' @param messy_v The messy string vector that will be restructured. This can come in the form
 #' of a column of a dataframe or a lone vector.
-#' @param g_v The clean string vector that will be referenced to perform the restructing.
+#' @param clean_v The clean string vector that will be referenced to perform the restructing.
 #' Again, this argument can be a dataframe column or vector.
 #' @param threshold The maximum distance that will form a match. If this argument
 #' is specified, any element in the messy vector that has no match closer than

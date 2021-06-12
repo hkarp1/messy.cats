@@ -7,8 +7,8 @@ library(rapportools)
 
 #' @title cat_match
 #' @description cat_match() uses fuzzy matching to clean messy categories or strings of a bad vector by comparing them to a good vector.
-#' @param b_v bad_vector: the vector of messy categories or strings
-#' @param g_v good_vector: the vector of clean categories or strings to compare with b_V
+#' @param messy_v messy_vector: the vector of messy categories or strings
+#' @param clean_v clean_vector: the vector of clean categories or strings to compare with b_V
 #' @param return_dists Returns the distance between the matched values. Range of values depends on method used: see help for stringdist::stringdist, Default: FALSE
 #' @param return_lists Instead of the closest match, return a list of the top number of matches that you specify with this argument, Default: NA
 #' @param pick_lists If TRUE cat_match() asks for user input and allows you to choose between the list of matches created by return_lists, Default: F
