@@ -83,7 +83,8 @@ cat_replace <- function(b_v, g_v, threshold = NA,
   x <- as.data.frame(stringdistmatrix(tolower(g_v), tolower(b_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
-                                      weight = weight))
+                                      weight = weight,
+                                      q = q, bt = bt))
 
   #rownames(x) = g_v
   #colnames(x) = b_v

@@ -1,6 +1,5 @@
 library(dplyr)
 library(stringdist)
-library(readxl)
 library(tidyverse)
 library(varhandle)
 library(rapportools)
@@ -80,7 +79,8 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
   x <- as.data.frame(stringdistmatrix(tolower(u_g_v), tolower(u_b_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
-                                      weight = weight))
+                                      weight = weight,
+                                      q = q, bt = bt))
   rownames(x) = u_g_v
   colnames(x) = u_b_v
   new_var <- c()
