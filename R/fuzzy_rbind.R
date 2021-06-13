@@ -20,7 +20,11 @@ library(rapportools)
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  mtcars_colnames_messy = mtcars
+#'  colnames(mtcars_colnames_messy)[1:5] = paste0(colnames(mtcars)[1:5], "_17")
+#'  colnames(mtcars_colnames_messy)[6:11] = paste0(colnames(mtcars)[6:11], "_2017")
+#'  x = fuzzy_rbind(mtcars, mtcars_colnames_messy, .5)
+#'  x = fuzzy_rbind(mtcars, mtcars_colnames_messy, .2)
 #'  }
 #' }
 #' @rdname fuzzy_rbind
@@ -58,11 +62,15 @@ fuzzy_rbind <- function(df1, df2, lvl, method = "jw", q = 1, p = 0, bt = 0,
     df[colnms1[acc[[i]][[1]]]] = rbind(data.frame(x = df1[[acc[[i]][[1]]]]), data.frame(x = df2[[acc[[i]][[2]]]]))
   }
 
+  if (ncol(df) == 0) {
+    stop("None of the columns of the two dataframes match at the given threshold")
+  }
+
   df = df[-1]
+
 
   return(df)
 }
-
 
 
 
