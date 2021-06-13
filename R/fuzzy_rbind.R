@@ -6,8 +6,8 @@ library(rapportools)
 
 #' @title fuzzy_rbind
 #' @description fuzzy_rbind() binds dataframes based on columns with slightly different names.
-#' @param df1 dataframe 1
-#' @param df2 dataframe 2
+#' @param df1 The first dataframe to be bound.
+#' @param df2 The second dataframe to be bound.
 #' @param threshold The maximum string distance between column names, if the distance
 #' between columns is greater than this threshold the columns will not be bound.
 #' @param method The type of string distance calculation to use. Possible methods
