@@ -7,6 +7,25 @@ library(rapportools)
 
 
 
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param messy_states PARAM_DESCRIPTION
+#' @param return_dists PARAM_DESCRIPTION, Default: FALSE
+#' @param return_lists PARAM_DESCRIPTION, Default: NA
+#' @param threshold PARAM_DESCRIPTION, Default: NA
+#' @param pick_lists PARAM_DESCRIPTION, Default: F
+#' @param p PARAM_DESCRIPTION, Default: 0
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname state_match
+#' @export
+
 state_match <- function(messy_states,return_dists = FALSE, return_lists = NA,
                         threshold = NA,pick_lists=F, p = 0){
 cat_match(messy_states,state.name,method = "jw",return_dists = return_dists,return_lists = return_lists,
