@@ -1,6 +1,6 @@
 
 #' @title cat_replace
-#' @description This function replaces the contents of a messy vector with
+#' @description cat_replace() replaces the contents of a messy vector with
 #' the closest match in a clean vector. The closest match can be found in a
 #' variety using a variety of different string distance measurement options.
 #' @param messy_v The messy string vector that will be restructured. This can come in the form
@@ -20,8 +20,8 @@
 #' @param weight Only used with methods "osa" or "dl", a vector representing the
 #' penalty for deletion, insertion, substitution, and transposition,
 #' in that order. Default: c(d = 1, i = 1, t = 1)
-#' @return This function returns a cleaned version of the bad vector, with each
-#' each element replaced by the most similar element of the good vector.
+#' @return cat_replace() returns a cleaned version of the bad vector, with each
+#'  element replaced by the most similar element of the good vector.
 #' @details When dealing with messy categorical string data, string distance
 #' matching can be an easy and efficient cleaning tool. A variety of string
 #' distance calculation algorithms have been developed for different types of data,
@@ -45,22 +45,22 @@
 #' @rdname cat_replace
 #' @export
 
-cat_replace <- function(b_v, g_v, threshold = NA,
-                      method = "jw", q = 1, p = 0, bt = 0,
-                      useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
+cat_replace <- function(messy_v, clean_v, threshold = NA,
+                        method = "jw", q = 1, p = 0, bt = 0,
+                        useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
-  if (is.factor(b_v)) {
-    b_v = unfactor(b_v)
+  if (is.factor(messy_v)) {
+    messy_v = unfactor(messy_v)
   }
 
-  if (is.factor(g_v)) {
-    g_v = unfactor(g_v)
+  if (is.factor(clean_v)) {
+    clean_v = unfactor(clean_v)
   }
 
-  if (!is.vector(b_v)) {
-    stop("Please use a vector for argument b_v")
-  } else if (!is.vector(g_v)) {
-    stop("Please use a vector for argument g_v")
+  if (!is.vector(messy_v)) {
+    stop("Please use a vector for argument messy_v")
+  } else if (!is.vector(clean_v)) {
+    stop("Please use a vector for argument clean_v")
   } else if (!is.numeric(p)) {
     stop("Argument p must be a number")
   } else if (p > .25) {
@@ -80,22 +80,22 @@ cat_replace <- function(b_v, g_v, threshold = NA,
   }
 
 
-  x <- as.data.frame(stringdistmatrix(tolower(g_v), tolower(b_v),
+  x <- as.data.frame(stringdistmatrix(tolower(clean_v), tolower(messy_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
                                       weight = weight,
                                       q = q, bt = bt))
 
-  #rownames(x) = g_v
-  #colnames(x) = b_v
+  #rownames(x) = clean_v
+  #colnames(x) = messy_v
 
   new_var = c()
 
   if (!is.na(threshold)) {
 
-    for (i in 1:length(b_v)) {
+    for (i in 1:length(messy_v)) {
       if (min(x[[i]]) <= threshold) {
-        new_var = append(new_var, g_v[which.min(x[[i]])])
+        new_var = append(new_var, clean_v[which.min(x[[i]])])
       } else {
         new_var = append(new_var, NA)
       }
@@ -103,8 +103,8 @@ cat_replace <- function(b_v, g_v, threshold = NA,
 
   } else {
 
-    for (i in 1:length(b_v)) {
-      new_var = append(new_var, g_v[which.min(x[[i]])])
+    for (i in 1:length(messy_v)) {
+      new_var = append(new_var, clean_v[which.min(x[[i]])])
     }
 
   }

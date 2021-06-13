@@ -8,7 +8,7 @@ library(rapportools)
 #' @title cat_match
 #' @description cat_match() uses fuzzy matching to clean messy categories or strings of a bad vector by comparing them to a good vector.
 #' @param messy_v messy_vector: the vector of messy categories or strings
-#' @param clean_v clean_vector: the vector of clean categories or strings to compare with b_V
+#' @param clean_v clean_vector: the vector of clean categories or strings to compare with messy_v
 #' @param return_dists Returns the distance between the matched values. Range of values depends on method used: see help for stringdist::stringdist, Default: FALSE
 #' @param return_lists Instead of the closest match, return a list of the top number of matches that you specify with this argument, Default: NA
 #' @param pick_lists If TRUE cat_match() asks for user input and allows you to choose between the list of matches created by return_lists, Default: F
@@ -30,22 +30,22 @@ library(rapportools)
 #' @rdname cat_match
 #' @export
 
-cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
+cat_match <- function(messy_v, clean_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
                       threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
                       useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
-  if (is.factor(b_v)) {
-    b_v = unfactor(b_v)
+  if (is.factor(messy_v)) {
+    messy_v = unfactor(messy_v)
   }
 
-  if (is.factor(g_v)) {
-    g_v = unfactor(g_v)
+  if (is.factor(clean_v)) {
+    clean_v = unfactor(clean_v)
   }
 
-  if (!is.vector(b_v)) {
-    stop("Please use a vector for argument b_v")
-  } else if (!is.vector(g_v)) {
-    stop("Please use a vector for argument g_v")
+  if (!is.vector(messy_v)) {
+    stop("Please use a vector for argument messy_v")
+  } else if (!is.vector(clean_v)) {
+    stop("Please use a vector for argument clean_v")
   } else if (!is.numeric(p)) {
     stop("Argument p must be a number")
   } else if (p > .25) {
@@ -73,16 +73,16 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
   }
 
 
-  u_g_v = unique(g_v)
-  u_b_v = unique(b_v)
+  u_clean_v = unique(clean_v)
+  u_messy_v = unique(messy_v)
 
-  x <- as.data.frame(stringdistmatrix(tolower(u_g_v), tolower(u_b_v),
+  x <- as.data.frame(stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
                                       weight = weight,
                                       q = q, bt = bt))
-  rownames(x) = u_g_v
-  colnames(x) = u_b_v
+  rownames(x) = u_clean_v
+  colnames(x) = u_messy_v
   new_var <- c()
 
   if (!is.na(threshold)) {
@@ -111,7 +111,7 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
         min <- min(x[[i]])
         min.plc <- which.min(x[[i]])
         if (min <= threshold) {
-          new_var <- new_var %>% append(u_g_v[min.plc])
+          new_var <- new_var %>% append(u_clean_v[min.plc])
         } else {
           new_var <- new_var %>% append(NA)
         }
@@ -136,12 +136,12 @@ cat_match <- function(b_v, g_v, return_dists = FALSE, return_lists = NA, pick_li
     } else {
       for (i in 1:ncol(x)) {
         min <- which.min(x[[i]])
-        new_var <- new_var %>% append(u_g_v[min])
+        new_var <- new_var %>% append(u_clean_v[min])
       }
     }
   }
 
-  df = data.frame(y = u_b_v)
+  df = data.frame(y = u_messy_v)
   df$x = new_var
 
   if (return_dists == TRUE & is.na(return_lists)) {
