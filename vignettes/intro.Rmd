@@ -26,6 +26,33 @@ library(stringdist)
 library(varhandle)
 library(rapportools)
 
+cars_g = c("Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive",
+           "Hornet Sportabout", "Valiant", "Duster 360", "Merc 240D",
+           "Merc 230", "Merc 280", "Merc 280C", "Merc 450SE",
+           "Merc 450SL", "Merc 450SLC", "Cadillac Fleetwood", "Lincoln Continental",
+           "Chrysler Imperial", "Fiat 128", "Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger", "AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "Fiat X1-9", "Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "Ferrari Dino", "Maserati Bora", "Volvo 142E")
+
+cars_b = c("teal Mazda RX4", "black Mazda RX4 Wag", "green Datsun 710", "Hornet 4 Drive",
+           "green Hornet Sportabout", "Valiant", "Duster 360", "orange Merc 240D",
+           "Merc 230", "teal Merc 280", "Merc 280C", "green Merc 450SE",
+           "Merc 450SL", "blue Merc 450SLC", "green Cadillac Fleetwood", "Lincoln Continental",
+           "Chrysler Imperial", "Fiat 128", "red Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger", "red AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "black Fiat X1-9", "blue Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "black Ferrari Dino", "black Maserati Bora", "black Volvo 142E")
+
+x = cat_match(cars_b, cars_g, method = "jw")
+x = cat_match(cars_b, cars_g, method = "jaccard")
+x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3)
+x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3, pick_lists = TRUE)
+
+
+
+
+
 ```
 
 ```{r data sets}
