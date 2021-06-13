@@ -36,8 +36,31 @@ library(rapportools)
 #' @rdname fuzzy_rbind
 #' @export
 
-fuzzy_rbind <- function(df1, df2, lvl, method = "jw", q = 1, p = 0, bt = 0,
+fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0,
                         useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
+  if (!is.data.frame(df1)) {
+    stop("Please use a dataframe for argument df1")
+  } else if (!is.data.frame(df1)) {
+    stop("Please use a dataframe for argument df2")
+  } else if (!is.numeric(p)) {
+    stop("Argument p must be a number")
+  } else if (p > .25) {
+    stop("Argument p must be less than or equal to .25")
+  } else if (!is.numeric(q)) {
+    stop("Argument q must be a number")
+  } else if (!is.numeric(bt)) {
+    stop("Argument bt must be a number")
+  } else if (!is.boolean(useBytes)) {
+    stop("Argument unique must be a boolean")
+  } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
+                             "cosine", "jaccard", "jw","soundex"))) {
+    stop("Please use only a method available to the stringdist function in the
+         stringdist package")
+  } else if (!is.numeric(threshold)) {
+    stop("Argument threshold must be numeric")
+  } else if (!is.vector(weight) | length(weight) != 3) {
+    stop("Argument weight must be a vector of length 3")
+  }
 
   colnms1 = colnames(df1)
   colnms2 = colnames(df2)
@@ -53,7 +76,7 @@ fuzzy_rbind <- function(df1, df2, lvl, method = "jw", q = 1, p = 0, bt = 0,
                      useBytes = useBytes,
                      weight = weight)
 
-      if (x < lvl) {
+      if (x < threshold) {
 
         acc[[count]] = list(i,e)
         count = count + 1
