@@ -21,6 +21,10 @@ library(stringdist)
 library(varhandle)
 library(rapportools)
 ```
+Messy.cats contains various function that employ string distance tools in order to make data mangement easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plauged by typos and different formatting choices, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
+
+This introduction will lead you through examples of the functions in use, explain the arguments, and show how to get the most out of these functions. 
+
 First lets create some example datasets:
 ```{r car lists}
 cars_b = c("teal Mazda RX4", "black Mazda RX4 Wag", "green Datsun 710", "Hornet 4 Drive",
@@ -41,15 +45,10 @@ cars_g = c("Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive",
            "Pontiac Firebird", "Fiat X1-9", "Porsche 914-2", "Lotus Europa",
            "Ford Pantera L", "Ferrari Dino", "Maserati Bora", "Volvo 142E")
 
-cats_bad = c("Achatia distincta,Acronicta hasta,Alsophila pometaria,Amphipyra pyramadoides,Besma quercivoraria,Crocidographa normani,Ennomos subsignaria,Eutrapela clemataria,Heterocampa gutivitta,Himella intractata,Hypagyrtis unipunctata,Iridopsis ephyraria,Itame pustularia,Lithophane antennata,Lithophane hemmena,Lithophane patefacta,Lomographa glomeraria,Lomographa vestaliata,Lymantria dispar,Machimia tentoriferella,Malacasoma disstria,Melanolophia canadaria,Morrisonia confusa,Morrisonia latex,Nadata gibbosa,Nematocampa resistaria,Nola triquetrana,Orgyia leucostigma,Orthosia hibisci,Orthosia rubescens,Papilio glaucus,Parallelia bistriarus,Phigalia strigitaria,Phigalia titea,Prochoerodes lineola,Pyrefera hesperidage,Satyrium calanus,Satyrium liparops,Tetracis cachexiata,Zale lunata,Zale lunifera")
-
-messy_caterpillars
-
-clean_caterpillars
-
+# load in messy_caterpillars and clean_caterpillars
 ```
 
-cat_match() is meant to be used to 
+In this example suppose these lists of cars are columns in dataframes you want to join. One column has color included in the make and model of the car, and the other does not. Instead of string processing and deleting the color descriptors, cat_match() can 
 ```{r first cat_match example}
 x = cat_match(cars_b, cars_g, method = "jw")
 x
@@ -70,8 +69,8 @@ x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_li
 
 ```
 
-```{r pick_lists cat_match example, eval=F,echo=T}
-
+```{r pick_lists cat_match example}
+cat_match(messy_caterpillars$`Caterpillar Species`,clean_caterpillars$species,return_dists = T)
 ```
 
 ```{r using outputs cat_match example}

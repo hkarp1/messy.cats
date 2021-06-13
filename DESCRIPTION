@@ -7,14 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "hkarp@wesleyan.edu")
     person(given = "Andrew",
-           family = "Hennesey",
+           family = "Hennessy",
            role = c("aut", "cre"),
-           email = "ahennesey@wesleyan.edu")
+           email = "ahennessy@wesleyan.edu")
     person(given = "Duncan",
            family = "Kreutter",
            role = c("aut", "cre"),
            email = "dkreutter@wesleyan.edu")
-Description: Messey.cats contains various function that employ string distance tools in order to make data mangement easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plauged by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.  
+Description: Messy.cats contains various function that employ string distance tools in order to make data mangement easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plauged by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
