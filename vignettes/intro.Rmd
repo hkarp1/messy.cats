@@ -14,17 +14,23 @@ knitr::opts_chunk$set(
 )
 
 library(messy.cats)
-library(sf)
-library(rgeos)
-library(maptools)
-library(raster)
 library(dplyr)
-library(qacr)
 library(rgdal)
 library(ggplot2)
 library(stringdist)
 library(varhandle)
 library(rapportools)
+```
+First lets create some example datasets:
+```{r car lists}
+cars_b = c("teal Mazda RX4", "black Mazda RX4 Wag", "green Datsun 710", "Hornet 4 Drive",
+           "green Hornet Sportabout", "Valiant", "Duster 360", "orange Merc 240D",
+           "Merc 230", "teal Merc 280", "Merc 280C", "green Merc 450SE",
+           "Merc 450SL", "blue Merc 450SLC", "green Cadillac Fleetwood", "Lincoln Continental",
+           "Chrysler Imperial", "Fiat 128", "red Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger", "red AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "black Fiat X1-9", "blue Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "black Ferrari Dino", "black Maserati Bora", "black Volvo 142E")
 
 cars_g = c("Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive",
            "Hornet Sportabout", "Valiant", "Duster 360", "Merc 240D",
@@ -35,49 +41,28 @@ cars_g = c("Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive",
            "Pontiac Firebird", "Fiat X1-9", "Porsche 914-2", "Lotus Europa",
            "Ford Pantera L", "Ferrari Dino", "Maserati Bora", "Volvo 142E")
 
-cars_b = c("teal Mazda RX4", "black Mazda RX4 Wag", "green Datsun 710", "Hornet 4 Drive",
-           "green Hornet Sportabout", "Valiant", "Duster 360", "orange Merc 240D",
-           "Merc 230", "teal Merc 280", "Merc 280C", "green Merc 450SE",
-           "Merc 450SL", "blue Merc 450SLC", "green Cadillac Fleetwood", "Lincoln Continental",
-           "Chrysler Imperial", "Fiat 128", "red Honda Civic", "Toyota Corolla",
-           "Toyota Corona", "Dodge Challenger", "red AMC Javelin", "Camaro Z28",
-           "Pontiac Firebird", "black Fiat X1-9", "blue Porsche 914-2", "Lotus Europa",
-           "Ford Pantera L", "black Ferrari Dino", "black Maserati Bora", "black Volvo 142E")
+cats_bad = c("Achatia distincta,Acronicta hasta,Alsophila pometaria,Amphipyra pyramadoides,Besma quercivoraria,Crocidographa normani,Ennomos subsignaria,Eutrapela clemataria,Heterocampa gutivitta,Himella intractata,Hypagyrtis unipunctata,Iridopsis ephyraria,Itame pustularia,Lithophane antennata,Lithophane hemmena,Lithophane patefacta,Lomographa glomeraria,Lomographa vestaliata,Lymantria dispar,Machimia tentoriferella,Malacasoma disstria,Melanolophia canadaria,Morrisonia confusa,Morrisonia latex,Nadata gibbosa,Nematocampa resistaria,Nola triquetrana,Orgyia leucostigma,Orthosia hibisci,Orthosia rubescens,Papilio glaucus,Parallelia bistriarus,Phigalia strigitaria,Phigalia titea,Prochoerodes lineola,Pyrefera hesperidage,Satyrium calanus,Satyrium liparops,Tetracis cachexiata,Zale lunata,Zale lunifera")
 
-x = cat_match(cars_b, cars_g, method = "jw")
-x = cat_match(cars_b, cars_g, method = "jaccard")
-x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3)
-x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3, pick_lists = TRUE)
+messy_caterpillars
 
-
-
-
+clean_caterpillars
 
 ```
 
-```{r data sets}
-
-
-
-```
-
-```{r view tables and map}
-
-```
-
-```{r head of names}
-
-```
-
+cat_match() is meant to be used to 
 ```{r first cat_match example}
-
+x = cat_match(cars_b, cars_g, method = "jw")
+x
 ```
 
-```{r}
+```{r changing the method}
+x = cat_match(cars_b, cars_g, method = "jaccard")
 
 ```
 
 ```{r threshold cat_match example}
+x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3)
+x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3, pick_lists = TRUE)
 
 ```
 

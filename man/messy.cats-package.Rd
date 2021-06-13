@@ -4,12 +4,12 @@
 \name{messy.cats-package}
 \alias{messy.cats}
 \alias{messy.cats-package}
-\title{messy.cats: What the Package Does (One Line, Title Case)}
+\title{messy.cats: Employs String Distance Tools to Help Clean Categorical Data}
 \description{
-What the package does (one paragraph).
+Messey.cats contains various function that employ string distance tools in order to make data mangement easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plauged by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Duncan Kreutter \email{dkreutter@wesleyan.edu}
 
 }
 \keyword{internal}

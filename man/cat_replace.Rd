@@ -5,8 +5,8 @@
 \title{cat_replace}
 \usage{
 cat_replace(
-  b_v,
-  g_v,
+  messy_v,
+  clean_v,
   threshold = NA,
   method = "jw",
   q = 1,
@@ -17,10 +17,10 @@ cat_replace(
 )
 }
 \arguments{
-\item{b_v}{The bad string vector that will be restructured. This can come in the form
+\item{messy_v}{The messy string vector that will be restructured. This can come in the form
 of a column of a dataframe or a lone vector.}
 
-\item{g_v}{The clean string vector that will be referenced to perform the restructing.
+\item{clean_v}{The clean string vector that will be referenced to perform the restructing.
 Again, this argument can be a dataframe column or vector.}
 
 \item{threshold}{The maximum distance that will form a match. If this argument
@@ -44,21 +44,34 @@ penalty for deletion, insertion, substitution, and transposition,
 in that order. Default: c(d = 1, i = 1, t = 1)}
 }
 \value{
-This function returns a cleaned version of the bad vector, with each
-each element replaced by the most similar element of the good vector.
+cat_replace() returns a cleaned version of the bad vector, with each
+element replaced by the most similar element of the good vector.
 }
 \description{
-This function replaces the contents of a messy vector with
-the closest match in a clean vector. The closest match can be found in a
-variety using a variety of different string distance measurement options.
+cat_replace() replaces the contents of a messy vector with
+the closest match in a clean vector. The closest match can be found
+using a variety of different string distance measurement options.
 }
 \details{
-DETAILS
+When dealing with messy categorical string data, string distance
+matching can be an easy and efficient cleaning tool. A variety of string
+distance calculation algorithms have been developed for different types of data,
+and these algorithms can be used to detect and remedy problems with categorical
+string data.
+
+By providing a correctly spelled and specified vector of categories to be compared
+against a vector of messy strings, a cleaned vector of categories can be generated
+by finding the correctly specificed string most similar to a messy string. This
+method works particularly well for messy user-inputted data that often suffers
+from transposition or misspelling errors.
 }
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+ messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+ clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+ cleaned_trees = cat_replace(messy_trees, clean_trees)
+
  }
 }
 }

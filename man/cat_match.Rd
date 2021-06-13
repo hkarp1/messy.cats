@@ -5,8 +5,8 @@
 \title{cat_match}
 \usage{
 cat_match(
-  b_v,
-  g_v,
+  messy_v,
+  clean_v,
   return_dists = FALSE,
   return_lists = NA,
   pick_lists = F,
@@ -20,9 +20,9 @@ cat_match(
 )
 }
 \arguments{
-\item{b_v}{bad_vector: the vector of messy categories or strings}
+\item{messy_v}{messy_vector: the vector of messy categories or strings}
 
-\item{g_v}{good_vector: the vector of clean categories or strings to compare with b_V}
+\item{clean_v}{clean_vector: the vector of clean categories or strings to compare with messy_v}
 
 \item{return_dists}{Returns the distance between the matched values. Range of values depends on method used: see help for stringdist::stringdist, Default: FALSE}
 
