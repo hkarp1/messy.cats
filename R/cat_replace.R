@@ -1,8 +1,8 @@
 
 #' @title cat_replace
 #' @description cat_replace() replaces the contents of a messy vector with
-#' the closest match in a clean vector. The closest match can be found in a
-#' variety using a variety of different string distance measurement options.
+#' the closest match in a clean vector. The closest match can be found
+#' using a variety of different string distance measurement options.
 #' @param messy_v The messy string vector that will be restructured. This can come in the form
 #' of a column of a dataframe or a lone vector.
 #' @param clean_v The clean string vector that will be referenced to perform the restructing.

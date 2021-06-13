@@ -7,8 +7,8 @@ library(rapportools)
 
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title state_match
+#' @description state_match() is a wrapper for cat_match() used when US states are misspelled.
 #' @param messy_states PARAM_DESCRIPTION
 #' @param return_dists PARAM_DESCRIPTION, Default: FALSE
 #' @param return_lists PARAM_DESCRIPTION, Default: NA
