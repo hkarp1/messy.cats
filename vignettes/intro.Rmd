@@ -21,47 +21,65 @@ library(stringdist)
 library(varhandle)
 library(rapportools)
 ```
-Messy.cats contains various function that employ string distance tools in order to make data mangement easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plauged by typos and different formatting choices, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
+Messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos and different formatting choices, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
 
 This introduction will lead you through examples of the functions in use, explain the arguments, and show how to get the most out of these functions. 
 
-First lets create some example datasets:
+First lets create some example vectors:
 ```{r car lists}
-cars_b = c("teal Mazda RX4", "black Mazda RX4 Wag", "green Datsun 710", "Hornet 4 Drive",
-           "green Hornet Sportabout", "Valiant", "Duster 360", "orange Merc 240D",
-           "Merc 230", "teal Merc 280", "Merc 280C", "green Merc 450SE",
-           "Merc 450SL", "blue Merc 450SLC", "green Cadillac Fleetwood", "Lincoln Continental",
-           "Chrysler Imperial", "Fiat 128", "red Honda Civic", "Toyota Corolla",
-           "Toyota Corona", "Dodge Challenger", "red AMC Javelin", "Camaro Z28",
-           "Pontiac Firebird", "black Fiat X1-9", "blue Porsche 914-2", "Lotus Europa",
-           "Ford Pantera L", "black Ferrari Dino", "black Maserati Bora", "black Volvo 142E")
+cars_bad = c("teal Mazda RX4", "black Mazda RX4 Wag",
+             "green Datsun 710", "Hornet 4 Drive",
+           "green Hornet Sportabout", "Valiant",
+           "Duster 360", "orange Merc 240D",
+           "Merc 230", "teal Merc 280",
+           "Merc 280C", "green Merc 450SE",
+           "Merc 450SL", "blue Merc 450SLC",
+           "green Cadillac Fleetwood", "Lincoln Continental",
+           "Chrysler Imperial", "Fiat 128",
+           "red Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger",
+           "red AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "black Fiat X1-9",
+           "blue Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "black Ferrari Dino",
+           "black Maserati Bora", "black Volvo 142E")
 
-cars_g = c("Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive",
-           "Hornet Sportabout", "Valiant", "Duster 360", "Merc 240D",
-           "Merc 230", "Merc 280", "Merc 280C", "Merc 450SE",
-           "Merc 450SL", "Merc 450SLC", "Cadillac Fleetwood", "Lincoln Continental",
-           "Chrysler Imperial", "Fiat 128", "Honda Civic", "Toyota Corolla",
-           "Toyota Corona", "Dodge Challenger", "AMC Javelin", "Camaro Z28",
-           "Pontiac Firebird", "Fiat X1-9", "Porsche 914-2", "Lotus Europa",
-           "Ford Pantera L", "Ferrari Dino", "Maserati Bora", "Volvo 142E")
+cars_good = c("Mazda RX4", "Mazda RX4 Wag",
+              "Datsun 710", "Hornet 4 Drive",
+           "Hornet Sportabout", "Valiant",
+           "Duster 360", "Merc 240D",
+           "Merc 230", "Merc 280",
+           "Merc 280C", "Merc 450SE",
+           "Merc 450SL", "Merc 450SLC",
+           "Cadillac Fleetwood", "Lincoln Continental",
+           "Chrysler Imperial", "Fiat 128",
+           "Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger",
+           "AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "Fiat X1-9",
+           "Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "Ferrari Dino",
+           "Maserati Bora", "Volvo 142E")
+
+
 
 # load in messy_caterpillars and clean_caterpillars
 ```
 
 In this example suppose these lists of cars are columns in dataframes you want to join. One column has color included in the make and model of the car, and the other does not. Instead of string processing and deleting the color descriptors, cat_match() can 
 ```{r first cat_match example}
-x = cat_match(cars_b, cars_g, method = "jw")
+x = cat_match(cars_bad, cars_good, method = "jw")
 x
 ```
 
 ```{r changing the method}
-x = cat_match(cars_b, cars_g, method = "jaccard")
+x = cat_match(cars_bad, cars_good, method = "jaccard")
 
 ```
 
 ```{r threshold cat_match example}
-x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3)
-x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_lists = 3, pick_lists = TRUE)
+x = cat_match(cars_bad, cars_good, method = "jaccard", return_dists = TRUE, return_lists = 3)
+x = cat_match(cars_bad, cars_good, method = "jaccard", return_dists = TRUE, return_lists = 3, pick_lists = TRUE)
 
 ```
 
@@ -70,7 +88,7 @@ x = cat_match(cars_b, cars_g, method = "jaccard", return_dists = TRUE, return_li
 ```
 
 ```{r pick_lists cat_match example}
-cat_match(messy_caterpillars$`Caterpillar Species`,clean_caterpillars$species,return_dists = T)
+#cat_match(messy_caterpillars$`Caterpillar Species`,clean_caterpillars$species,return_dists = T)
 ```
 
 ```{r using outputs cat_match example}

@@ -24,8 +24,8 @@
 # # cos<-cat_match(dmu$DEER_MGM_1,deerpop$DMU,method="cosine",p=0.1,return_dists = T)
 
 
-colnames(messy_caterpillars)=c("Caterpillar Species","Avg Weight (g)")
-clean_caterpillars
+#colnames(messy_caterpillars)=c("Caterpillar Species","Avg Weight (g)")
+#clean_caterpillars
 
 
 
