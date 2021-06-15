@@ -1,0 +1,95 @@
+library(dplyr)
+library(stringdist)
+library(tidyverse)
+library(varhandle)
+library(rapportools)
+
+#' @title cat_join
+#' @description cat_join() joins two dataframes using the closest match
+#' between two specified columns with misspellings or slight format differences.
+#' The closest match can be found using a variety of different string distance measurement options.
+#' @param messy_df The dataframe to be joined using a messy categorical variable.
+#' @param clean_df The dataframe to be joined with a clean categorical variable to be used
+#' as a reference for the messy column.
+#' @param by A vector that specifies the columns to match and join by. If the column
+#' names are the same input: "column_name". If the columns have different names
+#' input: c("messy_column" = "clean_column")
+#' @param threshold The maximum distance that will form a match. If this argument
+#' is specified, any element in the messy vector that has no match closer than
+#' the threshold distance will be replaced with NA. Default: NA
+#' @param method The type of string distance calculation to use. Possible methods
+#'  are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
+#'   See package stringdist for more information. Default: 'jw'
+#' @param q Size of the q-gram used in string distance calculation. Default: 1
+#' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
+#' @param bt Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0
+#' @param useBytes Whether or not to perform byte-wise comparison. Default: FALSE
+#' @param weight Only used with methods "osa" or "dl", a vector representing the
+#' penalty for deletion, insertion, substitution, and transposition,
+#' in that order. Default: c(d = 1, i = 1, t = 1)
+#' @return Returns a dataframe consisting of the two inputted dataframes joined by their designated columns.
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  messy_trees = data.frame()
+#'  messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+#'  messy_trees[1:9,2] = c(34,12,43,32,65,23,12,45,35)
+#'  clean_trees=data.frame()
+#'  clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+#'  clean_trees[1:9,2] = "y"
+#'  cat_join(messy_trees,clean_trees,by="V1",method="jaccard")
+#'  }
+#' }
+#' @rdname cat_join
+#' @export
+
+
+cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
+                     q = 1, p = 0, bt = 0,
+                     useBytes = FALSE, weight=c(d=1, i=1, t=1)){
+
+  if (!is.data.frame(messy_df)) {
+    stop("Please use a dataframe for argument messy_df")
+  } else if (!is.data.frame(clean_df)) {
+    stop("Please use a dataframe for argument clean_df")
+  } else if (!is.numeric(p)) {
+    stop("Argument p must be a number")
+  } else if (p > .25) {
+    stop("Argument p must be less than or equal to .25")
+  } else if (!is.numeric(q)) {
+    stop("Argument q must be a number")
+  } else if (!is.numeric(bt)) {
+    stop("Argument bt must be a number")
+  } else if (!is.boolean(useBytes)) {
+    stop("Argument unique must be a boolean")
+  } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
+                             "cosine", "jaccard", "jw","soundex"))) {
+    stop("Please use only a method available to the stringdist function in the
+         stringdist package")
+  } else if (!is.numeric(threshold) & !is.na(threshold)) {
+    stop("Argument threshold must be numeric")
+  } else if (!is.vector(weight) | length(weight) != 3) {
+    stop("Argument weight must be a vector of length 3")
+  }
+  if (length(by)==1){
+    messy_df[[by]] <- cat_replace(messy_v = messy_df[[by]], clean_v = clean_df[[by]], q=q,p=p,bt=bt,
+                          useBytes = useBytes,weight = weight, threshold = threshold,method = method)
+
+    return(left_join(messy_df,clean_df,by=by))
+
+  } else if (length(by)==2){
+    messy_df[[by[1]]] <- cat_replace(messy_v = messy_df[[by[1]]], clean_v = clean_df[[by[2]]], q=q,p=p,bt=bt,
+                           useBytes = useBytes,weight = weight, threshold = threshold,method = method)
+
+    if  (by[[1]] == by[[2]]) {
+      return(left_join(messy_df,clean_df,by=by[[1]]))
+    } else{
+      return(left_join(messy_df,clean_df,by=by))
+    }
+  }
+}
+
+
+
