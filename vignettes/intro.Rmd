@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 
 library(messy.cats)
 library(dplyr)
-library(rgdal)
 library(ggplot2)
 library(stringdist)
 library(varhandle)
@@ -83,20 +82,32 @@ x = cat_match(cars_bad, cars_good, method = "jaccard", return_dists = TRUE, retu
 
 ```
 
-```{r return_lists cat_match example}
 
+
+In this example we have two datasets, messy_caterpillars contains information about the average weight of caterpillars, and clean_caterpillars is the number of caterpillars you found last summer. You want to calculate the average total weight by species of the caterpillars you saw, but there are misspellings and typos that make merging these two datasets a pain.
+```{r return_lists cat_match example}
+messy_caterpillars
+clean_caterpillars
 ```
 
+
+You might also notice that there is weight data for more species than you saw this summer, and with cat_replace() we can match the mispelled names to the correct names, and exclude the caterpillars that you did not find. 
 ```{r pick_lists cat_match example}
+<<<<<<< HEAD
 #cat_match(messy_caterpillars$`Caterpillar Species`,clean_caterpillars$species,return_dists = T)
+=======
+cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T)
+>>>>>>> 04d50c7963170506921c7d66c76ae82f9c0e3e68
 ```
 
 ```{r using outputs cat_match example}
-
+cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T) %>% arrange(desc(dists))
 ```
-
+Now we know to set a threshold of ~.12 when using cat_replace()
 ```{r using outputs inner_join}
+messy_caterpillars$CaterpillarSpecies = cat_replace(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,threshold=0.12)
 
+left_join(clean_caterpillars,messy_caterpillars, by = c("species"="CaterpillarSpecies"))
 ```
 
 ``` {r using outputs left_join}
