@@ -1,6 +1,5 @@
-
 #' @title cat_replace
-#' @description cat_replace() replaces the contents of a messy vector with
+#' @description `cat_replace()` replaces the contents of a messy vector with
 #' the closest match in a clean vector. The closest match can be found
 #' using a variety of different string distance measurement options.
 #' @param messy_v The messy string vector that will be restructured. This can come in the form

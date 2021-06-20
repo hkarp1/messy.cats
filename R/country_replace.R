@@ -1,23 +1,14 @@
 #' @title country_replace
-#' @description A wrapper function for cat_replace that only requires an inputted
-#' vector of messy countries. country_replace() uses a built in clean list of
+#' @description A wrapper function for `cat_replace()`hat only requires an inputted
+#' vector of messy countries. `country_replace()` uses a built in clean list of
 #' country names `country.names` as the reference clean vector.
 #' @param messy_countries Vector containing the messy country names that will be replaced
 #' by the closest match from `country.names`
 #' @param threshold The maximum distance that will form a match. If this argument
 #' is specified, any element in the messy vector that has no match closer than
 #' the threshold distance will be replaced with NA. Default: NA
-#' @param method The type of string distance calculation to use. Possible methods
-#'  are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
-#'   See package stringdist for more information. Default: 'jw'
-#' @param q Size of the q-gram used in string distance calculation. Default: 1
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
-#' @param bt Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0
-#' @param useBytes Whether or not to perform byte-wise comparison. Default: FALSE
-#' @param weight Only used with methods "osa" or "dl", a vector representing the
-#' penalty for deletion, insertion, substitution, and transposition,
-#' in that order. Default: c(d = 1, i = 1, t = 1)
-#' @return country_replace() returns a cleaned version of the bad vector, with each
+#' @return `country_replace()` returns a cleaned version of the bad vector, with each
 #'  element replaced by the most similar element of the good vector.
 #' @details DETAILS
 #' @examples
@@ -31,10 +22,9 @@
 #' @rdname country_replace
 #' @export
 
-country_replace <- function(messy_countries, threshold = NA,
-                          method = "jw", q = 1, p = 0, bt = 0,
-                          useBytes = FALSE, weight=c(d=1, i=1, t=1)){
-  cat_replace(messy_countries, country.names[[1]], threshold, method = "jw", q, p, bt, useBytes, weight)
+country_replace <- function(messy_countries,threshold = NA, p = 0){
+
+  cat_replace(messy_countries,country.names[[1]],method = "jw", threshold, p)
 }
 
 

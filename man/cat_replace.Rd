@@ -48,7 +48,7 @@ cat_replace() returns a cleaned version of the bad vector, with each
 element replaced by the most similar element of the good vector.
 }
 \description{
-cat_replace() replaces the contents of a messy vector with
+\code{cat_replace()} replaces the contents of a messy vector with
 the closest match in a clean vector. The closest match can be found
 using a variety of different string distance measurement options.
 }

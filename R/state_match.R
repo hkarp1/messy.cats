@@ -1,49 +1,29 @@
-library(dplyr)
-library(stringdist)
-library(readxl)
-library(varhandle)
-library(rapportools)
-
-
-
 #' @title state_match
-#' @description state_match() is a wrapper for cat_match() used when US states are misspelled.
-#' @param messy_states PARAM_DESCRIPTION
-#' @param return_dists PARAM_DESCRIPTION, Default: FALSE
-#' @param return_lists PARAM_DESCRIPTION, Default: NA
-#' @param threshold PARAM_DESCRIPTION, Default: NA
-#' @param pick_lists PARAM_DESCRIPTION, Default: F
-#' @param p PARAM_DESCRIPTION, Default: 0
-#' @return OUTPUT_DESCRIPTION
+#' @description A wrapper function for `cat_match()`hat only requires an inputted
+#' vector of messy states. `state_match()` uses a built in clean list of
+#' state names `state.name` as the reference clean vector.
+#' @param messy_states Vector containing the messy state names that will be replaced
+#' by the closest match from `state.name`
+#' @param threshold The maximum distance that will form a match. If this argument
+#' is specified, any element in the messy vector that has no match closer than
+#' the threshold distance will be replaced with NA. Default: NA
+#' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
+#' @return `state_match()` returns a cleaned version of the bad vector, with each
+#'  element replaced by the most similar element of the good vector.
 #' @details DETAILS
 #' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
+#'  lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
+#'  matched <- state_match(lst)
 #'  }
 #' }
 #' @rdname state_match
 #' @export
 
-state_match <- function(messy_states,return_dists = FALSE, return_lists = NA,
-                        threshold = NA,pick_lists=F, p = 0){
-cat_match(messy_states,state.name,method = "jw",return_dists = return_dists,return_lists = return_lists,
-          threshold = threshold,pick_lists=pick_lists,p=p)
+state_match <- function(messy_states,threshold = NA, p = 0){
+
+    cat_match(messsy_states,state.name, return_dists = FALSE, return_lists = NA,
+              pick_lists = F, method = "jw", threshold, p)
 }
-
-
-# #### Examples ####
-# messy_states1 <- readRDS("C:/Users/abhen/Desktop/messy.cats/data/messy_states1.rds")
-# messy_states2 <- readRDS("C:/Users/abhen/Desktop/messy.cats/data/messy_states2.rds")
-#
-# # normal match with not very messy states list
-# state_match(messy_states1,return_dists=T,p=0.05) -> df
-#
-# # normal match with messier states
-# state_match(messy_states2,return_dists=T,p=0.05) -> df2
-#
-# # match returning lists with messier states
-# state_match(messy_states2,return_dists=T,p=0.05,return_lists = 3) -> df3
-#
-# # match by choosing with messier states
-# state_match(messy_states2,return_dists=T,threshold=0.2,p=0.05,return_lists = 5,pick_lists=T) -> df4

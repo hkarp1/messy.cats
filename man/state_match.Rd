@@ -4,33 +4,26 @@
 \alias{state_match}
 \title{state_match}
 \usage{
-state_match(
-  messy_states,
-  return_dists = FALSE,
-  return_lists = NA,
-  threshold = NA,
-  pick_lists = F,
-  p = 0
-)
+state_match(messy_states, threshold = NA, p = 0)
 }
 \arguments{
-\item{messy_states}{PARAM_DESCRIPTION}
+\item{messy_states}{Vector containing the messy state names that will be replaced
+by the closest match from \code{state.name}}
 
-\item{return_dists}{PARAM_DESCRIPTION, Default: FALSE}
+\item{threshold}{The maximum distance that will form a match. If this argument
+is specified, any element in the messy vector that has no match closer than
+the threshold distance will be replaced with NA. Default: NA}
 
-\item{return_lists}{PARAM_DESCRIPTION, Default: NA}
-
-\item{threshold}{PARAM_DESCRIPTION, Default: NA}
-
-\item{pick_lists}{PARAM_DESCRIPTION, Default: F}
-
-\item{p}{PARAM_DESCRIPTION, Default: 0}
+\item{p}{Only used with method "jw", the Jaro-Winkler penatly size. Default: 0}
 }
 \value{
-OUTPUT_DESCRIPTION
+\code{state_match()} returns a cleaned version of the bad vector, with each
+element replaced by the most similar element of the good vector.
 }
 \description{
-state_match() is a wrapper for cat_match() used when US states are misspelled.
+A wrapper function for \code{cat_match()}hat only requires an inputted
+vector of messy states. \code{state_match()} uses a built in clean list of
+state names \code{state.name} as the reference clean vector.
 }
 \details{
 DETAILS
@@ -39,6 +32,8 @@ DETAILS
 \dontrun{
 if(interactive()){
  #EXAMPLE1
+ lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
+ matched <- state_match(lst)
  }
 }
 }

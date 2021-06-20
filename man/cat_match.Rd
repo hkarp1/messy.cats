@@ -20,40 +20,54 @@ cat_match(
 )
 }
 \arguments{
-\item{messy_v}{messy_vector: the vector of messy categories or strings}
+\item{messy_v}{The messy string vector that will be restructured. This can come in the form
+of a column of a dataframe or a lone vector.}
 
-\item{clean_v}{clean_vector: the vector of clean categories or strings to compare with messy_v}
+\item{clean_v}{The clean string vector that will be referenced to perform the restructing.
+Again, this argument can be a dataframe column or vector.}
 
-\item{return_dists}{Returns the distance between the matched values. Range of values depends on method used: see help for stringdist::stringdist, Default: FALSE}
+\item{return_dists}{If set to TRUE the distance between the matched strings will
+be returned as a third column in the output dataframe, Default: FALSE}
 
-\item{return_lists}{Instead of the closest match, return a list of the top number of matches that you specify with this argument, Default: NA}
+\item{return_lists}{Return list of top X matches, Default: NA}
 
-\item{pick_lists}{If TRUE cat_match() asks for user input and allows you to choose between the list of matches created by return_lists, Default: F}
+\item{pick_lists}{Set to TRUE to manually choose matches, Default: F}
 
-\item{threshold}{Sets a threshold for an acceptable match. If return_lists != NA then lists are only returned for matches above the threshold, Default: NA}
+\item{threshold}{The maximum distance that will form a match. If this argument
+is specified, any element in the messy vector that has no match closer than
+the threshold distance will be replaced with NA. Default: NA}
 
-\item{method}{method to calculate string distances. See help for stringdist::stringdist, Default: 'jw'}
+\item{method}{The type of string distance calculation to use. Possible methods
+are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
+See package stringdist for more information. Default: 'jw'}
 
-\item{q}{Size of the q-gram; must be nonnegative. Only applies to method='qgram', 'jaccard' or 'cosine'., Default: 1}
+\item{q}{Size of the q-gram used in string distance calculation. Default: 1}
 
-\item{p}{Penalty factor for Jaro-Winkler distance. The valid range for p is 0 <= p <= 0.25. If p=0 (default), the Jaro-distance is returned. Applies only to method='jw', Default: 0}
+\item{p}{Only used with method "jw", the Jaro-Winkler penatly size. Default: 0}
 
-\item{bt}{Winkler's boost threshold. Winkler's penalty factor is only applied when the Jaro distance is larger than bt. Applies only to method='jw' and p>0., Default: 0, Default: 0}
+\item{bt}{Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0}
 
-\item{useBytes}{If TRUE, the matching is done byte-by-byte rather than character-by-character, Default: FALSE}
+\item{useBytes}{Whether or not to perform byte-wise comparison. Default: FALSE}
 
-\item{weight}{For method='osa' or 'dl', the penalty for deletion, insertion, substitution and transposition, in that order. When method='lv', the penalty for transposition is ignored. When method='jw', the weights associated with characters of a, characters from b and the transposition weight, in that order. Weights must be positive and not exceed 1. weight is ignored completely when method='hamming', 'qgram', 'cosine', 'Jaccard', 'lcs', or soundex., Default: c(d = 1, i = 1, s = 1, t = 1)}
+\item{weight}{Only used with methods "osa" or "dl", a vector representing the
+penalty for deletion, insertion, substitution, and transposition,
+in that order. Default: c(d = 1, i = 1, t = 1)}
 }
 \value{
-Returns a dataframe with each unique value in the bad vector and it's closest match in the good vector. If return_dists is TRUE the distances between the matches are added as a column.
+Returns a dataframe with each unique value in the bad vector and it's
+closest match in the good vector. If return_dists is TRUE the distances between
+the matches are added as a column.
 }
 \description{
-cat_match() matches the contents of a messy vector with
+\code{cat_match()} matches the contents of a messy vector with
 the closest match in a clean vector. The closest match can be found
 using a variety of different string distance measurement options.
 }
 \details{
-DETAILS
+cat_match() is meant as an exploratory tool to discover how two vectors
+will match, and has added functionality to solve issues by hand and create a
+dataframe that can be used to create custom matches between the clean and messy
+vectors.
 }
 \examples{
 \dontrun{

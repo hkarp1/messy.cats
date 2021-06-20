@@ -4,33 +4,26 @@
 \alias{country_match}
 \title{country_match}
 \usage{
-country_match(
-  messy_countries,
-  return_dists = FALSE,
-  return_lists = NA,
-  threshold = NA,
-  pick_lists = F,
-  p = 0
-)
+country_match(messy_countries, threshold = NA, p = 0)
 }
 \arguments{
-\item{messy_countries}{PARAM_DESCRIPTION}
+\item{messy_countries}{Vector containing the messy country names that will be replaced
+by the closest match from \code{country.names}}
 
-\item{return_dists}{PARAM_DESCRIPTION, Default: FALSE}
+\item{threshold}{The maximum distance that will form a match. If this argument
+is specified, any element in the messy vector that has no match closer than
+the threshold distance will be replaced with NA. Default: NA}
 
-\item{return_lists}{PARAM_DESCRIPTION, Default: NA}
-
-\item{threshold}{PARAM_DESCRIPTION, Default: NA}
-
-\item{pick_lists}{PARAM_DESCRIPTION, Default: F}
-
-\item{p}{PARAM_DESCRIPTION, Default: 0}
+\item{p}{Only used with method "jw", the Jaro-Winkler penatly size. Default: 0}
 }
 \value{
-OUTPUT_DESCRIPTION
+\code{country_match()} returns a cleaned version of the bad vector, with each
+element replaced by the most similar element of the good vector.
 }
 \description{
-FUNCTION_DESCRIPTION
+A wrapper function for \code{cat_match()}hat only requires an inputted
+vector of messy countries. \code{country_match()} uses a built in clean list of
+country names \code{country.names} as the reference clean vector.
 }
 \details{
 DETAILS
@@ -39,6 +32,8 @@ DETAILS
 \dontrun{
 if(interactive()){
  #EXAMPLE1
+ lst <- c("Conagoa", "Blearaus", "Venzesual", "Uruagsya", "England")
+ matched <- country_match(lst)
  }
 }
 }

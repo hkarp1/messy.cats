@@ -1,23 +1,21 @@
-library(dplyr)
-library(stringdist)
-library(varhandle)
-library(rapportools)
-
-
 #' @title cat_match
-#' @description cat_match() matches the contents of a messy vector with
+#' @description `cat_match()` matches the contents of a messy vector with
 #' the closest match in a clean vector. The closest match can be found
 #' using a variety of different string distance measurement options.
 #' @param messy_v The messy string vector that will be restructured. This can come in the form
 #' of a column of a dataframe or a lone vector.
 #' @param clean_v The clean string vector that will be referenced to perform the restructing.
 #' Again, this argument can be a dataframe column or vector.
+#' @param return_dists If set to TRUE the distance between the matched strings will
+#' be returned as a third column in the output dataframe, Default: FALSE
+#' @param return_lists Return list of top X matches, Default: NA
+#' @param pick_lists Set to TRUE to manually choose matches, Default: F
 #' @param threshold The maximum distance that will form a match. If this argument
 #' is specified, any element in the messy vector that has no match closer than
 #' the threshold distance will be replaced with NA. Default: NA
 #' @param method The type of string distance calculation to use. Possible methods
-#'  are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
-#'   See package stringdist for more information. Default: 'jw'
+#' are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
+#' See package stringdist for more information. Default: 'jw'
 #' @param q Size of the q-gram used in string distance calculation. Default: 1
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @param bt Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0
@@ -42,6 +40,7 @@ library(rapportools)
 #' }
 #' @rdname cat_match
 #' @export
+
 
 cat_match <- function(messy_v, clean_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
                       threshold = NA, method = "jw", q = 1, p = 0, bt = 0,

@@ -4,39 +4,26 @@
 \alias{country_replace}
 \title{country_replace}
 \usage{
-country_replace(
-  messy_countries,
-  threshold = NA,
-  method = "jw",
-  q = 1,
-  p = 0,
-  bt = 0,
-  useBytes = FALSE,
-  weight = c(d = 1, i = 1, t = 1)
-)
+country_replace(messy_countries, threshold = NA, p = 0)
 }
 \arguments{
-\item{messy_countries}{PARAM_DESCRIPTION}
+\item{messy_countries}{Vector containing the messy country names that will be replaced
+by the closest match from \code{country.names}}
 
-\item{threshold}{PARAM_DESCRIPTION, Default: NA}
+\item{threshold}{The maximum distance that will form a match. If this argument
+is specified, any element in the messy vector that has no match closer than
+the threshold distance will be replaced with NA. Default: NA}
 
-\item{method}{PARAM_DESCRIPTION, Default: 'jw'}
-
-\item{q}{PARAM_DESCRIPTION, Default: 1}
-
-\item{p}{PARAM_DESCRIPTION, Default: 0}
-
-\item{bt}{PARAM_DESCRIPTION, Default: 0}
-
-\item{useBytes}{PARAM_DESCRIPTION, Default: FALSE}
-
-\item{weight}{PARAM_DESCRIPTION, Default: c(d = 1, i = 1, t = 1)}
+\item{p}{Only used with method "jw", the Jaro-Winkler penatly size. Default: 0}
 }
 \value{
-OUTPUT_DESCRIPTION
+\code{country_replace()} returns a cleaned version of the bad vector, with each
+element replaced by the most similar element of the good vector.
 }
 \description{
-FUNCTION_DESCRIPTION
+A wrapper function for \code{cat_replace()}hat only requires an inputted
+vector of messy countries. \code{country_replace()} uses a built in clean list of
+country names \code{country.names} as the reference clean vector.
 }
 \details{
 DETAILS

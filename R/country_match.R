@@ -1,27 +1,29 @@
 #' @title country_match
-#' @description FUNCTION_DESCRIPTION
-#' @param messy_countries PARAM_DESCRIPTION
-#' @param return_dists PARAM_DESCRIPTION, Default: FALSE
-#' @param return_lists PARAM_DESCRIPTION, Default: NA
-#' @param threshold PARAM_DESCRIPTION, Default: NA
-#' @param pick_lists PARAM_DESCRIPTION, Default: F
-#' @param p PARAM_DESCRIPTION, Default: 0
-#' @return OUTPUT_DESCRIPTION
+#' @description A wrapper function for `cat_match()`hat only requires an inputted
+#' vector of messy countries. `country_match()` uses a built in clean list of
+#' country names `country.names` as the reference clean vector.
+#' @param messy_countries Vector containing the messy country names that will be replaced
+#' by the closest match from `country.names`
+#' @param threshold The maximum distance that will form a match. If this argument
+#' is specified, any element in the messy vector that has no match closer than
+#' the threshold distance will be replaced with NA. Default: NA
+#' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
+#' @return `country_match()` returns a cleaned version of the bad vector, with each
+#'  element replaced by the most similar element of the good vector.
 #' @details DETAILS
 #' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
+#'  lst <- c("Conagoa", "Blearaus", "Venzesual", "Uruagsya", "England")
+#'  matched <- country_match(lst)
 #'  }
 #' }
 #' @rdname country_match
 #' @export
 
-country_match <- function(messy_countries,return_dists = FALSE, return_lists = NA,
-                        threshold = NA,pick_lists=F, p = 0){
-  cat_match(messy_countries,country.names[[1]],method = "jw",return_dists = return_dists,return_lists = return_lists,
-            threshold = threshold,pick_lists=pick_lists,p=p)
+country_match <- function(messy_countries,threshold = NA, p = 0){
+
+  cat_match(messy_countries,country.names[[1]],return_dists = FALSE, return_lists = NA,
+            pick_lists = F, method = "jw", threshold, p)
 }
-
-
-
