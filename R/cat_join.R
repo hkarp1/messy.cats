@@ -27,6 +27,7 @@ library(rapportools)
 #' @param weight Only used with methods "osa" or "dl", a vector representing the
 #' penalty for deletion, insertion, substitution, and transposition,
 #' in that order. Default: c(d = 1, i = 1, t = 1)
+#' @param join Choose a join function from the dplyr package to use in joining the datasets. Default: 'left'
 #' @return Returns a dataframe consisting of the two inputted dataframes joined by their designated columns.
 #' @details DETAILS
 #' @examples
@@ -96,7 +97,7 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
 }
 
 
-# I THINK THIS WORKS
+# # Testing
 # join = "right"
 #
 # x = mtcars[,1:4]
@@ -108,7 +109,16 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
 #
 # eval(parse(text=paste0(join,"_join(y,x,by=by)")))
 #
+# # Example 1
 # cat_join(y,x,by="car",method="jw",join="left")
 #
-# cat_join(messy_trees,clean_trees,by="V1",method="jaccard",join="left")
+# # Example 2
+# messy_trees = data.frame()
+# messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+# messy_trees[1:9,2] = c(34,12,43,32,65,23,12,45,35)
+# clean_trees=data.frame()
+# clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+# clean_trees[1:9,2] = "y"
+#
+# cat_join(messy_trees,clean_trees,by="V1",method="jaccard",join="inner",threshold=0.7)
 
