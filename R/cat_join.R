@@ -48,7 +48,8 @@ library(rapportools)
 
 cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                      q = 1, p = 0, bt = 0,
-                     useBytes = FALSE, weight=c(d=1, i=1, t=1)){
+                     useBytes = FALSE, weight=c(d=1, i=1, t=1),
+                     join="left"){
 
   if (!is.data.frame(messy_df)) {
     stop("Please use a dataframe for argument messy_df")
@@ -68,6 +69,9 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                              "cosine", "jaccard", "jw","soundex"))) {
     stop("Please use only a method available to the stringdist function in the
          stringdist package")
+  } else if (!(join %in% c("inner","left","right","full"))) {
+    stop("Please use only a join type available to the mutate-joins function in the
+         dplyr package: left, right, inner, or full.")
   } else if (!is.numeric(threshold) & !is.na(threshold)) {
     stop("Argument threshold must be numeric")
   } else if (!is.vector(weight) | length(weight) != 3) {
@@ -77,19 +81,34 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
     messy_df[[by]] <- cat_replace(messy_v = messy_df[[by]], clean_v = clean_df[[by]], q=q,p=p,bt=bt,
                           useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
-    return(left_join(messy_df,clean_df,by=by))
+    return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by)"))))
 
   } else if (length(by)==2){
     messy_df[[by[1]]] <- cat_replace(messy_v = messy_df[[by[1]]], clean_v = clean_df[[by[2]]], q=q,p=p,bt=bt,
                            useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
     if  (by[[1]] == by[[2]]) {
-      return(left_join(messy_df,clean_df,by=by[[1]]))
+      return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by[[1]])"))))
     } else{
-      return(left_join(messy_df,clean_df,by=by))
+      return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by)"))))
     }
   }
 }
 
 
+# I THINK THIS WORKS
+# join = "right"
+#
+# x = mtcars[,1:4]
+# x$car = rownames(x)
+#
+# y = mtcars[,c(1,5:11)]
+# y$car = rownames(y)
+# by="car"
+#
+# eval(parse(text=paste0(join,"_join(y,x,by=by)")))
+#
+# cat_join(y,x,by="car",method="jw",join="left")
+#
+# cat_join(messy_trees,clean_trees,by="V1",method="jaccard",join="left")
 
