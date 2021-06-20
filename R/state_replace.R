@@ -1,6 +1,7 @@
 #' @title state_replace
-#' @description Wrapper of cat_replace() using inputted messy vector and a the
-#' built in clean vector state.name, a vector of the names of all U.S. states.
+#' @description A wrapper function for cat_replace() that only requires an inputted
+#' vector of messy US state names. state_replace() uses the built-in character
+#' vector state.name as the reference clean vector.
 #' @param messy_states Vector containing the messy state names that will be replaced
 #' by the closest match from state.name
 #' @param threshold The maximum distance that will form a match. If this argument
