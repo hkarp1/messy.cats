@@ -6,5 +6,3 @@
 #'}
 #' @details DETAILS
 "country.names"
-
-

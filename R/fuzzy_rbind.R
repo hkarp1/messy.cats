@@ -1,6 +1,5 @@
 library(dplyr)
 library(stringdist)
-library(tidyverse)
 library(varhandle)
 library(rapportools)
 

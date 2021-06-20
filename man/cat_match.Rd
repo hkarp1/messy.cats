@@ -48,7 +48,9 @@ cat_match(
 Returns a dataframe with each unique value in the bad vector and it's closest match in the good vector. If return_dists is TRUE the distances between the matches are added as a column.
 }
 \description{
-cat_match() uses fuzzy matching to clean messy categories or strings of a bad vector by comparing them to a good vector.
+cat_match() matches the contents of a messy vector with
+the closest match in a clean vector. The closest match can be found
+using a variety of different string distance measurement options.
 }
 \details{
 DETAILS
@@ -56,7 +58,9 @@ DETAILS
 \examples{
 \dontrun{
 if(interactive()){
-cat_match(bad$DEER_MGM_1, good$DMU, p = 0.1, return_dists = T, return_lists = 3, pick_lists = F)
+ messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+ clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+ matched_trees = cat_match(messy_trees, clean_trees)
  }
 }
 }
