@@ -24,10 +24,12 @@ Depends:
     R (>= 2.10)
 Imports: 
     dplyr,
+    ggplot2,
     stringdist,
     readxl,
     varhandle,
-    rapportools
+    rapportools,
+    Rfast
 Suggests: 
     knitr,
     rmarkdown

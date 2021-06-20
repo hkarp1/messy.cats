@@ -17,7 +17,7 @@ library(rapportools)
 #' @param method method to calculate string distances. See help for stringdist::stringdist, Default: 'jw'
 #' @param q Size of the q-gram; must be nonnegative. Only applies to method='qgram', 'jaccard' or 'cosine'., Default: 1
 #' @param p Penalty factor for Jaro-Winkler distance. The valid range for p is 0 <= p <= 0.25. If p=0 (default), the Jaro-distance is returned. Applies only to method='jw', Default: 0
-#' @param btWinkler's boost threshold. Winkler's penalty factor is only applied when the Jaro distance is larger than bt. Applies only to method='jw' and p>0., Default: 0, Default: 0
+#' @param bt Winkler's boost threshold. Winkler's penalty factor is only applied when the Jaro distance is larger than bt. Applies only to method='jw' and p>0., Default: 0, Default: 0
 #' @param useBytes If TRUE, the matching is done byte-by-byte rather than character-by-character, Default: FALSE
 #' @param weight For method='osa' or 'dl', the penalty for deletion, insertion, substitution and transposition, in that order. When method='lv', the penalty for transposition is ignored. When method='jw', the weights associated with characters of a, characters from b and the transposition weight, in that order. Weights must be positive and not exceed 1. weight is ignored completely when method='hamming', 'qgram', 'cosine', 'Jaccard', 'lcs', or soundex., Default: c(d = 1, i = 1, s = 1, t = 1)
 #' @return Returns a dataframe with each unique value in the bad vector and it's closest match in the good vector. If return_dists is TRUE the distances between the matches are added as a column.
