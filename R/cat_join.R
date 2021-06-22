@@ -50,7 +50,7 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                      q = 1, p = 0, bt = 0,
                      useBytes = FALSE, weight=c(d=1, i=1, t=1),
                      join="left"){
-
+  # error handling ----
   if (!is.data.frame(messy_df)) {
     stop("Please use a dataframe for argument messy_df")
   } else if (!is.data.frame(clean_df)) {
@@ -77,6 +77,7 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
   } else if (!is.vector(weight) | length(weight) != 3) {
     stop("Argument weight must be a vector of length 3")
   }
+  # main code ----
   if (length(by)==1){
     messy_df[[by]] <- cat_replace(messy_v = messy_df[[by]], clean_v = clean_df[[by]], q=q,p=p,bt=bt,
                           useBytes = useBytes,weight = weight, threshold = threshold,method = method)
@@ -88,9 +89,9 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                            useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
     if  (by[[1]] == by[[2]]) {
-      return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by[[1]])"))))
+      return(eval(parse(text = paste0(join,"_join(messy_df,clean_df,by=by[[1]])"))))
     } else{
-      return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by)"))))
+      return(eval(parse(text = paste0(join,"_join(messy_df,clean_df,by=by)"))))
     }
   }
 }
