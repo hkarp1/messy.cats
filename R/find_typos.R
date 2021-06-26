@@ -38,7 +38,9 @@ colnames(x) =  u_m_column
 
 which(x<0.2,arr.ind=TRUE,useNames = F) -> t
 
-
+f <- function(a,b){
+  stringdist(a,b,method="jw")
+}
 
 l = list(c(1,2),c(3,4))
 
