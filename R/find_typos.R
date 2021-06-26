@@ -20,8 +20,7 @@ find_typos1.0(df = typo_df,messy_column = "typo_caterpillars")
 
 # want to transitively group any pairs with a string distance less than 0.2
 # hopefully create clusters of mispellings
-# how to decide which is the correctly spelled word in the group
-# thing with lowest average distance between whole cluster?
+
 
 find_typos <- function(messy_column){
   u_m_column = unique(messy_column)
@@ -44,9 +43,15 @@ l = list(c(1,2),c(3,4))
 
 x[l[[1]][1],l[[1]][2]]
 
-rownames(x[l[[2]][1],l[[2]][2]])
-
 x[l[[i]][1],l[[i]][2]]
+
+
+# how to decide which is the correctly spelled word in the group:
+
+# thing with lowest average distance between whole cluster?
+
+# make/let user choose
+
 
 # testing dataset ----
 clean_caterpillars
@@ -75,14 +80,14 @@ find_typos(messy_column = typo_df$typo_caterpillars) -> df
 messy_column = typo_df$typo_caterpillars
 stringdistmatrix(messy_column,messy_column,method="jw")
 
-#######################
-### Threshold Searching ----
-#######################
+######################
+### Brainstorming ----
+######################
 
 # hand edited data
 typos = read_csv("data/typos.csv")
 
-
+# Threshold----
 # how to determine what is a typo?
 stringdistmatrix("Pyreferra hesperidago",typos$species,method="jw") -> x
 # so far most things in jw with a dist < 0.15 seem to be typos
@@ -189,3 +194,37 @@ l <- c(
 
 
 )
+
+
+
+# Choosing from the Clusters ----
+# how to decide which is the correctly spelled word in the group
+# thing with lowest average distance between whole cluster?
+
+ap = u_m_column[3:4]
+# in a case like this with only 2 strings in a cluster I can't think of a way
+# to decide which is right without looking at like trends in how words are written
+# e.g. soft and sofd, f and d aren't normally next to each other in english
+
+ph = u_m_column[c(9:11,13,14,29,22,25,26)] %>% na.omit()
+stringdistmatrix(ph,ph,method="jw") -> ph.x
+rownames(ph.x) = ph
+colnames(ph.x) = ph
+
+rowSums(ph.x)
+# in this example just summing the rows makes the correct spelling the lowest
+
+
+nr = u_m_column[15:17]
+stringdistmatrix(nr,nr,method="jw") -> nr.x
+rownames(nr.x) = nr
+colnames(nr.x) = nr
+
+rowSums(nr.x)
+# in this example rowsumming doesnt work
+
+# if there are a lot of similar mistakes they will have lower stringdist than the
+# correct spelling
+
+# have user designate the correct spelling in a cluster / if there was a problem
+# with the clustering
