@@ -1,4 +1,7 @@
 # find typos
+
+# string distance calculation that weights letters that are close in qwerty-space
+#
 library(tidyverse)
 
 clean_caterpillars
@@ -32,11 +35,17 @@ find_typos <- function(df,messy_column){
 
 find_typos(df = typo_df,messy_column = "typo_caterpillars")
 
-
+`%!in%` <- Negate(`%in%`)
+messy_caterpillars %<>% filter(CaterpillarSpecies %!in% c("Acronicta_hasta","Besma_quercivoraria","Heterocampa_gutivitta",
+                                                         "Lithophane_hemmena","Lithophane_patefacta","Lomographa_glomeraria",
+                                                         "Lomographa_vestaliata","Machimia_tentoriferella","Nadata_gibbosa",
+                                                         "Orthosia_hibisci","Phigalia_strigitaria","Schizura_unicornis",
+                                                         "Satyrium_calanus","Satyrium_liparops","Tetracis_cachexiata"))
+new = messy_caterpillars
 df = typo_df
 messy_column = "typo_caterpillars"
 
 eval(parse(text = paste0("df %>% group_by(",messy_column,") %>% count() -> x")))
 typos <- x %>% filter(n <= quantile(x$n,0.25))
 correct <- x %>% filter(n > quantile(x$n,0.25))
-cat_match(typos[[messy_column]],correct[[messy_column]])
+cat_match(typos[[messy_column]],correct[[messy_column]],method="lcs")
