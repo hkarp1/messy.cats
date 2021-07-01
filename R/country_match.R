@@ -1,6 +1,6 @@
 #' @title country_match
-#' @description A wrapper function for `cat_match()`hat only requires an inputted
-#' vector of messy countries. `country_match()` uses a built in clean list of
+#' @description A wrapper function for `cat_match()` that only requires an inputted
+#' vector of messy country names. `country_match()` uses a built in clean list of
 #' country names `country.names` as the reference clean vector.
 #' @param messy_countries Vector containing the messy country names that will be replaced
 #' by the closest match from `country.names`

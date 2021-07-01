@@ -5,7 +5,9 @@ documentation:
 		- details is empty
 		- return_dsists, return_lists, pick_lists need better descriptions
 
-	- double check the wording of descriptions and make it consistent across           functions
+	- double check the wording of descriptions and make it consistent across functions
+
+	- data.r needs details
 
 examples:
 	- make examples across functions consistent?
