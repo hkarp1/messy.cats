@@ -4,7 +4,10 @@ documentation:
 		- return is worded poorly
 		- details is empty
 		- return_dsists, return_lists, pick_lists need better descriptions
-	- 
+
+	- double check the wording of descriptions and make it consistent across           functions
+
 examples:
 	- make examples across functions consistent?
-	
+
+
