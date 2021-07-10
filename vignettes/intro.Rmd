@@ -63,7 +63,8 @@ cars_good = c("Mazda RX4", "Mazda RX4 Wag",
 
 
 # load in messy_caterpillars and clean_caterpillars
-
+data("clean_caterpillars")
+data("messy_caterpillars")
 ```
 
 In this example suppose these lists of cars are columns in dataframes you want to join. One column has color included in the make and model of the car, and the other does not. Instead of string processing and deleting the color descriptors, cat_match() can 
@@ -90,20 +91,34 @@ In this example we have two datasets, the first: `messy_caterpillars` contains i
 If you want to calculate how much caterpillar you actually saw in both centimeters and and milligrams, you'll have to fix those messy names somehow.
 ```{r return_lists cat_match example,eval=F}
 head(messy_caterpillars)
+str(messy_caterpillars)
+
 head(clean_caterpillars)
+str(clean_caterpillars)
 ```
 
+To fix these names we can either use `cat_replace()` and change the 
 
-You might also notice that there is weight data for more species than you saw this summer, and with cat_replace() we can match the mispelled names to the correct names, and exclude the caterpillars that you did not find. 
+In order to properly configure our string distance arguments, we will first use `cat_match()` to explore how the messy and clean caterpillar names match up.
+
+We input the messy and clean vectors—in this case columns of caterpillar names—and specify no other arguments other than to return the distance between each string pair.
 ```{r pick_lists cat_match example,eval=F}
-cat_match(messy_caterpillars$`Caterpillar Species`,clean_caterpillars$species,return_dists = T)
-
+cat_match(messy_caterpillars$CaterpillarSpecies,
+          clean_caterpillars$species,
+          return_dists = T)
 ```
+The output shows the clean string with the lowest string distance from each messy string, and the distance between the pair is returned as a third column. 
 
+If we arrange by the distance in descending order, we can see the items of the messy vector with the worst matches. As we scroll through we can see that first species from the messy list of species we have recorded in the clean dataset is "Pyreferra hespridago". If there are no incorrect matches with a lower string distance, we could simply use `cat_replace()` or `cat_join()` with a threshold set just above this match. Unfortunately if you look at the next record, "Lithophane patefacta", a species that wasn't in our clean dataset, but was incorrectly matched to another species in the Lithophane genus. 
 ```{r using outputs cat_match example,eval=F}
-cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T) %>% arrange(desc(dists))
+cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T,method="jaccard") %>% arrange(desc(dists))
 ```
-Now we know to set a threshold of ~.12 when using cat_replace()
+
+```{r}
+
+
+```
+
 ```{r using outputs inner_join,eval=F}
 messy_caterpillars$CaterpillarSpecies = cat_replace(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,threshold=0.12)
 
