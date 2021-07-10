@@ -7,7 +7,7 @@
 #' @param clean_v The clean string vector that will be referenced to perform the restructing.
 #' Again, this argument can be a dataframe column or vector.
 #' @param return_dists If set to TRUE the distance between the matched strings will
-#' be returned as a third column in the output dataframe, Default: FALSE
+#' be returned as a third column in the output dataframe, Default: TRUE
 #' @param return_lists Return list of top X matches, Default: NA
 #' @param pick_lists Set to TRUE to manually choose matches, Default: F
 #' @param threshold The maximum distance that will form a match. If this argument
@@ -42,7 +42,7 @@
 #' @export
 
 
-cat_match <- function(messy_v, clean_v, return_dists = FALSE, return_lists = NA, pick_lists = F,
+cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, pick_lists = F,
                       threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
                       useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
