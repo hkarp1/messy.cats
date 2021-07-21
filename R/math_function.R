@@ -147,7 +147,7 @@ certainties_20 <- certainties_20[c("String Length", "lv", "osa", "dl", "lcs", "j
 
 reg_5 <- NULL
 
-for(i in 2:ncols(certainties_5)){
+for(i in 2:ncol(certainties_5)){
   reg[i] <- coefficients(lm(certainties_5[,i] ~ poly(certainties_5[,1], 3, raw=TRUE)))
 
 

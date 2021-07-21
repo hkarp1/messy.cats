@@ -4,7 +4,33 @@
 # string distance calculation that weights letters that are close in qwerty-space
 
 library(tidyverse)
+data("clean_caterpillars")
+data("messy_caterpillars")
 
+
+
+# testing dataset ----
+rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
+
+append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
+
+typo_df <- as.data.frame(typo_caterpillars)
+
+typo_df %>% group_by(typo_caterpillars) %>% count() %>%
+  arrange(desc(n)) %>% select(typo_caterpillars) %>% as.vector() -> typo_freqs
+
+
+
+typo_df %>% group_by(typo_caterpillars) %>% count() -> counts
+
+mispellings <- counts %>% filter(n <= quantile(counts$n,0.25))
+references <- counts %>% filter(n > quantile(counts$n,0.25))
+
+cat_match(mispellings[["typo_caterpillars"]],references[["typo_caterpillars"]])
+
+
+# hand edited data
+typos = read_csv("data/typos.csv")
 
 # main code ----
 find_typos1.0 <- function(df,messy_column){
@@ -45,8 +71,6 @@ l = list(c(1,2),c(3,4))
 
 x[l[[1]][1],l[[1]][2]]
 
-x[l[[i]][1],l[[i]][2]]
-
 
 # how to decide which is the correctly spelled word in the group:
 
@@ -54,26 +78,6 @@ x[l[[i]][1],l[[i]][2]]
 
 # make/let user choose
 
-
-# testing dataset ----
-clean_caterpillars
-rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-
-append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
-
-typo_df <- as.data.frame(typo_caterpillars)
-
-typo_df %>% group_by(typo_caterpillars) %>% count() %>%
-  arrange(desc(n)) %>% select(typo_caterpillars) %>% as.vector() -> typo_freqs
-
-
-
-typo_df %>% group_by(typo_caterpillars) %>% count() -> counts
-
-mispellings <- counts %>% filter(n <= quantile(counts$n,0.25))
-references <- counts %>% filter(n > quantile(counts$n,0.25))
-
-cat_match(mispellings[["typo_caterpillars"]],references[["typo_caterpillars"]])
 
 # test ----
 find_typos(messy_column = typo_df$typo_caterpillars) -> df
@@ -86,8 +90,6 @@ stringdistmatrix(messy_column,messy_column,method="jw")
 ### Brainstorming ----
 ######################
 
-# hand edited data
-typos = read_csv("data/typos.csv")
 
 # Threshold----
 # how to determine what is a typo?
@@ -230,3 +232,5 @@ rowSums(nr.x)
 
 # have user designate the correct spelling in a cluster / if there was a problem
 # with the clustering
+
+
