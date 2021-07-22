@@ -32,6 +32,9 @@
 #' by finding the correctly specificed string most similar to a messy string. This
 #' method works particularly well for messy user-inputted data that often suffers
 #' from transposition or misspelling errors.
+#'
+#' `cat_replace()` replaces the elements of the messy vector with the closest matching
+#' element from the clean vector.
 #' @examples
 #' \dontrun{
 #' if(interactive()){

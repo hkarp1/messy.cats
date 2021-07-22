@@ -10,7 +10,11 @@
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @return `country_match()` returns a cleaned version of the bad vector, with each
 #'  element replaced by the most similar element of the good vector.
-#' @details DETAILS
+#' @details Country names are often misspelled or abbreviated in datasets, especially datasets that have been
+#' manually digitized or created. `country_match()` is a warpper function of `cat_match()` that quickly solves
+#' this common issue of mispellings or different formats of country names across datasets. This wrapper
+#' function uses a built in clean list of country names `country.names` as the reference clean vector and
+#' matches your inputted messy vector of names to their nearest country in `country.names`.
 #' @examples
 #' \dontrun{
 #' if(interactive()){

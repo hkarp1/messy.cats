@@ -10,8 +10,12 @@
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @return `state_replace()` returns a cleaned version of the bad vector, with each
 #'  element replaced by the most similar element of the good vector.
-#' @details DETAILS
-#' @examples
+#' @details State names are often misspelled or abbreviated in datasets, especially datasets that have been
+#' manually digitized or created. `state_replace()` is a warpper function of `cat_replace()` that quickly solves
+#' this common issue of mispellings or different formats of state names across datasets. This wrapper
+#' function uses a built in clean list of country names `state.name` as the reference clean vector and
+#' replaces your inputted messy vector of names to their nearest match in `state.name`.
+#' #' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1

@@ -21,7 +21,8 @@ library(rapportools)
 #' in that order. Default: c(d = 1, i = 1, t = 1)
 #' @return fuzzy_rbind() returns a dataframe that has bound the two inputted dataframes based on
 #' the closest matching columns, column names from dataframe 1 are preserved.
-#' @details DETAILS
+#' @details When using datasets often times column names are slightly different, and `fuzzy_rbind()` helps
+#' to bind dataframes using fuzzy matching of the column names.
 #' @examples
 #' \dontrun{
 #' if(interactive()){

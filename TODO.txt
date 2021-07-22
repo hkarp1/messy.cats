@@ -1,9 +1,6 @@
 TODO:
 documentation:
-	- cat_match
-		- return is worded poorly
-		- details is empty
-		- return_dsists, return_lists, pick_lists need better descriptions
+	- fuzzy_rbind() needs work
 
 	- double check the wording of descriptions and make it consistent across functions
 

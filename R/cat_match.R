@@ -26,10 +26,22 @@
 #' @return Returns a dataframe with each unique value in the bad vector and it's
 #' closest match in the good vector. If return_dists is TRUE the distances between
 #' the matches are added as a column.
-#' @details cat_match() is meant as an exploratory tool to discover how two vectors
-#' will match, and has added functionality to solve issues by hand and create a
-#' dataframe that can be used to create custom matches between the clean and messy
-#' vectors.
+#' @details When dealing with messy categorical string data, string distance
+#' matching can be an easy and efficient cleaning tool. A variety of string
+#' distance calculation algorithms have been developed for different types of data,
+#' and these algorithms can be used to detect and remedy problems with categorical
+#' string data.
+#'
+#' By providing a correctly spelled and specified vector of categories to be compared
+#' against a vector of messy strings, a cleaned vector of categories can be generated
+#' by finding the correctly specificed string most similar to a messy string. This
+#' method works particularly well for messy user-inputted data that often suffers
+#' from transposition or misspelling errors.
+#'
+#' `cat_match()` is meant as an exploratory tool to discover how the elements
+#' of two vectors will match using string distance measures, and has added functionality
+#' to solve issues by hand and create a dataframe that can be used to create custom
+#' matches between the clean and messy vectors.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
@@ -201,5 +213,16 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
 
 
 
+messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+matched_trees = cat_match(messy_trees, clean_trees,method="jaccard")
 
+u_clean_v = unique(clean_trees)
+u_messy_v = unique(messy_trees)
+
+x <- as.data.frame(stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
+                                    method = "jaccard"))
+rownames(x) = u_clean_v
+colnames(x) = u_messy_v
+new_var <- c()
 

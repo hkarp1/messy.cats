@@ -1,5 +1,5 @@
 #' @title country_replace
-#' @description A wrapper function for `cat_replace()`hat only requires an inputted
+#' @description A wrapper function for `cat_replace()` that only requires an inputted
 #' vector of messy countries. `country_replace()` uses a built in clean list of
 #' country names `country.names` as the reference clean vector.
 #' @param messy_countries Vector containing the messy country names that will be replaced
@@ -10,7 +10,11 @@
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @return `country_replace()` returns a cleaned version of the bad vector, with each
 #'  element replaced by the most similar element of the good vector.
-#' @details DETAILS
+#' @details Country names are often misspelled or abbreviated in datasets, especially datasets that have been
+#' manually digitized or created. `country_replace()` is a warpper function of `cat_replace()` that quickly solves
+#' this common issue of mispellings or different formats of country names across datasets. This wrapper
+#' function uses a built in clean list of country names `country.names` as the reference clean vector and
+#' replaces your inputted messy vector of names to their nearest match in `country.names`.
 #' @examples
 #' \dontrun{
 #' if(interactive()){
