@@ -207,22 +207,3 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
   return(df)
 
 }
-
-
-
-
-
-
-messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
-clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
-matched_trees = cat_match(messy_trees, clean_trees,method="jaccard")
-
-u_clean_v = unique(clean_trees)
-u_messy_v = unique(messy_trees)
-
-x <- as.data.frame(stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
-                                    method = "jaccard"))
-rownames(x) = u_clean_v
-colnames(x) = u_messy_v
-new_var <- c()
-
