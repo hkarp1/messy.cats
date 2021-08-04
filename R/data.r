@@ -4,7 +4,7 @@
 #' \describe{
 #'   \item{\code{name}}{character Names of countries}
 #'}
-#' @details DETAILS
+#' @details This dataframe contains a list of clean country names with many popular and official names for countries.
 "country.names"
 
 #' @title clean_caterpillars
@@ -15,7 +15,7 @@
 #'   \item{\code{count}}{integer Randomly generated fake counts of the caterpillars.}
 #'   \item{\code{year}}{double Year of caterpillar observations.}
 #'}
-#' @details DETAILS
+#' @details An example dataset with clean caterpillar species names.
 "clean_caterpillars"
 
 #' @title messy_caterpillars
@@ -27,7 +27,7 @@
 #'   \item{\code{Avg Weight (mg)}}{double Randomly generated fake weight data for each caterpillar species.}
 #'   \item{\code{Avg Length (cm)}}{double Randomly generated fake length data for each caterpillar species.}
 #'}
-#' @details DETAILS
+#' @details An example dataset with messy caterpillar species names.
 "messy_caterpillars"
 
 #' @title messy_states1
@@ -36,7 +36,7 @@
 #' \describe{
 #'   \item{\code{messy_states1}}{character All 50 US states with 1 randomly changed character.}
 #'}
-#' @details DETAILS
+#' @details An example dataset with mispelled US state names. The names have had 1 character randomly changed.
 "messy_states1"
 
 #' @title messy_states2
@@ -45,5 +45,5 @@
 #' \describe{
 #'   \item{\code{messy_states2}}{character All 50 US states with 2 randomly changed characters.}
 #'}
-#' @details DETAILS
+#' @details An example dataset with mispelled US state names. The names have had 2 characters randomly changed.
 "messy_states2"
