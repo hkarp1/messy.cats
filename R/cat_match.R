@@ -59,11 +59,11 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
                       useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
   if (is.factor(messy_v)) {
-    messy_v = unfactor(messy_v)
+    messy_v = varhandle::unfactor(messy_v)
   }
 
   if (is.factor(clean_v)) {
-    clean_v = unfactor(clean_v)
+    clean_v = varhandle::unfactor(clean_v)
   }
 
   if (!is.vector(messy_v)) {
@@ -78,11 +78,11 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
     stop("Argument q must be a number")
   } else if (!is.numeric(bt)) {
     stop("Argument bt must be a number")
-  } else if (!is.boolean(return_dists)) {
+  } else if (!rapportools::is.boolean(return_dists)) {
     stop("Argument unique must be a boolean")
-  } else if (!is.boolean(pick_lists)) {
+  } else if (!rapportools::is.boolean(pick_lists)) {
     stop("Argument unique must be a boolean")
-  } else if (!is.boolean(useBytes)) {
+  } else if (!rapportools::is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
                              "cosine", "jaccard", "jw","soundex"))) {
@@ -100,7 +100,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
   u_clean_v = unique(clean_v)
   u_messy_v = unique(messy_v)
 
-  x <- as.data.frame(stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
+  x <- as.data.frame(stringdist::stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
                                       weight = weight,
@@ -115,10 +115,10 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
       new_var = c()
 
       for (i in 1:ncol(x)) {
-        x[i] %>% arrange(x[i]) %>% slice(1:return_lists) -> t
+        x[i] %>% dplyr::arrange(x[i]) %>% dplyr::slice(1:return_lists) -> t
         t$matches = row.names(t)
         colnames(t)[1] = "dists"
-        if (min(unlist(t$dists)) <= threshold) {
+        if (rapportools::min(unlist(t$dists)) <= threshold) {
           t %>% slice(1) -> t
           new_var[[i]] = unlist(t$matches)
         } else {
@@ -132,7 +132,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
 
     } else {
       for (i in 1:ncol(x)) {
-        min <- min(x[[i]])
+        min <- rapportools::min(x[[i]])
         min.plc <- which.min(x[[i]])
         if (min <= threshold) {
           new_var <- new_var %>% append(u_clean_v[min.plc])
@@ -148,7 +148,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
       new_var = c()
 
       for (i in 1:ncol(x)) {
-        x[i] %>% arrange(x[i]) %>% slice(1:return_lists) -> t
+        x[i] %>% dplyr::arrange(x[i]) %>% dplyr::slice(1:return_lists) -> t
         t$matches = row.names(t)
         colnames(t)[1] = "dists"
         new_var[[i]] = unlist(t$matches)
