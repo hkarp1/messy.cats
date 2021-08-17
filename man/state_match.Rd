@@ -26,7 +26,11 @@ vector of messy states. \code{state_match()} uses a built in clean list of
 state names \code{state.name} as the reference clean vector.
 }
 \details{
-DETAILS
+State names are often misspelled or abbreviated in datasets, especially datasets that have been
+manually digitized or created. \code{state_match()} is a warpper function of \code{cat_match()} that quickly solves
+this common issue of mispellings or different formats of country names across datasets. This wrapper
+function uses a built in clean list of country names \code{state.name} as the reference clean vector and
+matches your inputted messy vector of names to their nearest state in \code{state.name}.
 }
 \examples{
 \dontrun{

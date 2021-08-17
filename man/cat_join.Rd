@@ -59,7 +59,21 @@ between two specified columns with misspellings or slight format differences.
 The closest match can be found using a variety of different string distance measurement options.
 }
 \details{
-DETAILS
+When dealing with messy categorical string data, string distance
+matching can be an easy and efficient cleaning tool. A variety of string
+distance calculation algorithms have been developed for different types of data,
+and these algorithms can be used to detect and remedy problems with categorical
+string data.
+
+By providing a correctly spelled and specified vector of categories to be compared
+against a vector of messy strings, a cleaned vector of categories can be generated
+by finding the correctly specificed string most similar to a messy string. This
+method works particularly well for messy user-inputted data that often suffers
+from transposition or misspelling errors.
+
+\code{cat_join()} joins the messy and clean datasets using the closest matching elements from
+designated columns. The columns from the datasets are inputted into \code{cat_replace()} as the
+messy and clean vectors, and the datasets are joined using a user inputted dplyr join verb.
 }
 \examples{
 \dontrun{

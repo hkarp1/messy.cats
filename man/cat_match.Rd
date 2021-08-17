@@ -7,7 +7,7 @@
 cat_match(
   messy_v,
   clean_v,
-  return_dists = FALSE,
+  return_dists = TRUE,
   return_lists = NA,
   pick_lists = F,
   threshold = NA,
@@ -27,7 +27,7 @@ of a column of a dataframe or a lone vector.}
 Again, this argument can be a dataframe column or vector.}
 
 \item{return_dists}{If set to TRUE the distance between the matched strings will
-be returned as a third column in the output dataframe, Default: FALSE}
+be returned as a third column in the output dataframe, Default: TRUE}
 
 \item{return_lists}{Return list of top X matches, Default: NA}
 
@@ -64,10 +64,22 @@ the closest match in a clean vector. The closest match can be found
 using a variety of different string distance measurement options.
 }
 \details{
-cat_match() is meant as an exploratory tool to discover how two vectors
-will match, and has added functionality to solve issues by hand and create a
-dataframe that can be used to create custom matches between the clean and messy
-vectors.
+When dealing with messy categorical string data, string distance
+matching can be an easy and efficient cleaning tool. A variety of string
+distance calculation algorithms have been developed for different types of data,
+and these algorithms can be used to detect and remedy problems with categorical
+string data.
+
+By providing a correctly spelled and specified vector of categories to be compared
+against a vector of messy strings, a cleaned vector of categories can be generated
+by finding the correctly specificed string most similar to a messy string. This
+method works particularly well for messy user-inputted data that often suffers
+from transposition or misspelling errors.
+
+\code{cat_match()} is meant as an exploratory tool to discover how the elements
+of two vectors will match using string distance measures, and has added functionality
+to solve issues by hand and create a dataframe that can be used to create custom
+matches between the clean and messy vectors.
 }
 \examples{
 \dontrun{

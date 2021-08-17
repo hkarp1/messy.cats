@@ -17,6 +17,6 @@ country.names
 Dataframe with country names as only variable, contains many popular and official names for countries.
 }
 \details{
-DETAILS
+This dataframe contains a list of clean country names with many popular and official names for countries.
 }
 \keyword{datasets}

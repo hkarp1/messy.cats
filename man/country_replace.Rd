@@ -21,12 +21,16 @@ the threshold distance will be replaced with NA. Default: NA}
 element replaced by the most similar element of the good vector.
 }
 \description{
-A wrapper function for \code{cat_replace()}hat only requires an inputted
+A wrapper function for \code{cat_replace()} that only requires an inputted
 vector of messy countries. \code{country_replace()} uses a built in clean list of
 country names \code{country.names} as the reference clean vector.
 }
 \details{
-DETAILS
+Country names are often misspelled or abbreviated in datasets, especially datasets that have been
+manually digitized or created. \code{country_replace()} is a warpper function of \code{cat_replace()} that quickly solves
+this common issue of mispellings or different formats of country names across datasets. This wrapper
+function uses a built in clean list of country names \code{country.names} as the reference clean vector and
+replaces your inputted messy vector of names to their nearest match in \code{country.names}.
 }
 \examples{
 \dontrun{

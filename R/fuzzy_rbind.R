@@ -1,8 +1,3 @@
-library(dplyr)
-library(stringdist)
-library(varhandle)
-library(rapportools)
-
 #' @title fuzzy_rbind
 #' @description fuzzy_rbind() binds dataframes based on columns with slightly different names.
 #' @param df1 The first dataframe to be bound.
@@ -50,7 +45,7 @@ fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0
     stop("Argument q must be a number")
   } else if (!is.numeric(bt)) {
     stop("Argument bt must be a number")
-  } else if (!is.boolean(useBytes)) {
+  } else if (!rapportools::is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
                              "cosine", "jaccard", "jw","soundex"))) {
@@ -71,7 +66,7 @@ fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0
   for (i in 1:length(colnms1)) {
     for (e in 1:length(colnms2)) {
 
-      x = stringdist(tolower(colnms1[[i]]), tolower(colnms2[[e]]),
+      x = stringdist::stringdist(tolower(colnms1[[i]]), tolower(colnms2[[e]]),
                      method = method, p = p, q = q, bt = bt,
                      useBytes = useBytes,
                      weight = weight)
@@ -96,7 +91,6 @@ fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0
   }
 
   df = df[-1]
-
 
   return(df)
 }

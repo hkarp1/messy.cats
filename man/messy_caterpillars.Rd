@@ -7,9 +7,10 @@
 \format{
 A data frame with 39 rows and 3 variables:
 \describe{
-\item{\code{CaterpillarSpecies}}{character COLUMN_DESCRIPTION}
-\item{\code{Avg Weight (mg)}}{double COLUMN_DESCRIPTION}
-\item{\code{Avg Length (cm)}}{double COLUMN_DESCRIPTION}
+\item{\code{CaterpillarSpecies}}{character Full latin names of 39 caterpillar
+species with spelling and formatting errors.}
+\item{\code{Avg Weight (mg)}}{double Randomly generated fake weight data for each caterpillar species.}
+\item{\code{Avg Length (cm)}}{double Randomly generated fake length data for each caterpillar species.}
 }
 }
 \usage{
@@ -19,6 +20,6 @@ messy_caterpillars
 DATASET_DESCRIPTION
 }
 \details{
-DETAILS
+An example dataset with messy caterpillar species names.
 }
 \keyword{datasets}

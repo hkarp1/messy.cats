@@ -52,11 +52,11 @@ cat_replace <- function(messy_v, clean_v, threshold = NA,
                         useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
   if (is.factor(messy_v)) {
-    messy_v = unfactor(messy_v)
+    messy_v = varhandle::unfactor(messy_v)
   }
 
   if (is.factor(clean_v)) {
-    clean_v = unfactor(clean_v)
+    clean_v = varhandle::unfactor(clean_v)
   }
 
   if (!is.vector(messy_v)) {
@@ -71,7 +71,7 @@ cat_replace <- function(messy_v, clean_v, threshold = NA,
     stop("Argument q must be a number")
   } else if (!is.numeric(bt)) {
     stop("Argument bt must be a number")
-  } else if (!is.boolean(useBytes)) {
+  } else if (!rapportools::is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
                              "cosine", "jaccard", "jw","soundex"))) {
@@ -82,7 +82,7 @@ cat_replace <- function(messy_v, clean_v, threshold = NA,
   }
 
 
-  x <- as.data.frame(stringdistmatrix(tolower(clean_v), tolower(messy_v),
+  x <- as.data.frame(stringdist::stringdistmatrix(tolower(clean_v), tolower(messy_v),
                                       method = method, p = p,
                                       useBytes = useBytes,
                                       weight = weight,
