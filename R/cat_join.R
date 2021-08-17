@@ -1,8 +1,3 @@
-library(dplyr)
-library(stringdist)
-library(varhandle)
-library(rapportools)
-
 #' @title cat_join
 #' @description cat_join() joins two dataframes using the closest match
 #' between two specified columns with misspellings or slight format differences.
@@ -77,7 +72,7 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
     stop("Argument q must be a number")
   } else if (!is.numeric(bt)) {
     stop("Argument bt must be a number")
-  } else if (!is.boolean(useBytes)) {
+  } else if (!rapportools::is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
                              "cosine", "jaccard", "jw","soundex"))) {
@@ -96,16 +91,16 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
     messy_df[[by]] <- cat_replace(messy_v = messy_df[[by]], clean_v = clean_df[[by]], q=q,p=p,bt=bt,
                           useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
-    return(eval(parse(text=paste0(join,"_join(messy_df,clean_df,by=by)"))))
+    return(eval(parse(text=paste0("dplyr::", join,"_join(messy_df,clean_df,by=by)"))))
 
   } else if (length(by)==2){
     messy_df[[by[1]]] <- cat_replace(messy_v = messy_df[[by[1]]], clean_v = clean_df[[by[2]]], q=q,p=p,bt=bt,
                            useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
     if  (by[[1]] == by[[2]]) {
-      return(eval(parse(text = paste0(join,"_join(messy_df,clean_df,by=by[[1]])"))))
+      return(eval(parse(text = paste0("dplyr::", join,"_join(messy_df,clean_df,by=by[[1]])"))))
     } else{
-      return(eval(parse(text = paste0(join,"_join(messy_df,clean_df,by=by)"))))
+      return(eval(parse(text = paste0("dplyr::", join,"_join(messy_df,clean_df,by=by)"))))
     }
   }
 }

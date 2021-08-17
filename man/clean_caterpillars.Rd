@@ -7,9 +7,9 @@
 \format{
 A data frame with 74 rows and 3 variables:
 \describe{
-\item{\code{species}}{character COLUMN_DESCRIPTION}
-\item{\code{count}}{integer COLUMN_DESCRIPTION}
-\item{\code{year}}{double COLUMN_DESCRIPTION}
+\item{\code{species}}{character Full latin names of 29 caterpillar species.}
+\item{\code{count}}{integer Randomly generated fake counts of the caterpillars.}
+\item{\code{year}}{double Year of caterpillar observations.}
 }
 }
 \usage{
@@ -19,6 +19,6 @@ clean_caterpillars
 Dataframe with caterpillar counts from three summers.
 }
 \details{
-DETAILS
+An example dataset with clean caterpillar species names.
 }
 \keyword{datasets}

@@ -26,9 +26,12 @@ vector of messy US state names. \code{state_replace()} uses the built-in charact
 vector \code{state.name} as the reference clean vector.
 }
 \details{
-DETAILS
-}
-\examples{
+State names are often misspelled or abbreviated in datasets, especially datasets that have been
+manually digitized or created. \code{state_replace()} is a warpper function of \code{cat_replace()} that quickly solves
+this common issue of mispellings or different formats of state names across datasets. This wrapper
+function uses a built in clean list of country names \code{state.name} as the reference clean vector and
+replaces your inputted messy vector of names to their nearest match in \code{state.name}.
+#' @examples
 \dontrun{
 if(interactive()){
  #EXAMPLE1

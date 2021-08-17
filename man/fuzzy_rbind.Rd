@@ -48,7 +48,8 @@ the closest matching columns, column names from dataframe 1 are preserved.
 fuzzy_rbind() binds dataframes based on columns with slightly different names.
 }
 \details{
-DETAILS
+When using datasets often times column names are slightly different, and \code{fuzzy_rbind()} helps
+to bind dataframes using fuzzy matching of the column names.
 }
 \examples{
 \dontrun{

@@ -7,7 +7,7 @@
 \format{
 A data frame with 50 rows and 1 variables:
 \describe{
-\item{\code{messy_states2}}{character COLUMN_DESCRIPTION}
+\item{\code{messy_states2}}{character All 50 US states with 2 randomly changed characters.}
 }
 }
 \usage{
@@ -17,6 +17,6 @@ messy_states2
 US State names with 2 characters randomly changed.
 }
 \details{
-DETAILS
+An example dataset with mispelled US state names. The names have had 2 characters randomly changed.
 }
 \keyword{datasets}
