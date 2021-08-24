@@ -120,7 +120,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
         x[i] %>% dplyr::arrange(x[i]) %>% dplyr::slice(1:return_lists) -> t
         t$matches = row.names(t)
         colnames(t)[1] = "dists"
-        if (min(unlist(t$dists)) <= threshold) {
+        if (rapportools::min(unlist(t$dists)) <= threshold) {
           t %>% slice(1) -> t
           new_var[[i]] = unlist(t$matches)
         } else {
@@ -134,7 +134,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
 
     } else {
       for (i in 1:ncol(x)) {
-        min <- min(x[[i]])
+        min <- rapportools::min(x[[i]])
         min.plc <- which.min(x[[i]])
         if (min <= threshold) {
           new_var <- new_var %>% append(u_clean_v[min.plc])
