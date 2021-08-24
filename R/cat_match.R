@@ -121,7 +121,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
         t$matches = row.names(t)
         colnames(t)[1] = "dists"
         if (rapportools::min(unlist(t$dists)) <= threshold) {
-          t %>% slice(1) -> t
+          t %>% dplyr::slice(1) -> t
           new_var[[i]] = unlist(t$matches)
         } else {
           new_var[[i]] = unlist(t$matches)
