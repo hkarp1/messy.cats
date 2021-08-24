@@ -20,7 +20,7 @@ library(stringdist)
 library(varhandle)
 library(rapportools)
 ```
-Messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos and different formatting choices, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
+`messy.cats` contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos and different formatting choices, can be difficult to work with. `messy.cats` aims to provide functions that make cleaning categorical data simple and easy.
 
 This introduction will lead you through examples of the functions in use, explain the arguments, and show how to get the most out of these functions. 
 
@@ -102,12 +102,6 @@ str(clean_caterpillars)
 ```
 
 
-
-
-
-
-
-
 To fix these names we can either use `cat_replace()` and change the caterpillar name variables and then use a merging function such as the dplyr join functions, or use `cat_join()`.
 
 But first, in order to properly configure our string distance arguments, we will first use `cat_match()` to explore how the messy and clean caterpillar names match up.
@@ -145,8 +139,27 @@ clean_caterpillars$species
 cat_join(messy_df = messy_caterpillars, clean_df = clean_caterpillars, by = c("CaterpillarSpecies", "species"), method="jaccard", threshold = .49,join="left")
 ```
 
+```{r}
+data("mtcars")
+mtcars_colnames_messy = mtcars
+colnames(mtcars_colnames_messy)[1:5] = paste0(colnames(mtcars)[1:5], "_17")
+colnames(mtcars_colnames_messy)[6:11] = paste0(colnames(mtcars)[6:11], "_2017")
+```
 
 
+Another messy dataset problem that our package hopes to help solve is row binding two datasets with different columns names. `fuzzy_rbind()` allows a user to join columns in dataframes using string distance matching. Any two columns with similar enough names will be bound together, and `fuzzy_rbind()` takes similar arguments as the rest of the functions in `messy.cats` to allow the user to fine tune their string distance matching.
+
+```{r}
+fuzzy_rbind(df1 = mtcars, df2 = mtcars_colnames_messy, threshold = .5, 
+            method = "jw")
+```
+
+```{r}
+fuzzy_rbind(df1 = mtcars, df2 = mtcars_colnames_messy, threshold = .2,
+            method = "jw")
+```
+
+The second `fuzzy_rbind()` call results in fewer bound columns because the user asked for a lower threshold.
 
 
 
