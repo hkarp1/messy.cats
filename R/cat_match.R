@@ -105,6 +105,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
                                       useBytes = useBytes,
                                       weight = weight,
                                       q = q, bt = bt))
+
   rownames(x) = u_clean_v
   colnames(x) = u_messy_v
   new_var <- c()
@@ -113,6 +114,7 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
     if (!is.na(return_lists)) {
       acc_dists = c()
       new_var = c()
+
 
       for (i in 1:ncol(x)) {
         x[i] %>% dplyr::arrange(x[i]) %>% dplyr::slice(1:return_lists) -> t
