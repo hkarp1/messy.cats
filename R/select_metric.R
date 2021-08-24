@@ -1,7 +1,3 @@
- library(stringdist)
-
-
-
 # Uses heuristic algo to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
 # For each metric, measures certainty via the difference between the best matches for each word and
 # the average of all matches for each word
@@ -12,7 +8,7 @@
 
    for(k in 1:length(metric)){
      p_0 = as.integer(k == 6)/10 #sets p_0 to 0.1 for second test of jw
-     dists <- stringdistmatrix(messy_v, clean_v, method = metric[k], p = p_0)
+     dists <- stringdist::stringdistmatrix(messy_v, clean_v, method = metric[k], p = p_0)
 
      if(metric[k] == "lv" | metric[k] == "osa" | metric[k] == "dl"){ #maps lv, osa, and dl values into the range [0,1]
        for(i in 1:nrow(dists)){
