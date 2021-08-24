@@ -54,7 +54,6 @@
 #' @rdname cat_join
 #' @export
 
-
 cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                      q = 1, p = 0, bt = 0,
                      useBytes = FALSE, weight=c(d=1, i=1, t=1),
@@ -98,10 +97,10 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
                            useBytes = useBytes,weight = weight, threshold = threshold,method = method)
 
     colnames(messy_df)[colnames(messy_df) == by[1]] = by[2]
-    return(eval(parse(text = paste0("dplyr::", join,"_join(messy_df,clean_df,by=by[[2]])"))))
+    return(eval(parse(text = paste0(join,"_join(messy_df,clean_df,by='", by[[2]], "')")))
+)
   }
 }
-
 
 # # Testing
 # join = "right"

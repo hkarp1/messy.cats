@@ -141,18 +141,12 @@ Alternatively, a user could accomplish this task in one step using `cat_join()`.
 
 ```{r}
 data("messy_caterpillars")
-cat_join(clean_df = clean_caterpillars, messy_df = messy_caterpillars, by = c("CaterpillarSpecies", "species"), method="jaccard", threshold = .49,join="left")
-```
-```{r}
-by = c("Caterpillarspecies","species")
-clean_caterpillars
-
+clean_caterpillars$species
+cat_join(messy_df = messy_caterpillars, clean_df = clean_caterpillars, by = c("CaterpillarSpecies", "species"), method="jaccard", threshold = .49,join="left")
 ```
 
 
 
-```{r}
-clean_caterpillars["species"]
-```
+
 
 
