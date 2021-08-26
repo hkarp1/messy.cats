@@ -4,15 +4,15 @@ Version: 1.0
 BugReports: https://github.com/hkarp1/messy.cats/issues
 Authors@R: c(person(given = "Andrew",
            family = "Hennessy",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "ahennessy@wesleyan.edu"),
            person(given = "Duncan",
            family = "Kreutter",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "dkreutter@wesleyan.edu"),
            person(given = "Harrison",
            family = "Karp",
-           role = c("aut", "cre"),
+           role = c("cre"),
            email = "hkarp@wesleyan.edu"))
 Description: Messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.  
 License: MIT + file LICENSE

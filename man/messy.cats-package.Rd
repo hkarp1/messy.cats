@@ -8,8 +8,21 @@
 \description{
 Messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/hkarp1/messy.cats/issues}
+}
+
+}
 \author{
-\strong{Maintainer}: Duncan Kreutter \email{dkreutter@wesleyan.edu}
+\strong{Maintainer}: Harrison Karp \email{hkarp@wesleyan.edu}
+
+Authors:
+\itemize{
+  \item Andrew Hennessy \email{ahennessy@wesleyan.edu}
+  \item Duncan Kreutter \email{dkreutter@wesleyan.edu}
+}
 
 }
 \keyword{internal}
