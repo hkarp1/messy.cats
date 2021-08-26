@@ -1,7 +1,19 @@
 # Uses heuristic algo to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
 # For each metric, measures certainty via the difference between the best matches for each word and
 # the average of all matches for each word
- select_metric <- function(messy_v, clean_v){
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param messy_v PARAM_DESCRIPTION
+#' @param clean_v PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' @seealso
+#'  \code{\link[stringdist]{stringdist}}
+#' @rdname select_metric
+#' @export
+#' @importFrom stringdist stringdistmatrix
+select_metric <- function(messy_v, clean_v){
 
    metric <- c("lv", "osa", "dl", "lcs", "jw" , "jw")
    metric_certainties <-NULL
