@@ -1,6 +1,3 @@
-# Uses heuristic algo to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
-# For each metric, measures certainty via the difference between the best matches for each word and
-# the average of all matches for each word
 #' @title select_metric
 #' @description Uses heuristic algorithm to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
 #' @param messy_v a messy vector of strings
