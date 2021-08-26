@@ -2,7 +2,7 @@ Package: messy.cats
 Title: Employs String Distance Tools to Help Clean Categorical Data
 Version: 1.0
 Authors@R: 
-    person(given = "Harrison",
+    c(person(given = "Harrison",
            family = "Karp",
            role = c("aut", "cre"),
            email = "hkarp@wesleyan.edu")
@@ -13,7 +13,7 @@ Authors@R:
     person(given = "Duncan",
            family = "Kreutter",
            role = c("aut", "cre"),
-           email = "dkreutter@wesleyan.edu")
+           email = "dkreutter@wesleyan.edu"))
 Description: Messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. Messy.cats aims to provide functions that make cleaning categorical data simple and easy.  
 License: MIT + file LICENSE
 Encoding: UTF-8
