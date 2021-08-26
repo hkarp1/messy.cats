@@ -3,5 +3,9 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   intro: intro.html
+<<<<<<< HEAD
 last_built: 2021-08-26T04:21Z
+=======
+last_built: 2021-08-26T04:19Z
+>>>>>>> 078ac800270f680b2296c3e3e5cd05cb44824497
 
