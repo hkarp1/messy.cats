@@ -1,13 +1,14 @@
 # Uses heuristic algo to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
 # For each metric, measures certainty via the difference between the best matches for each word and
 # the average of all matches for each word
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param messy_v PARAM_DESCRIPTION
-#' @param clean_v PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
+#' @title select_metric
+#' @description Uses heuristic algorithm to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
+#' @param messy_v a messy vector of strings
+#' @param clean_v a vector of strings for messy_v to be matched against
+#' @return a string representing the suggested stringdist metric
+#' @details for each metric, measures certainty via the difference between the best matches for each word and
+# the average of all matches for each word
+#' @examples select_metric(c("aapple", "bamana", "clemtidne"), c("apple", "banana", "clementine"))
 #' @seealso
 #'  \code{\link[stringdist]{stringdist}}
 #' @rdname select_metric
