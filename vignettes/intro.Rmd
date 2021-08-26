@@ -162,4 +162,15 @@ fuzzy_rbind(df1 = mtcars, df2 = mtcars_colnames_messy, threshold = .2,
 The second `fuzzy_rbind()` call results in fewer bound columns because the user asked for a lower threshold.
 
 
+messy.cats also provides a function to help the user choose a string distance metric in order to get the best matches possible. `select_metric()` gives an approximate measure of "certainty" of matches for some of R's string distance metrics on a given clean and messy vector pair.
+```{r}
+select_metric(c("axxxxx", "bxxxxx", "cxxxxx"), c("apples", "banana", "carrot"))
 
+```
+
+In the above example, `select_metric()` recommends the Jaro-Winkler distance with a p value of 0.1, since this metric weights agreement in the beginning of strings more heavily. The other metrics do not consider the position of discrepancies in strings, and as such are less "certain" of their matches given the nature of the example.
+```{r}
+select_metric(c("ipzza", "rgegplants", "vrem aof wheat"), c("pizza", "eggplants", "cream of wheat"))
+```
+
+This example recommends Optimal String Alignment distance, since this metric is more forgiving of adjacent character swaps. Notably, Jaro-Winkler with p of 0.1 is a particularly bad choice for this dataset, since all intended matches disagree on their first character.
