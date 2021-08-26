@@ -43,8 +43,6 @@ select_metric <- function(messy_v, clean_v){
 
    }
 
-   return(metric_certainties)
-
    if(which.max(metric_certainties) == 6){
      return("jw, p = 0.1")
    }
