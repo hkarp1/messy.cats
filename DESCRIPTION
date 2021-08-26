@@ -1,6 +1,6 @@
 Package: messy.cats
 Title: Employs String Distance Tools to Help Clean Categorical Data
-Version: 0.0.0.9000
+Version: 1.0
 Authors@R: 
     person(given = "Harrison",
            family = "Karp",
