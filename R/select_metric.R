@@ -3,8 +3,7 @@
 #' @param messy_v a messy vector of strings
 #' @param clean_v a vector of strings for messy_v to be matched against
 #' @return a string representing the suggested stringdist metric
-#' @details for each metric, measures certainty via the difference between the best matches for each word and
-# the average of all matches for each word
+#' @details for each metric, measures certainty via the difference between the best matches for each word and the average of all matches for each word
 #' @examples select_metric(c("aapple", "bamana", "clemtidne"), c("apple", "banana", "clementine"))
 #' @seealso
 #'  \code{\link[stringdist]{stringdist}}
