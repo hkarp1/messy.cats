@@ -102,28 +102,31 @@ cat_join <- function(messy_df, clean_df, by, threshold = NA, method = "jw",
   }
 }
 
-# # Testing
-# join = "right"
-#
-# x = mtcars[,1:4]
-# x$car = rownames(x)
-#
-# y = mtcars[,c(1,5:11)]
-# y$car = rownames(y)
-# by="car"
-#
-# eval(parse(text=paste0(join,"_join(y,x,by=by)")))
-#
-# # Example 1
-# cat_join(y,x,by="car",method="jw",join="left")
-#
-# # Example 2
-# messy_trees = data.frame()
-# messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
-# messy_trees[1:9,2] = c(34,12,43,32,65,23,12,45,35)
-# clean_trees=data.frame()
-# clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
-# clean_trees[1:9,2] = "y"
-#
-# cat_join(messy_trees,clean_trees,by="V1",method="jaccard",join="inner",threshold=0.7)
+# Testing
+join = "right"
+
+x = mtcars[,1:4]
+x$car = rownames(x)
+
+y = mtcars[,c(1,5:11)]
+y$car = rownames(y)
+by="car"
+
+eval(parse(text=paste0(join,"_join(y,x,by=by)")))
+
+# Example 1
+cat_join(y,x,by="car",method="jw",join="left")
+
+# Example 2
+messy_trees = data.frame()
+messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+messy_trees[1:9,2] = c(34,12,43,32,65,23,12,45,35)
+colnames(messy_trees) = c("species","count")
+
+clean_trees=data.frame()
+clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+clean_trees[1:9,2] = "y"
+colnames(clean_trees) = c("Species","Count")
+
+cat_join(messy_trees,clean_trees,by=c("species","Species"),method="jaccard",join="inner",threshold=0.7)
 
