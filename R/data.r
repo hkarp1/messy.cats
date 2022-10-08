@@ -47,3 +47,12 @@
 #'}
 #' @details An example dataset with mispelled US state names. The names have had 2 characters randomly changed.
 "messy_states2"
+
+#' @title picked_list
+#' @description Handpicked matches from the datasets in intro.rmd.
+#' @format A data frame with 15 rows and 3 variables:
+#' \describe{
+#'   \item{\code{picked_list}}{character Handpicked matches of cars.}
+#'}
+#' @details An example dataset of matched car names.
+"picked_list"

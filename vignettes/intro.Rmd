@@ -34,14 +34,7 @@ cars_bad = c("teal Mazda RX4", "black Mazda RX4 Wag",
            "Merc 280C", "green Merc 450SE",
            "Merc 450SL", "blue Merc 450SLC",
            "green Cadillac Fleetwood", "Lincoln Continental",
-           "Chrysler Imperial", "Fiat 128",
-           "red Honda Civic", "Toyota Corolla",
-           "Toyota Corona", "Dodge Challenger",
-           "red AMC Javelin", "Camaro Z28",
-           "Pontiac Firebird", "black Fiat X1-9",
-           "blue Porsche 914-2", "Lotus Europa",
-           "Ford Pantera L", "black Ferrari Dino",
-           "black Maserati Bora", "black Volvo 142E")
+           "Chrysler Imperial")
 
 cars_good = c("Mazda RX4", "Mazda RX4 Wag",
               "Datsun 710", "Hornet 4 Drive",
@@ -51,14 +44,8 @@ cars_good = c("Mazda RX4", "Mazda RX4 Wag",
            "Merc 280C", "Merc 450SE",
            "Merc 450SL", "Merc 450SLC",
            "Cadillac Fleetwood", "Lincoln Continental",
-           "Chrysler Imperial", "Fiat 128",
-           "Honda Civic", "Toyota Corolla",
-           "Toyota Corona", "Dodge Challenger",
-           "AMC Javelin", "Camaro Z28",
-           "Pontiac Firebird", "Fiat X1-9",
-           "Porsche 914-2", "Lotus Europa",
-           "Ford Pantera L", "Ferrari Dino",
-           "Maserati Bora", "Volvo 142E")
+           "Chrysler Imperial")
+
 ```
 
 Suppose you have two lists of cars descriptions, one containing information on the make of the car, and the other containing make and color. Instead of string processing and deleting the color descriptors, which can be a fincky and time consuming process, cat_match() can match the contents of the two lists. 
@@ -68,7 +55,7 @@ cat_match(cars_bad, cars_good, method = "jw")
 
 After making sure that the string distance calculation is not making error with cat_match(), a user can use cat_replace to swap the contents of one list for their closest match in another.
 ```{r cat_replace ex}
-cat_match(cars_bad, cars_good, method = "jw")
+cat_replace(cars_bad, cars_good, method = "jw")
 ```
 
 
@@ -76,6 +63,9 @@ Alternatively, a user could join together two dataframes that use these lists as
 ```{r cat_join ex}
 bad_cars_df = data.frame(car = cars_bad, state_registration = "CA")
 good_cars_df= data.frame(car = cars_good, insur_comp = "All State")
+
+head(bad_cars_df)
+head(good_cars_df)
 
 cat_join(bad_cars_df, good_cars_df, by="car", method="jw", join="left")
 ```
@@ -85,10 +75,53 @@ These are some of the most basic uses of the core functions in the messy.cats pa
 
 
 
+What happens when the lists are not the same length, or the matches aren't perfect?
 
-In this more extensive example we have two datasets of caterpillar data collected over the the summers of 2019-2021 by Wesleyan University researchers. The first: `messy_caterpillars` contains information about the average weight and length of caterpillars, and as the name suggests, has messy very caterpillar names.`clean_caterpillars` is a dataset containing the species and number of caterpillars you found by researchers and clean caterpillar names. 
+```{r not perfect matches}
+messy_short <-         c("Fiat 128",
+           "red Honda Civic", "Toyota Corolla",
+           "Toyota Corona", "Dodge Challenger",
+           "red AMC Javelin", "Camaro Z28",
+           "Pontiac Firebird", "black Fiat X1-9",
+           "blue Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "black Ferrari Dino",
+           "black Maserati Bora", "black Volvo 142E")
 
-If you want to calculate how much caterpillar you actually saw in both centimeters and and milligrams, you'll have to fix those messy names somehow.
+
+clean_short <-       c(
+           "Honda Civic",
+           "Toyota Corona",
+           "AMC Javelin",
+           "Pontiac Firebird", "Fiat X1-9",
+           "Porsche 914-2", "Lotus Europa",
+           "Ford Pantera L", "Ferrari Dino",
+           "Maserati Bora", "Volvo 142E")
+
+cat_match(messy_short,clean_short, method = "jaccard") %>% arrange(desc(dists))
+```
+
+You can see that some of these matches are wrong, you can use the `return_lists` argument to return a list of the top matches. We suggest setting this to 2 or 3, if the top 3 are not still not correct, there may not be a clean match, or you may need to try a different string distance method (see `select_metric()`.
+
+When combined with a threshold, `cat_match` will only return a list for values that have a best match above that threshold.
+
+```{r pick_lists}
+cat_match(messy_short,clean_short, method = "jaccard", return_lists = 3, threshold = 0.2) %>% arrange(desc(dists)) %>% 
+  gt::gt()
+```
+
+Some of our matches have good choices, but others seem to be lacking a match in the clean vector. You can  output this dataframe and manually choose the correct match or that there is no suitable match, or you can use the `pick_lists` argument, which prompts you in the console to choose the correct option or none of the above. 
+
+![Example of pick_lists prompts](C:/Users/abhen/Desktop/messy.cats/cat_match_pick_lists.png)
+
+```{r picked_list}
+#data("picked_list")
+
+```
+
+
+
+In this more extensive example we have two datasets of biological data. The first: `messy_caterpillars` contains information about the average weight and length of caterpillars, and as the name suggests, has messy very caterpillar names.`clean_caterpillars` is a dataset containing the species and the number of caterpillars found and clean caterpillar names. 
+
 ```{r return_lists cat_match example,eval=F}
 # load in messy_caterpillars and clean_caterpillars
 data("clean_caterpillars")
@@ -119,10 +152,6 @@ If we arrange by the distance in descending order, we can see the items of the m
 cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T,method="jaccard") %>% arrange(desc(dists))
 ```
 
-```{r}
-cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T,method="jaccard", threshold = .49) %>% arrange(desc(dists))
-
-```
 
 ```{r using outputs inner_join,eval=F}
 messy_caterpillars$CaterpillarSpecies = cat_replace(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,method="jaccard", threshold = .49)
@@ -134,9 +163,10 @@ left_join(clean_caterpillars,messy_caterpillars, by = c("species"="CaterpillarSp
 Alternatively, a user could accomplish this task in one step using `cat_join()`. 
 
 ```{r}
+data("clean_caterpillars")
 data("messy_caterpillars")
-clean_caterpillars$species
-cat_join(messy_df = messy_caterpillars, clean_df = clean_caterpillars, by = c("CaterpillarSpecies", "species"), method="jaccard", threshold = .49,join="left")
+
+cat_join(messy_df = messy_caterpillars, clean_df = clean_caterpillars, by = c("CaterpillarSpecies", "species"), method="jaccard", threshold = .49,join="full")
 ```
 
 ```{r}
