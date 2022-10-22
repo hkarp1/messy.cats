@@ -3,13 +3,36 @@ library(dplyr)
 library(magrittr)
 
 
+# TODO: ----
+
+#1. conditional statement for messy/clean_names args to be:
+#   1. full name column
+#   2. first and last name columns
+#   3. dataframe where we find first/last/full column
+#   4. any combination of the two
+
+#2. rn you give it a df it can tell if it has first and last or full
+#   need to spit errors if it only has first/last and no full
+
+#3. want to clean up the stringr::str_detect() calls with regex
+
+
 readRDS("data/messy_names.rda") -> messy_names.df
 readRDS("data/clean_names.rda") -> clean_names.df
 messy_names.df %>% mutate(full = tolower(paste(first,last,sep = " "))) -> mn_full.df
 clean_names.df %>% mutate(full = tolower(paste(first,last,sep = " "))) -> cn_full.df
 
+messycols <- c("first_name","firstname","FIRSTNAME","FIRST_NAME",
+               "last_name", "lastname", "LASTNAME", "LAST_NAME")
+
+
+names(messy_names.df) <- c("FIRST_NAME","LASTNAME")
+names(clean_names.df) <- c(" first names  ", "...last...")
+
 create_full <- function(df){ # takes dataframe and creates full column
-  names(df) -> vec #vector of column names
+  tolower(names(df)) -> vec #vector of lowercase column names
+  # I think just lowering the column names will work but I might be missing something
+  # i think janitor::clean_names() might be good
   if(TRUE %in% stringr::str_detect(vec,"full")){
     df[,stringr::str_detect(vec,"full")] -> full #dataframe had full column so just take that
     df$full = full
@@ -24,17 +47,18 @@ create_full <- function(df){ # takes dataframe and creates full column
 }
 
 
+
 name_match <- function(messy_names,clean_names,extract=NULL){
   if (is.data.frame(messy_names) == T){ #messy_names is dataframe
-    # df w/ first&last
-    messy_names %<>% create_full() #take df input and create full column
+    # take df input and create full column
+    messy_names %<>% create_full()
     if(is.data.frame(clean_names) == T){ #clean_names is dataframe
-      # df w/ first&last
-      clean_names %<>% create_full() #take df input and create full column
-      cat_match(messy_names$full,clean_names$full) -> t #match newly made full columns
+      # take df input and create full column
+      clean_names %<>% create_full()
+      cat_match(messy_names$full,clean_names$full) -> t
     }
     if(is.vector(clean_names)){ #clean_names is full name column
-      cat_match(messy_names$full,clean_names) -> t #match newly made full columns
+      cat_match(messy_names$full,clean_names) -> t
 
     }
     else {
@@ -42,16 +66,17 @@ name_match <- function(messy_names,clean_names,extract=NULL){
   }
   if(is.vector(messy_names)){ #messy_names is full name column
     if(is.data.frame(clean_names) == T){ #clean_names is dataframe
-      clean_names %<>% create_full() #take df input and create full column
-      cat_match(messy_names,clean_names$full) -> t #match newly made and inputted full columns
+      #take df input and create full column
+      clean_names %<>% create_full()
+      cat_match(messy_names,clean_names$full) -> t
     }
     if(is.vector(clean_names) == T){ #clean_names is full name column
-      cat_match(messy_names,clean_names) -> t #match inputted made full columns
+      cat_match(messy_names,clean_names) -> t
     }
     else {
     }
   }
-
+  # this would be the part to put in as argument to cat match
   min_dists = data.frame()
   if(is.numeric(extract) == T) {
     for (name in unique(clean_names$full)){
@@ -68,20 +93,7 @@ name_match <- function(messy_names,clean_names,extract=NULL){
 
 
 
-# want to fix regex
-# TODO: ----
-
-#1. conditional statement for messy/clean_names args to be:
-#   1. full name column
-#   2. first and last name columns
-#   3. dataframe where we find first/last/full column
-#   4. any combination of the two
-
-#2. rn you give it a df it can tell if it has first and last or full
-#   need to spit errors if it only has first/last and no full
-
-#3. want to clean up the stringr::str_detect() calls with regex
-
+#tests -----
 
 name_match(messy_names.df,clean_names.df) -> t #two dataframes w/ first and last
 name_match(messy_names.df,cn_full.df$full) -> t1 #df w/ first and last, full column directly
@@ -106,6 +118,16 @@ name_match(mn_full.df,cn_full.df$full, extract = 2) -> x7 #dataframe w/ full, fu
 name_match(mn_full.df,clean_names.df, extract = 2) -> x8 #df w/full, df w/first and last
 
 
+
+t %>% filter(dists == 0) %>% count()
+t1 %>% filter(dists == 0) %>% count()
+t2 %>% filter(dists == 0) %>% count()
+t3 %>% filter(dists == 0) %>% count()
+t4 %>% filter(dists == 0) %>% count()
+t5 %>% filter(dists == 0) %>% count()
+t6 %>% filter(dists == 0) %>% count()
+t7 %>% filter(dists == 0) %>% count()
+t8 %>% filter(dists == 0) %>% count()
 
 
 
