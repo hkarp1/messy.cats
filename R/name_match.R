@@ -2,6 +2,14 @@
 library(dplyr)
 library(magrittr)
 
+# TODO: ----
+# get extract argument working
+# conditional statement for messy/clean_names args to be:
+#   1. full name column
+#   2. first and last name columns
+#   3. dataframe where we find first/last/full column
+#   4. any combination of the two
+
 readRDS("data/messy_names.rda") -> messy_names.df
 readRDS("data/clean_names.rda") -> clean_names.df
 
@@ -30,8 +38,6 @@ name_match(messy_names.df,clean_names.df) -> t
 
 name_match(messy_names.df,clean_names.df,extract = 2) -> x
 
-
-# loop takes the output and finds the closest match, if the 1 in brackets is changed it returns the x closest matches
 
 
 
