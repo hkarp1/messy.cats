@@ -15,7 +15,7 @@ name_match <- function(messy_names,clean_names,extract=NULL){
   if(is.numeric(extract) == T) {
     for (name in unique(clean_names$full)){
       filter(t, match == name) %>% arrange(dists) -> desc_dist
-      desc_dist <- desc_dist[1:2,]
+      desc_dist <- desc_dist[1:extract,]
       min_dists <- rbind(min_dists,desc_dist)
     }
     return(min_dists)
