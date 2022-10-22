@@ -66,28 +66,44 @@ name_match <- function(messy_names,clean_names,extract=NULL){
   }
 }
 
+
+
+# want to fix regex
 # TODO: ----
 
-#1. allow for multiple input types
-#   1.
-
-
-#2. conditional statement for messy/clean_names args to be:
+#1. conditional statement for messy/clean_names args to be:
 #   1. full name column
 #   2. first and last name columns
 #   3. dataframe where we find first/last/full column
 #   4. any combination of the two
 
+#2. rn you give it a df it can tell if it has first and last or full
+#   need to spit errors if it only has first/last and no full
 
-name_match(messy_names.df,clean_names.df) -> t
-name_match(mn_full.df$full,clean_names.df) -> t1
-name_match(messy_names.df,cn_full.df$full) -> t2
+#3. want to clean up the stringr::str_detect() calls with regex
 
 
-name_match(messy_names.df,clean_names.df,extract = 2) -> x
-name_match(mn_full.df$full,clean_names.df,extract = 2) -> x1
-name_match(messy_names.df,clean_names.df,extract = 2) -> x2
+name_match(messy_names.df,clean_names.df) -> t #two dataframes w/ first and last
+name_match(messy_names.df,cn_full.df$full) -> t1 #df w/ first and last, full column directly
+name_match(messy_names.df,cn_full.df) -> t2 #df w/ first and last, df w/ full column
+name_match(mn_full.df$full,clean_names.df) -> t3 #full column, df w/ first and last
+name_match(mn_full.df$full,cn_full.df) -> t4 #full column directly, df w/ full column
+name_match(mn_full.df$full,cn_full.df$full) -> t5 #2 full columns directly
+name_match(mn_full.df,cn_full.df) -> t6 #two dataframes w/ full
+name_match(mn_full.df,cn_full.df$full) -> t7 #dataframe w/ full, full column directly
+name_match(mn_full.df,clean_names.df) -> t8 #df w/full, df w/first and last
 
+
+
+name_match(messy_names.df,clean_names.df, extract = 2) -> x #two dataframes w/ first and last
+name_match(messy_names.df,cn_full.df$full, extract = 2) -> x1 #df w/ first and last, full column directly
+name_match(messy_names.df,cn_full.df, extract = 2) -> x2 #df w/ first and last, df w/ full column
+name_match(mn_full.df$full,clean_names.df, extract = 2) -> x3 #full column, df w/ first and last
+name_match(mn_full.df$full,cn_full.df, extract = 2) -> x4 #full column directly, df w/ full column
+name_match(mn_full.df$full,cn_full.df$full, extract = 2) -> x5 #2 full columns directly
+name_match(mn_full.df,cn_full.df, extract = 2) -> x6 #two dataframes w/ full
+name_match(mn_full.df,cn_full.df$full, extract = 2) -> x7 #dataframe w/ full, full column directly
+name_match(mn_full.df,clean_names.df, extract = 2) -> x8 #df w/full, df w/first and last
 
 
 
