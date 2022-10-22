@@ -20,9 +20,8 @@ library(magrittr)
 
 #3. want to clean up the stringr::str_detect() calls with regex
 
-
-readRDS("data/messy_names.rda") -> messy_names.df
-readRDS("data/clean_names.rda") -> clean_names.df
+load("data/messy_names.rda") -> messy_names.df
+load("data/clean_names.rda") -> clean_names.df
 messy_names.df %>% mutate(full = tolower(paste(first,last,sep = " "))) -> mn_full.df
 clean_names.df %>% mutate(full = tolower(paste(first,last,sep = " "))) -> cn_full.df
 

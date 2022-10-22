@@ -156,7 +156,7 @@ cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,retur
 ```{r using outputs inner_join,eval=F}
 messy_caterpillars$CaterpillarSpecies = cat_replace(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,method="jaccard", threshold = .49)
 
-left_join(clean_caterpillars,messy_caterpillars, by = c("species"="CaterpillarSpecies"))
+dplyr::left_join(clean_caterpillars,messy_caterpillars, by = c("species"="CaterpillarSpecies"))
 ```
 
 
