@@ -4,6 +4,10 @@ library(magrittr)
 
 
 # TODO: ----
+# want to let people keep the names formatted how they want
+#     upper, lower, Proper Capitalization,Camel/snake/whatever the fuck else-case
+#     let them choose separator on full name:
+#         " ","_","-","",
 
 #1. conditional statement for messy/clean_names args to be:
 #   1. full name column
@@ -12,7 +16,7 @@ library(magrittr)
 #   4. any combination of the two
 
 #2. rn you give it a df it can tell if it has first and last or full
-#   need to spit errors if it only has first/last and no full
+#   need to spit errors if it only has first or last and no full
 
 #3. want to clean up the stringr::str_detect() calls with regex
 
