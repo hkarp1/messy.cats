@@ -33,6 +33,7 @@ names(messy_names.df) <- c("FIRST_NAME","LASTNAME")
 names(clean_names.df) <- c(" first names  ", "...last...")
 
 create_full <- function(df){ # takes dataframe and creates full column
+  df %<>% as.data.frame(df)
   tolower(names(df)) -> vec #vector of lowercase column names
   # I think just lowering the column names will work but I might be missing something
   # i think janitor::clean_names() might be good
@@ -93,7 +94,6 @@ name_match <- function(messy_names,clean_names,extract=NULL){
     return(t)
   }
 }
-
 
 
 #tests -----
