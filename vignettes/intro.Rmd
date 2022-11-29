@@ -18,6 +18,7 @@ library(ggplot2)
 library(stringdist)
 library(varhandle)
 library(rapportools)
+library(gt)
 ```
 `messy.cats` contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos and different formatting choices, can be difficult to work with. `messy.cats` aims to provide functions that make cleaning categorical data simple and easy.
 
