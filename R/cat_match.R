@@ -209,3 +209,4 @@ cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, 
   return(df)
 
 }
+
