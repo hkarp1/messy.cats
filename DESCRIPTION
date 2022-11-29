@@ -29,7 +29,8 @@ Imports:
     readxl,
     varhandle,
     rapportools,
-    Rfast
+    Rfast,
+    stringr
 Suggests: 
     knitr,
     rmarkdown
