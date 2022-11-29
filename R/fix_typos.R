@@ -27,6 +27,7 @@
 #'  }
 #' }
 #' @rdname fix_typos
+#' @import dplyr
 #' @export
 
 fix_typos <- function(typo_v, thr, occ_ratio) {

@@ -24,6 +24,7 @@
 #'  }
 #' }
 #' @rdname state_match
+#' @importFrom datasets state.name
 #' @export
 
 state_match <- function(messy_states,threshold = NA, p = 0){

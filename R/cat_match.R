@@ -52,7 +52,9 @@
 #'  }
 #' }
 #' @rdname cat_match
+#' @import dplyr
 #' @export
+
 
 
 cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, pick_lists = F,

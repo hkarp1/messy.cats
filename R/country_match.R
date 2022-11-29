@@ -28,6 +28,6 @@
 
 country_match <- function(messy_countries,threshold = NA, p = 0){
 
-  cat_match(messy_countries,country.names[[1]],return_dists = FALSE, return_lists = NA,
+    cat_match(messy_countries,country.names[[1]],return_dists = FALSE, return_lists = NA,
             pick_lists = F, method = "jw", threshold, p)
 }

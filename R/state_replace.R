@@ -24,6 +24,7 @@
 #'  }
 #' }
 #' @rdname state_replace
+#' @importFrom datasets state.name
 #' @export
 
 state_replace <- function(messy_states,threshold = NA, p = 0){
