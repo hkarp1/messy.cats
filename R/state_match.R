@@ -16,13 +16,11 @@
 #' function uses a built in clean list of country names `state.name` as the reference clean vector and
 #' matches your inputted messy vector of names to their nearest state in `state.name`.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
 #'  matched <- state_match(lst)
 #'  }
-#' }
 #' @rdname state_match
 #' @import datasets
 #' @export

@@ -16,13 +16,11 @@
 #' function uses a built in clean list of country names `state.name` as the reference clean vector and
 #' replaces your inputted messy vector of names to their nearest match in `state.name`.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
 #'  fixed <- state_replace(lst)
 #'  }
-#' }
 #' @rdname state_replace
 #' @import datasets
 #' @export

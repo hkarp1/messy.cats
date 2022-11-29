@@ -36,7 +36,6 @@
 #' `cat_replace()` replaces the elements of the messy vector with the closest matching
 #' element from the clean vector.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree",
 #'   "birch tree", "pone", "dagwood", "mople")
@@ -44,7 +43,6 @@
 #'  cleaned_trees = cat_replace(messy_trees, clean_trees)
 #'
 #'  }
-#' }
 #' @rdname cat_replace
 #' @export
 
