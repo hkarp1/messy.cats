@@ -33,11 +33,45 @@
 # applications
   # names / words not in US dictionary
   # if using basic EN words just use hunspell (https://www.rdocumentation.org/packages/hunspell/versions/3.0.2/topics/hunspell)
-# library(tidytext)
+
 # a <- typo_df$typo_caterpillars
 
 
+# add handling for multiple typo matches
+# add to vignette
 
+
+
+#' @title fix_typos
+#' @description This function is meant to allow users to fix typos in strings
+#'  that are not normally found in dictionaries.
+#' @param typo_v vector of strings that will have its typos cleaned
+#' @param thr the string distance maximum used to determine typos. This argument
+#' is specified as the percentage of a typo that should at most be expected to be
+#' insertions, additons, deletions, and transpositions.
+#' @param occ_ratio the minimum ratio of correctly spelled words to their typo.
+#' This argument helps to weed out words that are similar but valid. For example
+#' commonly occurring valid names such as Adam and Amy will not be recognized as typos
+#' even though they are similar because they both appear often. Typos are recognized by
+#' their similarity in addition to their infrequent occurrence.
+#' @return reformatted vector with typos replaced with correctly spelled words
+#' @details  There are great tools like the
+#'  hunspell package that allow users to fix typos for words found in dictionaries,
+#'  but these functions struggle to work for strings like proper nouns and other
+#'  specific terminology not usually found in common dictionaries. This function
+#'  uses the text being cleaned as a dictionary. It finds probable correctly spelled
+#'  words based on their high occurrence and finds typos based on their low occurence.
+#'  This is based on the theory that typos will appear as infrequently used words due
+#'  no one using them on purpose, and they will be a short string distance from commonly
+#'  occurring correctly spelled words.
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname fix_typos
+#' @export
 
 fix_typos <- function(typo_v, thr, occ_ratio) {
   # string <- str_split(paste0(typo_v, collapse = " "), " ")[[1]]
