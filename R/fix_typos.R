@@ -1,4 +1,4 @@
-# find typos
+# fix typos
 
 # idea from dk:
 # string distance calculation that weights letters that are close in qwerty-space

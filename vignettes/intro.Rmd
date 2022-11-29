@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
 library(messy.cats)
 library(dplyr)
 library(ggplot2)
@@ -111,7 +110,7 @@ cat_match(messy_short,clean_short, method = "jaccard", return_lists = 3, thresho
 
 Some of our matches have good choices, but others seem to be lacking a match in the clean vector. You can  output this dataframe and manually choose the correct match or that there is no suitable match, or you can use the `pick_lists` argument, which prompts you in the console to choose the correct option or none of the above. 
 
-![Example of pick_lists prompts](C:/Users/abhen/Desktop/messy.cats/cat_match_pick_lists.png)
+
 
 ```{r picked_list}
 #data("picked_list")

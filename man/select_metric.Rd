@@ -18,7 +18,7 @@ a string representing the suggested stringdist metric
 Uses heuristic algorithm to suggest a stringdist metric from among hamming, lv, osa, dl, lcs, jw
 }
 \details{
-for each metric, measures certainty via the difference between the best matches for each word and
+for each metric, measures certainty via the difference between the best matches for each word and the average of all matches for each word
 }
 \examples{
 select_metric(c("aapple", "bamana", "clemtidne"), c("apple", "banana", "clementine"))
