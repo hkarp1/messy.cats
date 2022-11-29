@@ -84,7 +84,8 @@ matches between the clean and messy vectors.
 \examples{
 \dontrun{
 if(interactive()){
- messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+ messy_trees = c("red oak", "williw", "hemluck", "white elm",
+ "fir tree", "birch tree", "pone", "dagwood", "mople")
  clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
  matched_trees = cat_match(messy_trees, clean_trees)
  }
