@@ -43,10 +43,12 @@
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  messy_trees = data.frame()
-#'  messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm", "fir tree", "birch tree", "pone", "dagwood", "mople")
+#'  messy_trees[1:9,1] = c("red oak", "williw", "hemluck", "white elm",
+#'   "fir tree", "birch tree", "pone", "dagwood", "mople")
 #'  messy_trees[1:9,2] = c(34,12,43,32,65,23,12,45,35)
 #'  clean_trees=data.frame()
-#'  clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
+#'  clean_trees[1:9,1] = c("oak", "willow", "hemlock", "elm", "fir",
+#'  "birch", "pine", "dogwood", "maple")
 #'  clean_trees[1:9,2] = "y"
 #'  cat_join(messy_trees,clean_trees,by="V1",method="jaccard")
 #'  }
