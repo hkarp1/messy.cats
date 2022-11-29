@@ -33,11 +33,9 @@ function uses a built in clean list of country names \code{country.names} as the
 matches your inputted messy vector of names to their nearest country in \code{country.names}.
 }
 \examples{
-\dontrun{
 if(interactive()){
  #EXAMPLE1
  lst <- c("Conagoa", "Blearaus", "Venzesual", "Uruagsya", "England")
  matched <- country_match(lst)
  }
-}
 }

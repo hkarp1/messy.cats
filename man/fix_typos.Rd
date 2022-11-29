@@ -38,9 +38,7 @@ no one using them on purpose, and they will be a short string distance from comm
 occurring correctly spelled words.
 }
 \examples{
-\dontrun{
 if(interactive()){
  #EXAMPLE1
  }
-}
 }

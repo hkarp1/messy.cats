@@ -52,7 +52,6 @@ When using datasets often times column names are slightly different, and \code{f
 to bind dataframes using fuzzy matching of the column names.
 }
 \examples{
-\dontrun{
 if(interactive()){
  mtcars_colnames_messy = mtcars
  colnames(mtcars_colnames_messy)[1:5] = paste0(colnames(mtcars)[1:5], "_17")
@@ -60,5 +59,4 @@ if(interactive()){
  x = fuzzy_rbind(mtcars, mtcars_colnames_messy, .5)
  x = fuzzy_rbind(mtcars, mtcars_colnames_messy, .2)
  }
-}
 }

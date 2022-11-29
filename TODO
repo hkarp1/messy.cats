@@ -35,3 +35,5 @@
   # if using basic EN words just use hunspell (https://www.rdocumentation.org/packages/hunspell/versions/3.0.2/topics/hunspell)
 # add handling for multiple typo matches
 # add to vignette
+
+# add better error handling to all packages

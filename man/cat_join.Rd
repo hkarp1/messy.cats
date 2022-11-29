@@ -76,7 +76,6 @@ designated columns. The columns from the datasets are inputted into \code{cat_re
 messy and clean vectors, and the datasets are joined using a user inputted dplyr join verb.
 }
 \examples{
-\dontrun{
 if(interactive()){
  #EXAMPLE1
  messy_trees = data.frame()
@@ -89,5 +88,4 @@ if(interactive()){
  clean_trees[1:9,2] = "y"
  cat_join(messy_trees,clean_trees,by="V1",method="jaccard")
  }
-}
 }

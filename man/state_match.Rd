@@ -33,11 +33,9 @@ function uses a built in clean list of country names \code{state.name} as the re
 matches your inputted messy vector of names to their nearest state in \code{state.name}.
 }
 \examples{
-\dontrun{
 if(interactive()){
  #EXAMPLE1
  lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
  matched <- state_match(lst)
  }
-}
 }

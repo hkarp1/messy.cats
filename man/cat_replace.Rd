@@ -69,7 +69,6 @@ from transposition or misspelling errors.
 element from the clean vector.
 }
 \examples{
-\dontrun{
 if(interactive()){
  messy_trees = c("red oak", "williw", "hemluck", "white elm", "fir tree",
   "birch tree", "pone", "dagwood", "mople")
@@ -77,5 +76,4 @@ if(interactive()){
  cleaned_trees = cat_replace(messy_trees, clean_trees)
 
  }
-}
 }

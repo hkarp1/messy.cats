@@ -6,7 +6,7 @@
 \alias{messy.cats-package}
 \title{messy.cats: Employs String Distance Tools to Help Clean Categorical Data}
 \description{
-Matching with string distance has never been easier! messy.cats contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. messy.cats aims to provide functions that make cleaning categorical data simple and easy.
+Matching with string distance has never been easier! `messy.cats` contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. `messy.cats` aims to provide functions that make cleaning categorical data simple and easy.
 }
 \seealso{
 Useful links:

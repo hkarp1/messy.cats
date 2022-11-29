@@ -1,4 +1,4 @@
-Package: messy.cats
+Package: 'messy.cats'
 Title: Employs String Distance Tools to Help Clean Categorical Data
 Version: 1.0
 BugReports: https://github.com/hkarp1/messy.cats/issues
@@ -14,7 +14,7 @@ Authors@R: c(person(given = "Andrew",
            family = "Karp",
            role = c("cre"),
            email = "hkarp@wesleyan.edu"))
-Description: Matching with string distance has never been easier! `messy.cats` contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. `messy.cats` aims to provide functions that make cleaning categorical data simple and easy.  
+Description: Matching with string distance has never been easier! 'messy.cats' contains various functions that employ string distance tools in order to make data management easier for users working with categorical data. Categorical data, especially user inputted categorical data that often tends to be plagued by typos, can be difficult to work with. 'messy.cats' aims to provide functions that make cleaning categorical data simple and easy.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

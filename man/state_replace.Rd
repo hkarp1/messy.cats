@@ -33,11 +33,9 @@ function uses a built in clean list of country names \code{state.name} as the re
 replaces your inputted messy vector of names to their nearest match in \code{state.name}.
 }
 \examples{
-\dontrun{
 if(interactive()){
  #EXAMPLE1
  lst <- c("Indianaa", "Wisvconsin", "aLaska", "NewJersey", "Claifoarni")
  fixed <- state_replace(lst)
  }
-}
 }
