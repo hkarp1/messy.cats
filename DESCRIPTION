@@ -1,4 +1,4 @@
-Package: 'messy.cats'
+Package: messy.cats
 Title: Employs String Distance Tools to Help Clean Categorical Data
 Version: 1.0
 BugReports: https://github.com/hkarp1/messy.cats/issues
