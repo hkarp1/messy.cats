@@ -24,10 +24,10 @@
 #'  }
 #' }
 #' @rdname state_replace
-#' @import datasets
 #' @export
 
 state_replace <- function(messy_states,threshold = NA, p = 0){
-
+  state.name <- NULL
+  state.name <- load("state.name")
   cat_replace(messy_states,state.name, method = "jw", threshold, p)
 }

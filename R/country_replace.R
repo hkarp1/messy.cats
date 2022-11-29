@@ -27,7 +27,8 @@
 #' @export
 
 country_replace <- function(messy_countries,threshold = NA, p = 0){
-
+  country.names <- NULL
+  country.names <- load("country.names")
   cat_replace(messy_countries,country.names[[1]],method = "jw", threshold, p)
 }
 

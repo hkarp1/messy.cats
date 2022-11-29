@@ -35,6 +35,8 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
   # tbl <- table(string)
   # df <- data.frame(word = names(tbl), times = as.integer(tbl))
 
+  prom_ratio <- NULL
+
   tbl <- table(typo_v)
   df <- data.frame(word = names(tbl), times = as.integer(tbl))
 

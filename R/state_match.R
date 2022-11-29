@@ -24,11 +24,11 @@
 #'  }
 #' }
 #' @rdname state_match
-#' @import datasets
 #' @export
 
 state_match <- function(messy_states,threshold = NA, p = 0){
-
+    state.name <- NULL
+    state.name <- load("state.name")
     cat_match(messy_states,state.name, return_dists = FALSE, return_lists = NA,
               pick_lists = F, method = "jw", threshold, p)
 }
