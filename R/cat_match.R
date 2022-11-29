@@ -43,21 +43,19 @@
 #' to solve issues by hand and create a dataframe that can be used to create custom
 #' matches between the clean and messy vectors.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  messy_trees = c("red oak", "williw", "hemluck", "white elm",
 #'  "fir tree", "birch tree", "pone", "dagwood", "mople")
 #'  clean_trees = c("oak", "willow", "hemlock", "elm", "fir", "birch", "pine", "dogwood", "maple")
 #'  matched_trees = cat_match(messy_trees, clean_trees)
 #'  }
-#' }
 #' @rdname cat_match
 #' @import dplyr
 #' @export
 
 
 
-cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, pick_lists = F,
+cat_match <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, pick_lists = FALSE,
                       threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
                       useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 

@@ -39,7 +39,6 @@
 #' designated columns. The columns from the datasets are inputted into `cat_replace()` as the
 #' messy and clean vectors, and the datasets are joined using a user inputted dplyr join verb.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  messy_trees = data.frame()
@@ -52,7 +51,6 @@
 #'  clean_trees[1:9,2] = "y"
 #'  cat_join(messy_trees,clean_trees,by="V1",method="jaccard")
 #'  }
-#' }
 #' @rdname cat_join
 #' @export
 

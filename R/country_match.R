@@ -16,13 +16,11 @@
 #' function uses a built in clean list of country names `country.names` as the reference clean vector and
 #' matches your inputted messy vector of names to their nearest country in `country.names`.
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  lst <- c("Conagoa", "Blearaus", "Venzesual", "Uruagsya", "England")
 #'  matched <- country_match(lst)
 #'  }
-#' }
 #' @rdname country_match
 #' @export
 
@@ -30,5 +28,5 @@ country_match <- function(messy_countries,threshold = NA, p = 0){
     country.names <- NULL
     country.names <- load("country.names")
     cat_match(messy_countries,country.names[[1]],return_dists = FALSE, return_lists = NA,
-            pick_lists = F, method = "jw", threshold, p)
+            pick_lists = FALSE, method = "jw", threshold, p)
 }
