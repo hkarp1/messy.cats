@@ -15,7 +15,7 @@
 #' this common issue of mispellings or different formats of state names across datasets. This wrapper
 #' function uses a built in clean list of country names `state.name` as the reference clean vector and
 #' replaces your inputted messy vector of names to their nearest match in `state.name`.
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1

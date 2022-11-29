@@ -28,6 +28,6 @@
 
 state_match <- function(messy_states,threshold = NA, p = 0){
 
-    cat_match(messsy_states,state.name, return_dists = FALSE, return_lists = NA,
+    cat_match(messy_states,state.name, return_dists = FALSE, return_lists = NA,
               pick_lists = F, method = "jw", threshold, p)
 }

@@ -30,14 +30,14 @@
 #' @export
 
 fix_typos <- function(typo_v, thr, occ_ratio) {
-  # string <- str_split(paste0(typo_v, collapse = " "), " ")[[1]]
+  # string <- stringr::str_split(paste0(typo_v, collapse = " "), " ")[[1]]
   # tbl <- table(string)
   # df <- data.frame(word = names(tbl), times = as.integer(tbl))
 
   tbl <- table(typo_v)
   df <- data.frame(word = names(tbl), times = as.integer(tbl))
 
-  dist_mat <- stringdistmatrix(df$word, df$word, method = "dl")
+  dist_mat <- stringdist::stringdistmatrix(df$word, df$word, method = "dl")
 
   scaled_dist_mat <- dist_mat / nchar(df$word)
 
@@ -54,7 +54,7 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
 
   under_thresh_mat$prom_ratio <- under_thresh_mat$row2 / under_thresh_mat$col2
 
-  under_thresh_mat %>% filter(prom_ratio > occ_ratio | prom_ratio < 1/occ_ratio) -> under_thresh_mat
+  under_thresh_mat %>% dplyr::filter(prom_ratio > occ_ratio | prom_ratio < 1/occ_ratio) -> under_thresh_mat
 
   # to optimize later
   for (i in 1:nrow(under_thresh_mat)) {

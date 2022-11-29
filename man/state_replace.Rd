@@ -31,7 +31,8 @@ manually digitized or created. \code{state_replace()} is a warpper function of \
 this common issue of mispellings or different formats of state names across datasets. This wrapper
 function uses a built in clean list of country names \code{state.name} as the reference clean vector and
 replaces your inputted messy vector of names to their nearest match in \code{state.name}.
-#' @examples
+}
+\examples{
 \dontrun{
 if(interactive()){
  #EXAMPLE1
