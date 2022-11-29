@@ -3,19 +3,19 @@
 # idea from dk:
 # string distance calculation that weights letters that are close in qwerty-space
 
-library(tidyverse)
-library(stringdist)
-data("clean_caterpillars")
-data("messy_caterpillars")
-load("~/Desktop/messy.cats/data/clean_names.rda")
-load("~/Desktop/messy.cats/data/messy_names.rda")
-
-# testing dataset ----
-rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-
-append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
-
-typo_df <- as.data.frame(typo_caterpillars)
+# library(tidyverse)
+# library(stringdist)
+# data("clean_caterpillars")
+# data("messy_caterpillars")
+# load("~/Desktop/messy.cats/data/clean_names.rda")
+# load("~/Desktop/messy.cats/data/messy_names.rda")
+#
+# # testing dataset ----
+# rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
+#
+# append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
+#
+# typo_df <- as.data.frame(typo_caterpillars)
 # OSA / DL
   # use DL, probably give option for OSA
 
@@ -33,8 +33,8 @@ typo_df <- as.data.frame(typo_caterpillars)
 # applications
   # names / words not in US dictionary
   # if using basic EN words just use hunspell (https://www.rdocumentation.org/packages/hunspell/versions/3.0.2/topics/hunspell)
-library(tidytext)
-a <- typo_df$typo_caterpillars
+# library(tidytext)
+# a <- typo_df$typo_caterpillars
 
 
 
@@ -78,6 +78,6 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
   typo_v
 }
 
-fix_typos(typo_v = a, thr = 0.3, occ_ratio = 10) %>% unique
+# fix_typos(typo_v = a, thr = 0.3, occ_ratio = 10) %>% unique
 
 
