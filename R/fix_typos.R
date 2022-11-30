@@ -113,3 +113,8 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
 #
 # fix_typos(typo_v = cnts_v, thr = 0.5, occ_ratio = 5) %>% unique
 
+# this is in the data folder
+# readr::read_csv("aus_cities_typos.csv") -> aus_df
+# aus_typos = aus_df$City
+#
+# fix_typos(aus_typos, thr = 0.5, occ_ratio = 10) %>% unique
