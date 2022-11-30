@@ -28,6 +28,7 @@
 #' @import dplyr
 #' @export
 
+
 fix_typos <- function(typo_v, thr, occ_ratio) {
   # string <- stringr::str_split(paste0(typo_v, collapse = " "), " ")[[1]]
   # tbl <- table(string)
@@ -66,9 +67,49 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
       typo_v[typo_v==df$word[under_thresh_mat$row[[i]]]] = df$word[under_thresh_mat$col[[i]]]
     }
   }
-  typo_v
+  typo_v %>% unique
 }
 
-# fix_typos(typo_v = a, thr = 0.3, occ_ratio = 10) %>% unique
 
+# rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
+#
+# append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
+#
+# typo_df <- as.data.frame(typo_caterpillars)
+#
+# typo_v = typo_caterpillars
+# occ_ratio = 10
+# thr = 0.3
+
+# fix_typos(typo_v = typo_v, thr = 0.3, occ_ratio = 10) %>% unique
+
+# cnts <- c(
+#   "Litchfield",
+#   "Hartford",
+#   "Tolland",
+#   "Windham",
+#   "Fairfield",
+#   "New Haven",
+#   "Middlesex",
+#   "New London"
+# )
+#
+# cnts_typo <- c(
+#   "Litchfeld",
+#   "Hartferd",
+#   "Tolland",
+#   "Wind Ham",
+#   "Fairfield",
+#   "New Heven",
+#   "Midlsex",
+#   "NwLndn"
+# )
+#
+# cnts_v <- append(rep(cnts,10),cnts_typo)
+#
+# cnts_v -> typo_v
+# thr = 0.5
+# occ_ratio = 5
+#
+# fix_typos(typo_v = cnts_v, thr = 0.5, occ_ratio = 5) %>% unique
 
