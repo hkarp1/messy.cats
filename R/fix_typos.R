@@ -118,3 +118,9 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
 # aus_typos = aus_df$City
 #
 # fix_typos(aus_typos, thr = 0.5, occ_ratio = 10) %>% unique
+
+# i feel like this has potential but there are a ton of weird "corrections" that
+# are super not intuitive
+# read_csv("github_typos.csv") -> gh_df
+# gh_df %>% select(wrong, correct) -> gh_df2
+# gh_typos <- append(gh_df2$wrong,gh_df2$correct)
