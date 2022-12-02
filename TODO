@@ -3,10 +3,8 @@ General Package TODO:
 add better error handling to all functions
 
 NEED BETTER EXAMPLES
-  the example in the readme doesn't even fucking work
-  this works:
-    select_metric(messy_v = messy_plant_categories, clean_v = plant_categories)
-    cat_match(messy_v = messy_plant_categories, clean_v = plant_categories, method = "lcs")
+
+put datasets back into data.R
 
 cat_match TODO:
 we can already insert select metrics into the method argument
