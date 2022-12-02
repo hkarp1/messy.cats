@@ -14,8 +14,9 @@
 #' is specified, any element in the messy vector that has no match closer than
 #' the threshold distance will be replaced with NA, Default: NA
 #' @param method The type of string distance calculation to use. Possible methods
-#' are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
-#' See package stringdist for more information, Default: 'jw'
+#' are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex. A method
+#' can be automatically selected by setting method to auto.
+#' See package stringdist for more information, Default: 'auto'
 #' @param q Size of the q-gram used in string distance calculation. Default: 1
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @param bt Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0
@@ -63,7 +64,7 @@
 #'
 
 cat_match_interactive <- function(messy_v, clean_v, return_dists = TRUE, return_lists = NA, pick_lists = FALSE,
-                      threshold = NA, method = "jw", q = 1, p = 0, bt = 0,
+                      threshold = NA, method = "auto", q = 1, p = 0, bt = 0,
                       useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
 
   if (is.factor(messy_v)) {
@@ -93,9 +94,9 @@ cat_match_interactive <- function(messy_v, clean_v, return_dists = TRUE, return_
   } else if (!rapportools::is.boolean(useBytes)) {
     stop("Argument unique must be a boolean")
   } else if (!(method %in% c("osa", "lv", "dl", "hamming", "lcs", "qgram",
-                             "cosine", "jaccard", "jw","soundex"))) {
+                             "cosine", "jaccard", "jw","soundex", "auto"))) {
     stop("Please use only a method available to the stringdist function in the
-         stringdist package")
+         stringdist package or automatically select a metric with the auto method")
   } else if (!is.na(return_lists) & !is.numeric(return_lists)) {
     stop("Argument return_lists must be either NA or numeric")
   } else if (!is.na(threshold) & !is.numeric(threshold)) {
@@ -107,6 +108,10 @@ cat_match_interactive <- function(messy_v, clean_v, return_dists = TRUE, return_
 
   u_clean_v = unique(clean_v)
   u_messy_v = unique(messy_v)
+
+  if (method == "auto") {
+    method <- select_metric(messy_v, clean_v)
+  }
 
   x <- as.data.frame(stringdist::stringdistmatrix(tolower(u_clean_v), tolower(u_messy_v),
                                                   method = method, p = p,

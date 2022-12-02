@@ -11,7 +11,7 @@ cat_match_interactive(
   return_lists = NA,
   pick_lists = FALSE,
   threshold = NA,
-  method = "jw",
+  method = "auto",
   q = 1,
   p = 0,
   bt = 0,
@@ -38,8 +38,9 @@ is specified, any element in the messy vector that has no match closer than
 the threshold distance will be replaced with NA, Default: NA}
 
 \item{method}{The type of string distance calculation to use. Possible methods
-are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
-See package stringdist for more information, Default: 'jw'}
+are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex. A method
+can be automatically selected by setting method to auto.
+See package stringdist for more information, Default: 'auto'}
 
 \item{q}{Size of the q-gram used in string distance calculation. Default: 1}
 

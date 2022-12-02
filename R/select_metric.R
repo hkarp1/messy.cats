@@ -43,7 +43,7 @@ select_metric <- function(messy_v, clean_v){
    }
 
    if(which.max(metric_certainties) == 6){
-     return("jw, p = 0.1")
+     return("jw")
    }
    else{
      return(metric[which.max(metric_certainties)])

@@ -4,15 +4,6 @@ add better error handling to all functions
 
 NEED BETTER EXAMPLES
 
-put datasets back into data.R
-
-cat_match TODO:
-we can already insert select metrics into the method argument
-  maybe a way to do this automatically so the function call looks nicer
-
-create a new function cat_match_interactive and remove the overly-complicated arguments
-from cat_match
-
 fix typos TODO:
 
 right now fix typos takes in a vector of strings
