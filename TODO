@@ -29,6 +29,7 @@ idea from dk:
 
 setting the arguments thr and occ_ratio is tough
   should probably make a method for determining the best way
+  select_metric type thing
 
 return a similar vector to cat match as well
   the original and what it was replaced by
@@ -36,28 +37,13 @@ return a similar vector to cat match as well
 OSA / DL
   use DL, probably give option for OSA
 
-Number of Edits
-  guess n check
-  find the most fucked up typo and count number of edits
-  keep it simple to start
-  have threshold be percentage of the word
-  change >= ~90% of letters, probably not a typo
-
-As prominence / how much more common the correctly spelled word is versus wrong word
-  as either number or percent
-  enter as integer for number and string for percent
-
 viable applications
-  names / words not in US dictionary
-  if using basic EN words just use hunspell (https://www.rdocumentation.org/packages/hunspell/versions/3.0.2/topics/hunspell)
   add handling for multiple typo matches
   add to vignette
 
 most dl changes are 1, default value should be 1 / nchar(string)
 
-New Function Ideas
-automatically remove NULL, NA, special characters, and ""
+New Function Ideas:
 
-check for plurals and singular versions of the same words and match
 
 
