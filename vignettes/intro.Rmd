@@ -99,25 +99,16 @@ clean_short <-       c(
 cat_match(messy_short,clean_short, method = "jaccard") %>% arrange(desc(dists))
 ```
 
-You can see that some of these matches are wrong, you can use the `return_lists` argument to return a list of the top matches. We suggest setting this to 2 or 3, if the top 3 are not still not correct, there may not be a clean match, or you may need to try a different string distance method (see `select_metric()`.
+You can see that some of these matches are wrong, you can use the `return_lists` argument in `cat_match()'s` more exploratory counter part, `cat_match_interactve()`, to return a list of the top matches. We suggest setting this to 2 or 3, if the top 3 are not still not correct, there may not be a clean match, or you may need to try a different string distance method (see `select_metric()`.
 
-When combined with a threshold, `cat_match` will only return a list for values that have a best match above that threshold.
+When combined with a threshold, `cat_match_interactve()` will only return a list for values that have a best match above that threshold.
 
 ```{r pick_lists}
-cat_match(messy_short,clean_short, method = "jaccard", return_lists = 3, threshold = 0.2) %>% arrange(desc(dists)) %>% 
+cat_match_interactive(messy_short,clean_short, method = "jaccard", return_lists = 3, threshold = 0.2) %>% arrange(desc(dists)) %>% 
   gt::gt()
 ```
 
 Some of our matches have good choices, but others seem to be lacking a match in the clean vector. You can  output this dataframe and manually choose the correct match or that there is no suitable match, or you can use the `pick_lists` argument, which prompts you in the console to choose the correct option or none of the above. 
-
-
-
-```{r picked_list}
-#data("picked_list")
-
-```
-
-
 
 In this more extensive example we have two datasets of biological data. The first: `messy_caterpillars` contains information about the average weight and length of caterpillars, and as the name suggests, has messy very caterpillar names.`clean_caterpillars` is a dataset containing the species and the number of caterpillars found and clean caterpillar names. 
 
@@ -142,13 +133,13 @@ We input the messy and clean vectors—in this case columns of caterpillar names
 ```{r pick_lists cat_match example,eval=F}
 cat_match(messy_caterpillars$CaterpillarSpecies,
           clean_caterpillars$species,
-          return_dists = T)
+          return_dists = TRUE)
 ```
 The output shows the clean string with the lowest string distance from each messy string, and the distance between the pair is returned as a third column. 
 
 If we arrange by the distance in descending order, we can see the items of the messy vector with the worst matches. We can observe that the worst match is between "Papilio_glaucus" and "Orgyia leucostigma". Additionally, this is the only incorrect match. This means that if we set a threshold lower than .5, cat_match will return no incorrect matches.
 ```{r using outputs cat_match example,eval=F}
-cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = T,method="jaccard") %>% arrange(desc(dists))
+cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$species,return_dists = TRUE,method="jaccard") %>% arrange(desc(dists))
 ```
 
 
