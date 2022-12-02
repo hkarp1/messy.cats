@@ -1,10 +1,21 @@
-General Package TODO
+General Package TODO:
 
 add better error handling to all functions
 
+NEED BETTER EXAMPLES
+  the example in the readme doesn't even fucking work
+  this works:
+    select_metric(messy_v = messy_plant_categories, clean_v = plant_categories)
+    cat_match(messy_v = messy_plant_categories, clean_v = plant_categories, method = "lcs")
 
+cat_match TODO:
+we can already insert select metrics into the method argument
+  maybe a way to do this automatically so the function call looks nicer
 
-fix typos TODO
+create a new function cat_match_interactive and remove the overly-complicated arguments
+from cat_match
+
+fix typos TODO:
 
 right now fix typos takes in a vector of strings
   should we add a way to take in df column of unique strings and column of occurence?
@@ -13,9 +24,14 @@ right now fix typos takes in a vector of strings
 
 idea from dk:
   string distance calculation that weights letters that are close in qwerty-space
+  would work really well for same length strings
+
 
 setting the arguments thr and occ_ratio is tough
   should probably make a method for determining the best way
+
+return a similar vector to cat match as well
+  the original and what it was replaced by
 
 OSA / DL
   use DL, probably give option for OSA
@@ -36,5 +52,12 @@ viable applications
   if using basic EN words just use hunspell (https://www.rdocumentation.org/packages/hunspell/versions/3.0.2/topics/hunspell)
   add handling for multiple typo matches
   add to vignette
+
+most dl changes are 1, default value should be 1 / nchar(string)
+
+New Function Ideas
+automatically remove NULL, NA, special characters, and ""
+
+check for plurals and singular versions of the same words and match
 
 

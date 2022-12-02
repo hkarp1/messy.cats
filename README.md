@@ -27,6 +27,8 @@ plant_categories = c("tree", "bush", "herb", "grass")
 messy_plant_categories = c("green tree", "red bush", "new herb", "old grass", "young tree", "small bush", "20 herbs", "the grass", "a tree", 
 "bushes", "herbs", "tall grass")
 
-cat_match(plant_categories, messy_plant_categories)
+
+cat_match(messy_v = messy_plant_categories, clean_v = plant_categories,
+method = select_metric(messy_v = messy_plant_categories, clean_v = plant_categories))
 ```
 

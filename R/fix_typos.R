@@ -33,7 +33,6 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
   # string <- stringr::str_split(paste0(typo_v, collapse = " "), " ")[[1]]
   # tbl <- table(string)
   # df <- data.frame(word = names(tbl), times = as.integer(tbl))
-
   prom_ratio <- NULL
 
   tbl <- table(typo_v)
@@ -67,7 +66,7 @@ fix_typos <- function(typo_v, thr, occ_ratio) {
       typo_v[typo_v==df$word[under_thresh_mat$row[[i]]]] = df$word[under_thresh_mat$col[[i]]]
     }
   }
-  typo_v %>% unique
+  typo_v
 }
 
 
