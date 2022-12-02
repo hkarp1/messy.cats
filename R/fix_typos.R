@@ -1,7 +1,8 @@
 #' @title fix_typos
 #' @description This function is meant to allow users to fix typos in strings
 #'  that are not normally found in dictionaries.
-#' @param typo_v vector of strings that will have its typos cleaned
+#' @param typo_v vector of strings or 2 column data frame containing strings and the
+#' count of their occurrence that will have its typos cleaned
 #' @param threshold the string distance maximum used to determine typos. This argument
 #' is specified as the percentage of a typo that should at most be expected to be
 #' insertions, additons, deletions, and transpositions.
@@ -22,7 +23,15 @@
 #'  occurring correctly spelled words.
 #' @examples
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_cat_rep
+#'  append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_cat
+#'
+#'  fix_typos(typo_v = typo_cat, thr = 0.3, occ_ratio = 10)
+#'
+#'
+#'  typo_df <- as.data.frame(typo_cat) %>% group_by(typo_cat) %>% count
+#'
+#'  fix_typos(typo_v = typo_df, thr = 0.3, occ_ratio = 10)
 #'  }
 #' @rdname fix_typos
 #' @import dplyr
