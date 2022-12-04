@@ -4,12 +4,12 @@
 \alias{fix_typos}
 \title{fix_typos}
 \usage{
-fix_typos(typo_v, thr, occ_ratio)
+fix_typos(typo_v, threshold, occ_ratio)
 }
 \arguments{
 \item{typo_v}{vector of strings that will have its typos cleaned}
 
-\item{thr}{the string distance maximum used to determine typos. This argument
+\item{threshold}{the string distance maximum used to determine typos. This argument
 is specified as the percentage of a typo that should at most be expected to be
 insertions, additons, deletions, and transpositions.}
 
