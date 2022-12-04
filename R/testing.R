@@ -16,6 +16,9 @@
 # t = rep(unlist(typo_df[,1]),unlist(typo_df[,2]))
 # names(t) <- NULL
 #
+# fix_typos(typo_v = typo_caterpillars, threshold = 0.3, occ_ratio = 10)
+# table(typo_caterpillars) %>% as.data.frame() -> messy
+# table(fix_typos(typo_v = typo_caterpillars, threshold = 0.3, occ_ratio = 10)) %>% as.data.frame() -> clean
 #
 # fix_typos(typo_v = clean_caterpillars, thr = 0.3, occ_ratio = 10)
 # fix_typos(typo_v = typo_caterpillars, thr = 3, occ_ratio = 10)
@@ -51,7 +54,15 @@
 #   "NwLndn"
 # )
 #
-# counties_v <- append(rep(counties,10),counties_typo)
+# counties_v <- append(rep(counties,10),rep(counties_typo,5))
+# table(counties_v) %>% as.data.frame() -> messy
+# table(fix_typos(typo_v = counties_v, thr = 0.5, occ_ratio = 1.5)) %>% as.data.frame() -> clean
+#
+# ounties_v <- append(rep(counties,10),counties_typo)
+#
+# table(ounties_v) %>% as.data.frame() -> messy
+# table(fix_typos(typo_v = ounties_v, thr = 0.5, occ_ratio = 9)) %>% as.data.frame() -> clean
+#
 #
 # counties_v -> typo_v
 # thr = 0.5

@@ -12,9 +12,15 @@ idea from dk:
   string distance calculation that weights letters that are close in qwerty-space
   would work really well for same length strings
 
+include capitilzation
+
 setting the arguments thr and occ_ratio is tough
   should probably make a method for determining the best way
   select_metric type thing
+  occ_ratio needs to be less than:
+    the least common correct word / corresponding typo
+  threshold needs to be more than:
+    distance between most fucked typo and correct spelling / nchar(correct spelling)
 
 return a similar vector to cat match as well
   the original and what it was replaced by
