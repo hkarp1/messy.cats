@@ -1,3 +1,8 @@
+Suggestions from big Brice da goat:
+format return_lists better to have indiviudal columns for the matches and distances
+
+add plotting functionality to better find correct matches
+
 General Package TODO:
 
 add better error handling to all functions
@@ -5,6 +10,10 @@ add better error handling to all functions
 want to add testing that works with devtools::test
 
 NEED BETTER EXAMPLES
+
+cat_match TODO:
+add an argument for when messy and clean are same length
+  find a mapping with the least total distance and prevent duplicates
 
 fix typos TODO:
 
