@@ -16,6 +16,9 @@ cat_match TODO:
 add an argument for when messy and clean are same length
   find a mapping with the least total distance and prevent duplicates
 
+fuzzy rbind TODO:
+change defualt method to "auto" that uses select_metric
+
 fix typos TODO:
 
 Switch from percentage of typos (dist / length) to raw number of typos (dist)
