@@ -1,7 +1,8 @@
 Suggestions from big Brice da goat:
-format return_lists better to have indiviudal columns for the matches and distances
+list_split works as intended
 
-add plotting functionality to better find correct matches
+plot_list requires index
+plot_lists makes a list of all the plots from the dataset
 
 General Package TODO:
 
