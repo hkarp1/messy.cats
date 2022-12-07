@@ -18,6 +18,8 @@ add an argument for when messy and clean are same length
 
 fix typos TODO:
 
+Switch from percentage of typos (dist / length) to raw number of typos (dist)
+
 idea from dk:
   string distance calculation that weights letters that are close in qwerty-space
   would work really well for same length strings
@@ -30,22 +32,10 @@ setting the arguments thr and occ_ratio is tough
   occ_ratio needs to be less than:
     the least common correct word / corresponding typo
   threshold needs to be more than:
-    distance between most fucked typo and correct spelling / nchar(correct spelling)
-
-return a similar vector to cat match as well
-  the original and what it was replaced by
-
-OSA / DL
-  use DL, probably give option for OSA
+    distance between most fucked typo and correct spelling
 
 viable applications
   add handling for multiple typo matches
     c(amy, andy, amdy)
   add to vignette
-
-most dl changes are 1, default value should be 1 / nchar(string)
-
-New Function Ideas:
-
-
 
