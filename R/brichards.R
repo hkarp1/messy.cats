@@ -60,20 +60,49 @@ test_match = cat_match(messy_caterpillars$CaterpillarSpecies,clean_caterpillars$
           return_lists = 5, threshold = 0.05)
 
 test = list_split(test_match)
-
+test2 = list_split(car_mtch)
 
 # plots ----
+list_plots <- function(mtch,n){
+  # create list to append plots into
+  plots.l <- list()
+  # drop nas (rows without lists) from cat_match
+  mtch %>% drop_na -> mtch_l
+  txt1 = paste0("TARGET: ", mtch_l[n,1])
+  txt2 = paste(c("GUESS:", "DIST:"))
+  u = "\u2022"
+  brk = "\n"
+  sp = chr(32)
 
-txt1 = paste0("TARGET: ", struct_mtch[8,1])
-txt2 = paste(c("GUESS:", "DIST:"))
-u = "\u2022"
-brk = "\n"
-sp = chr(32)
-txt3 = paste0(u, sp, struct_mtch[8,2], brk, u, sp, struct_mtch[8,3],
-              brk, u, sp, struct_mtch[8,4])
-txt4 = paste0(u, sp, struct_mtch[8,5], brk, u, sp, struct_mtch[8,6],
-              brk, u, sp, struct_mtch[8,7])
-dgram = add_box(txt = txt1) %>%
-  add_split(txt = txt2) %>%
-  add_side_box(txt = c(txt3, txt4))
-plot(dgram)
+
+  # get indices of all mtch columns
+  mtch_cols = grep("mtch",colnames(mtch_l))
+  # set empty character vector to append into
+  t_txt3 = character()
+  # for all mtch column indices, format to put in guess box
+  for (i in mtch_cols[[1]]:mtch_cols[[length(mtch_cols)]]) {
+    t_txt3 = append(t_txt3,paste0(u,sp,mtch_l[n,i],brk))
+  }
+  # convert vector to single string and remove commas + space
+  t_txt3 = toString(t_txt3) %>% stringr::str_remove_all(", ")
+
+  # get indices of all dist columns
+  dist_cols = grep("dist",colnames(mtch_l))
+  # set empty character vector to append into
+  t_txt4 = character()
+  # for all dist col indices, format to but in dist box
+  for (i in dist_cols[[1]]:dist_cols[[length(dist_cols)]]) {
+    t_txt4 = append(t_txt4,paste0(u,sp,mtch_l[n,i],brk))
+  }
+  # convert vector to single string and remove commas + space
+  t_txt4 = toString(t_txt4) %>% stringr::str_remove_all(", ")
+  # create plot
+  t_dgram = add_box(txt = txt1) %>%
+    add_split(txt = txt2) %>%
+    add_side_box(txt = c(t_txt3, t_txt4))
+}
+
+dgram2 = list_plots(test3,1)
+
+plot(dgram2)
+
