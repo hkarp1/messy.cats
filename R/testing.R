@@ -1,13 +1,15 @@
 # # fix_typos ----
-# rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-#
-# append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
-#
-# typo_df <- as.data.frame(typo_caterpillars) %>% group_by(typo_caterpillars) %>% count
-#
-# fix_typos(typo_v = typo_caterpillars, thr = 0.3, occ_ratio = 10)
-#
-# fix_typos(typo_v = typo_df, thr = 0.3, occ_ratio = 10)
+rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
+
+append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
+
+typo_df <- as.data.frame(typo_caterpillars) %>% group_by(typo_caterpillars) %>% count
+
+fix_typos(typo_v = typo_caterpillars, thr = 0.3, occ_ratio = 10)
+
+fix_typos(typo_v = typo_df, thr = 0.3, occ_ratio = 10)
+
+find_typos(typo_v = typo_caterpillars, thr = 0.3, occ_ratio = 10)
 #
 #
 # occ_ratio = 4

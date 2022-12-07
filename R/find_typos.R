@@ -59,14 +59,5 @@ find_typos <- function(typo_v, threshold, occ_ratio) {
   typo_df
 }
 
-rep(clean_caterpillars$species,clean_caterpillars$count) -> clean_caterpillars_rep
-
-append(clean_caterpillars_rep,messy_caterpillars$CaterpillarSpecies) -> typo_caterpillars
-
-occ_ratio = 10
-threshold = 0.3
-find_typos(typo_v = typo_caterpillars, threshold = 0.3, occ_ratio = 10)
-
-
 
 
