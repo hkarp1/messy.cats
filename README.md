@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of messy.cats is to make cleaning messy categorical easier. User inputted character categorical data often suffers from messiness than can be complicated and time consuming to clean up. When inputting data, users often make typos or formatting errors than cause stubborn, hard to detect issues in their data. By leveraging string distance measurement tools, messy.cats allows users to automate many of the steps involved with cleaning categorical data. This enables users to spend less time fiddling around with inconsistent categorical data with less effort. 
+The goal of `messy.cats` is to make cleaning messy categorical easier. User inputted character categorical data often suffers from messiness that can be complicated and time consuming to clean up. When inputting data, mainly in the form of strings, users often make typos or formatting errors that cause stubborn, hard-to-detect issues in their data. By leveraging string distance measurement tools, `messy.cats` allows users to automate many of the steps involved with cleaning categorical data. This enables users to spend less time fiddling around with inconsistent categorical data and solve problems with less effort.
 
 ## Installation
 

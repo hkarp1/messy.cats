@@ -14,6 +14,7 @@ want to add testing that works with devtools::test
 
 NEED BETTER EXAMPLES
 
+our readme has hella typos
 
 
 cat_match TODO:
@@ -57,4 +58,16 @@ viable applications
   add handling for multiple typo matches
     c(amy, andy, amdy)
   add to vignette
+
+
+
+name match TODO:
+develop better system for automatically finding "name" column
+  right now it looks for "first" "last" or "full"
+  should probably look for name, but wary of it finding "org name" or other names
+
+I think it would be cool to do regular string distance matching, then if it doesn't
+find something below the threshold, use a dictionary to try and clean the typos
+or just use fix_typos
+
 
