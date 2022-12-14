@@ -71,3 +71,23 @@ find something below the threshold, use a dictionary to try and clean the typos
 or just use fix_typos
 
 
+
+New Function Ideas:
+
+extract_name
+  I have a bunch of fucked up zoom data that has a name in the middle of a bunch
+  of bullshit that I want to extract the name from
+  e.g.: Sawatch Labs - Sara Booth (she/her) (Sarah Booth (she/her))
+        MacQueen (MacQueen # James Dwayne (Contractor))
+        [ltron] Gene Falendysz (Gene Falendysz)
+        Ken Wacks ISO/IEC (Ken Wacks [Home Systems])
+        SEPA Daisy Chung (Sarah LeBarron)
+
+  I want to extract these names somehow without going through the tedious proces
+  of looking through the whole list and finding patterns to implement with regex
+
+    might just be a wrapper for all these regex patterns that people use, but
+    alternatively could use a dictionary of names to try and only keep words that
+    are deemed "names"
+
+
