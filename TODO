@@ -4,6 +4,7 @@ list_split works as intended
 plot_list requires index
 plot_lists makes a list of all the plots from the dataset
 
+Need to make distance columns in split lists numeric
 
 
 General Package TODO:
