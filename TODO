@@ -15,9 +15,6 @@ want to add testing that works with devtools::test
 
 NEED BETTER EXAMPLES
 
-our readme has hella typos
-
-
 cat_match TODO:
 add an argument for when messy and clean are same length
   find a mapping with the least total distance and prevent duplicates
@@ -28,13 +25,6 @@ add way to make sure cat_match uses all the clean options at least once
 cat_... functions match NA to messy string if there is no match under threshold
   might be better to have it match the messy string so NAs aren't inserted into
   the vector / dataframe
-
-
-
-fuzzy rbind TODO:
-change defualt method to "auto" that uses select_metric
-deal with multiple matches of column names
-
 
 
 fix typos TODO:

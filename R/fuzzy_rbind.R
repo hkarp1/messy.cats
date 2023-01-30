@@ -6,7 +6,10 @@
 #' between columns is greater than this threshold the columns will not be bound.
 #' @param method The type of string distance calculation to use. Possible methods
 #'  are : osa, lv, dl, hamming, lcs, qgram, cosine, jaccard, jw, and soundex.
-#'  See package stringdist for more information. Default: 'jw', Default: 'jw'
+#'  See package stringdist for more information. A method can automatically
+#'  selected by setting method to auto. Default: 'auto'
+#' @param no_match what to do wth columns that have no column name match under the threshold.
+#' Options are drop and keep. Default: 'keep'
 #' @param q Size of the q-gram used in string distance calculation. Default: 1
 #' @param p Only used with method "jw", the Jaro-Winkler penatly size. Default: 0
 #' @param bt Only used with method "jw" with p > 0, Winkler's boost threshold. Default: 0
@@ -29,7 +32,8 @@
 #' @rdname fuzzy_rbind
 #' @export
 
-fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0,
+fuzzy_rbind <- function(df1, df2, threshold, method = "auto", no_match = "keep",
+                        q = 1, p = 0, bt = 0,
                         useBytes = FALSE, weight=c(d=1, i=1, t=1)) {
   if (!is.data.frame(df1)) {
     stop("Please use a dataframe for argument df1")
@@ -55,40 +59,56 @@ fuzzy_rbind <- function(df1, df2, threshold, method = "jw", q = 1, p = 0, bt = 0
     stop("Argument weight must be a vector of length 3")
   }
 
-  colnms1 = colnames(df1)
-  colnms2 = colnames(df2)
+  colnms1 <- colnames(df1)
+  colnms2 <- colnames(df2)
 
-  acc = list()
-  count = 1
+  if (method == "auto") {
+    method <- select_metric(colnms1, colnms2)
+  }
+
+  acc <- list()
 
   for (i in 1:length(colnms1)) {
-    for (e in 1:length(colnms2)) {
+    x <- stringdist::stringdist(tolower(colnms1[[i]]), tolower(colnms2),
+                               method = method
 
-      x = stringdist::stringdist(tolower(colnms1[[i]]), tolower(colnms2[[e]]),
-                     method = method, p = p, q = q, bt = bt,
-                     useBytes = useBytes,
-                     weight = weight)
+                               # , p = p, q = q, bt = bt,
+                               # useBytes = useBytes,
+                               # weight = weight
+                               )
 
-      if (x < threshold) {
-
-        acc[[count]] = list(i,e)
-        count = count + 1
-      }
+    if (min(x) <= threshold) {
+      acc[[length(acc) + 1]] <- c(colnms1[[i]], colnms2[[which.min(x)]])
     }
   }
 
-
-  df = data.frame(rep(NA, times = (nrow(df1) + nrow(df2))))
+  df <- data.frame(rep(NA, times = (nrow(df1) + nrow(df2))))
 
   for (i in 1:length(acc)) {
-    df[colnms1[acc[[i]][[1]]]] = rbind(data.frame(x = df1[[acc[[i]][[1]]]]), data.frame(x = df2[[acc[[i]][[2]]]]))
+    df[acc[[i]][[1]]] <-
+      rbind(data.frame(x = df1[[acc[[i]][[1]]]]),
+            data.frame(x = df2[[acc[[i]][[2]]]]))
   }
 
   if (ncol(df) == 0) {
     stop("None of the columns of the two dataframes match at the given threshold")
   }
 
-  df = df[-1]
+  df <- df[-1]
+
+  if (no_match == "keep") {
+    kept_cols1 <- colnms1[!colnms1 %in% unlist(acc)]
+    kept_cols2 <- colnms2[!colnms2 %in% unlist(acc)]
+    for (i in 1:length(kept_cols1)) {
+      df[kept_cols1[[i]]] <- c(df1[[kept_cols1[[i]]]],
+                               rep(NA, times = nrow(df2)))
+    }
+    for (i in 1:length(kept_cols2)) {
+      df[kept_cols2[[i]]] <- c(rep(NA, times = nrow(df1)),
+                               df2[[kept_cols2[[i]]]])
+    }
+
+  }
 
   return(df)
 }
